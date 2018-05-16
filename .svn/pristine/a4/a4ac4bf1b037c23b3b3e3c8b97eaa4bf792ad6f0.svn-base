@@ -1,0 +1,33 @@
+package semi.dao;
+
+import java.util.List;
+
+import java.sql.SQLException;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import semi.utils.IbatisUtil;
+import semi.vo.Question;
+
+public class QuestionDao {
+	
+	private static QuestionDao instance;
+	
+	private SqlMapClient sqlMapper;
+	
+	static {
+		instance = new QuestionDao();
+	}
+	
+	private QuestionDao() {
+		sqlMapper = IbatisUtil.getsqlMap();
+	}
+	
+	public static QuestionDao getInstance() {
+		return instance;
+	}
+	
+	public List<Question> getQuestionByNo(int custNo) throws SQLException{
+		return (List<Question>) sqlMapper.queryForList("getQuestionByNo", custNo);
+	}
+}

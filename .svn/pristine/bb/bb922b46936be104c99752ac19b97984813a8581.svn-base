@@ -1,0 +1,223 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<html lang="ko">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<%@ include file="../include/uppermost-nav.jsp"%>
+<%@ include file="../style/ywj/liststyle.jsp"%>
+	<div id="wrap">
+		<div id="container">
+			<div id="contents02">
+				<div
+					class="xans-element- xans-board xans-board-listpackage-4 xans-board-listpackage xans-board-4 ">
+					<div
+						class="xans-element- xans-board xans-board-title-4 xans-board-title xans-board-4 ">
+						<div class="title">
+							<h2>
+								<font color="#555555">review</font>
+							</h2>
+							<p>상품 사용후기입니다.</p>
+						</div>
+					</div>
+					<script>
+						(function(i, s, o, g, r, a, m, board_no) {
+							if (s.getElementById(g)) {
+								return
+							}
+							;
+							m = new RegExp("[\?&]board_no=([^&#]*)")
+									.exec(location.search),
+									board_no = m ? decodeURIComponent(m[1]
+											.replace(/\+/g, " ")) : '';
+							if (board_no == "4") {
+								document
+										.write("<style>.crema-hide { display: none; }</style>");
+								document
+										.write("<div style='margin: 0 auto; text-align: center;'><img src='/web/upload/madeleine/photoqueen.jpg'></div>");
+								document
+										.write("<div class='crema-reviews' data-widget-id='13'></div>");
+								document
+										.write("<div class='crema-reviews' data-widget-id='15'></div>");
+								document
+										.write("<div class='crema-products' data-widget-id='8'></div>");
+								a = s.createElement(o), m = s
+										.getElementsByTagName(o)[0];
+								a.id = g;
+								a.async = 1;
+								a.src = r;
+								m.parentNode.insertBefore(a, m);
+							}
+						})
+								(window, document, 'script', 'crema-jssdk',
+										'//widgets.cre.ma/reviews/init.js?domain=fromheadtotoe.kr');
+					</script>
+					<style>
+					.crema-hide {
+						display: none;
+					}
+					</style>
+					
+					<div class="boardList crema-hide crema-applied"
+						style="display: none;">
+						<table border="1" summary="">
+							<caption>상품 게시판 목록</caption>
+							<colgroup
+								class="xans-element- xans-board xans-board-listheader-4 xans-board-listheader xans-board-4 ">
+								<col style="width: 70px;">
+								<col style="width: 134px;">
+								<col style="width: 135px;" class="displaynone">
+								<col style="width: auto;">
+								<col style="width: 84px;">
+								<col style="width: 80px;" class="">
+								<col style="width: 55px;" class="">
+								<col style="width: 55px;" class="displaynone">
+								<col style="width: 80px;" class="displaynone">
+							</colgroup>
+							<thead
+								class="xans-element- xans-board xans-board-listheader-4 xans-board-listheader xans-board-4 ">
+								<tr style="">
+									<th scope="col">no</th>
+									<th scope="col" class="thumb">product</th>
+									<th scope="col" class="displaynone">카테고리</th>
+									<th scope="col">subject</th>
+									<th scope="col">name</th>
+									<th scope="col" class="">date</th>
+									<th scope="col" class="">hit</th>
+									<th scope="col" class="displaynone">추천</th>
+									<th scope="col" class="displaynone">평점</th>
+								</tr>
+							</thead>
+							<tbody
+								class="xans-element- xans-board xans-board-notice-4 xans-board-notice xans-board-4 notice">
+								<tr style="background-color: #FFFFFF; color: #555555;"
+									class="xans-record-">
+									<td>공지</td>
+									<td class="thumb"><a href="#"><span></span></a></td>
+									<td class="displaynone"></td>
+									<td class="subject"><span class="displaynone"> <a
+											href="#none" onclick="BOARD.viewTarget('175498','4',this);"><img
+												src="http://img.echosting.cafe24.com/skin/base_ko_KR/board/btn_unfold.gif"
+												alt="내용 보기"></a>
+									</span> <a href="#"
+										style="color: #555555;"><font color="red">★17년 3월
+												리뷰퀸 이벤트 당첨자 발표★</font></a> <span class="comment"></span></td>
+									<td>프롬헤드투토</td>
+									<td class="txtLess ">2017-04-14</td>
+									<td class="txtLess ">84</td>
+									<td class="txtLess displaynone">2</td>
+									<td class="displaynone"><img
+										src="http://img.echosting.cafe24.com/skin/base_ko_KR/board/ico_point0.gif"
+										alt="0점"></td>
+								</tr>
+							</tbody>
+							<tbody
+								class="xans-element- xans-board xans-board-list-4 xans-board-list xans-board-4">
+								<tr style="background-color: #FFFFFF; color: #555555;"
+									class="xans-record-">
+									<td>24929</td>
+									<td class="thumb"><a
+										href="#"><img
+											src="//fromheadtotoe.kr/web/product/tiny/201801/13485_shop1_685686.gif"
+											border="0" alt=""></a></td>
+									<td class="displaynone"></td>
+									<td class="subject">
+										<p style="color: #999; padding: 0 0 3px 0;">749언발랩 SK</p> <span
+										class="displaynone"> <a href="#none"
+											onclick="BOARD.viewTarget('228242','4',this);"><img
+												src="http://img.echosting.cafe24.com/skin/base_ko_KR/board/btn_unfold.gif"
+												alt="내용 보기"></a>
+									</span> <a href="#"
+										style="color: #555555;">마음에 들어요~~</a> <span class="comment"></span>
+									</td>
+									<td><img
+										src="//fromheadtotoe.kr/web/bbs_member_icon/member/1475053097.jpg">주영</td>
+									<td class="txtLess ">2018-03-12</td>
+									<td class="txtLess ">9</td>
+									<td class="txtLess displaynone">0</td>
+									<td class="displaynone"><img
+										src="http://img.echosting.cafe24.com/skin/base_ko_KR/board/ico_point5.gif"
+										alt="5점"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div
+						class="xans-element- xans-board xans-board-empty-4 xans-board-empty xans-board-4 boardListEmpty displaynone crema-hide  crema-applied"
+						style="display: none;">
+						<p></p>
+					</div>
+					<div
+						class="xans-element- xans-board xans-board-buttonlist-4 xans-board-buttonlist xans-board-4 displaynone crema-hide  crema-applied"
+						style="display: none;">
+						<a href="#"
+							class="displaynone boardwritebtn">WRITE</a>
+					</div>
+				</div>
+
+				<div
+					class="xans-element- xans-board xans-board-paging-4 xans-board-paging xans-board-4 crema-hide crema-applied"
+					style="display: none;">
+					<p>
+						<a href="#"><img
+							src="/web/upload/madeleine/pagingBTN/left1.jpg" alt="이전 페이지"></a>
+					</p>
+					<ol>
+						<li class="xans-record-"><a href="#"
+							class="this">1</a></li>
+					</ol>
+					<p>
+						<a href="#"><img
+							src="/web/upload/madeleine/pagingBTN/right1.jpg" alt="다음 페이지"></a>
+					</p>
+				</div>
+
+				<form id="boardSearchForm" name="" action="#"
+					method="get" enctype="multipart/form-data">
+					<input id="board_no" name="board_no" value="4" type="hidden">
+					<input id="page" name="page" value="1" type="hidden"> <input
+						id="board_sort" name="board_sort" value="" type="hidden">
+					<div
+						class="xans-element- xans-board xans-board-search-4 xans-board-search xans-board-4 crema-hide  crema-applied"
+						style="display: none;">
+						<fieldset class="boardSearch">
+							<legend>게시물 검색</legend>
+							<p class="category displaynone"></p>
+							<p>
+								<select id="search_date" name="search_date" fw-filter=""
+									fw-label="" fw-msg="">
+									<option value="week">일주일</option>
+									<option value="month">한달</option>
+									<option value="month3">세달</option>
+									<option value="all">전체</option>
+								</select> <select id="search_key" name="search_key" fw-filter=""
+									fw-label="" fw-msg="">
+									<option value="subject">제목</option>
+									<option value="content">내용</option>
+									<option value="writer_name">글쓴이</option>
+									<option value="member_id">아이디</option>
+									<option value="nick_name">별명</option>
+									<option value="product">상품정보</option>
+								</select> <input id="search" name="search" fw-filter="" fw-label=""
+									fw-msg="" class="inputTypeText" placeholder="" value=""
+									type="text"> <a href="#none"
+									onclick="BOARD.form_submit('boardSearchForm');"
+									class="boardsecrshbtn">search</a>
+							</p>
+						</fieldset>
+					</div>
+				</form>
+			</div>
+			<hr class="layout">
+		</div>
+		<hr class="layout">
+	</div>
+	<%@ include file="../include/lowermost-footer.jsp"%>
+</body>
+</html>

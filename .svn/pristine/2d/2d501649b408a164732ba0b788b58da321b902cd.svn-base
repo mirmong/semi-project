@@ -1,0 +1,379 @@
+<%-- 
+<%@page import="fromheadto.vo.Fromcustomer"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript"> 
+
+
+function execDaumPostcode() {
+
+    new daum.Postcode({
+
+        oncomplete: function(data) {
+
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+
+            var fullAddr = ''; // 최종 주소 변수
+
+            var extraAddr = ''; // 조합형 주소 변수
+
+
+
+            // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+
+                fullAddr = data.roadAddress;
+
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+
+                fullAddr = data.jibunAddress;
+
+            }
+            // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+
+            if(data.userSelectedType === 'R'){
+
+                //법정동명이 있을 경우 추가한다.
+
+                if(data.bname !== ''){
+
+                    extraAddr += data.bname;
+
+                }
+
+                // 건물명이 있을 경우 추가한다.
+
+                if(data.buildingName !== ''){
+
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+
+                }
+
+                // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+
+                fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+
+            }
+
+
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+			
+            document.getElementById('loanPostNo').value = data.zonecode; //5자리 새우편번호 사용
+
+            document.getElementById('loanAddr1').value = fullAddr;
+
+
+
+            // 커서를 상세주소 필드로 이동한다.
+
+            document.getElementById('loanAddr2').focus();
+
+             
+
+        },
+
+     theme: {
+
+	}
+
+    }).open({
+
+    	popupName: 'postcodePopup'
+
+    });
+
+}
+</script> 
+
+</head>
+<body>
+	<%
+      Fromcustomer fromcustomer = (Fromcustomer) session.getAttribute("loginuser");
+    %>
+
+<div class="titleArea">
+    <h2>My Info</h2>
+    <p>회원 정보 수정</p>
+</div>
+
+
+<form id="editForm" name="editForm" action="modifys.jsp"  method="post" enctype="multipart/form-data" >
+
+
+    
+<h3>기본정보</h3>
+<div class="boardWrite ">
+        <table border="1" >
+<caption>회원 기본정보</caption>
+        <tbody>
+<<tr>
+<th scope="row">아이디 </th>
+                <td><input type="text" name="cust_id"  class="" value="<%=fromcustomer.getCust_id() %>" readonly="readonly" /> 
+                <input type="button" value="중복확인" onClick="confirmid()"/>
+           		
+            </tr>
+<tr>
+<th scope="row">비밀번호 </th>
+                <td><input id="cust_password" name="change_password" maxlength="16" value="" type="password" onkeyup="passwordCheckk()" /> (영문 대소문자/숫자 4자~16자)</td>
+            	<td id="pwsame" style="color:red;"></td>
+		
+            </tr>
+<tr>
+<th scope="row">비밀번호 확인 </th>
+                <td><input id="cust_password2" name="change_password2"   maxlength="16" value="" type="password" onkeyup="passwordCheckk()" /></td>
+            </tr>
+<tr>
+<th scope="row">비밀번호 확인 질문 </th>
+                <td><select id="hint" name="hint" >
+<option value=""><%=fromcustomer.getCust_que()%></option>
+<option value="hint_01">기억에 남는 추억의 장소는?</option>
+<option value="hint_02">자신의 인생 좌우명은?</option>
+<option value="hint_03">자신의 보물 제1호는?</option>
+<option value="hint_04">가장 기억에 남는 선생님 성함은?</option>
+<option value="hint_05">타인이 모르는 자신만의 신체비밀이 있다면?</option>
+<option value="hint_06">추억하고 싶은 날짜가 있다면?</option>
+<option value="hint_07">받았던 선물 중 기억에 남는 독특한 선물은?</option>
+<option value="hint_08">유년시절 가장 생각나는 친구 이름은?</option>
+<option value="hint_09">인상 깊게 읽은 책 이름은?</option>
+<option value="hint_10">읽은 책 중에서 좋아하는 구절이 있다면?</option>
+<option value="hint_11">자신이 두번째로 존경하는 인물은?</option>
+<option value="hint_12">친구들에게 공개하지 않은 어릴 적 별명이 있다면?</option>
+<option value="hint_13">초등학교 때 기억에 남는 짝꿍 이름은?</option>
+<option value="hint_14">다시 태어나면 되고 싶은 것은?</option>
+<option value="hint_15">내가 좋아하는 캐릭터는?</option>
+</select></td>
+            </tr>
+<tr>
+<th scope="row">비밀번호 확인 답변 </th>
+                <td><input id="text" name="cust_passwordconfirm" class="inputTypeText"  value="<%=fromcustomer.getCust_passwordconfirm()   %>" type="text"   /></td>
+            </tr>
+<tr>
+<th scope="row" id="nameTitle">이름 </th>
+                <td>
+                    <span id="nameContents"><input id="cust_name" name="cust_name"  class="ec-member-name" maxlength="30" value="<%=fromcustomer.getCust_name() %>" type="text" readonly="readonly"   /></span>
+                    
+                </td>
+            </tr>
+<tr id="nation">
+<tr>
+
+<th scope="row">주소 </th>
+                <td>
+                <input type="text" id="loanPostNo" name="cust_addres" value="" readonly="readonly" ><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_zipcode.gif" alt="우편번호" onclick="execDaumPostcode()" /><br/>
+      			<input type="text" id="loanAddr1" name="cust_addres1"  value="" readonly="readonly"> <br>
+				<input type="text" id="loanAddr2" name="cust_addres2"value="" > <br>
+                </td>
+            </tr>
+<tr>
+<th scope="row">일반전화 </th>
+                <td><select id="phone1" name="cust_tel" >
+<option value="02">02</option>
+<option value="031">031</option>
+<option value="032">032</option>
+<option value="033">033</option>
+<option value="041">041</option>
+<option value="042">042</option>
+<option value="043">043</option>
+<option value="044">044</option>
+<option value="051">051</option>
+<option value="052">052</option>
+<option value="053">053</option>
+<option value="054">054</option>
+<option value="055">055</option>
+<option value="061">061</option>
+<option value="062">062</option>
+<option value="063">063</option>
+<option value="064">064</option>
+<option value="0502">0502</option>
+<option value="0503">0503</option>
+<option value="0504">0504</option>
+<option value="0505">0505</option>
+<option value="0506">0506</option>
+<option value="0507">0507</option>
+<option value="070">070</option>
+<option value="010">010</option>
+<option value="011">011</option>
+<option value="016">016</option>
+<option value="017">017</option>
+<option value="018">018</option>
+<option value="019">019</option>
+</select>-<input id="phone2" name="cust_tel2" maxlength="4"  value="<%=fromcustomer.getCust_tel() %>" type="text"  />-<input id="phone3" name="cust_tel" maxlength="4"  value="" type="text"  /></td>
+            </tr>
+<tr>
+<th scope="row">휴대전화 </th>
+                <td><select id="mobile1" name="cust_phone" >
+<option value="010">010</option>
+<option value="011">011</option>
+<option value="016">016</option>
+<option value="017">017</option>
+<option value="018">018</option>
+<option value="019">019</option>
+</select>-<input id="mobile2" name="cust_phone" maxlength="4" value="" type="text"  />-<input id="mobile3" name="cust_phone" maxlength="4"  value="" type="text"  /></td>
+            </tr>
+<tr class="">
+<th scope="row">SMS 수신여부 </th>
+                <td><label for=is_sms0><input id="is_sms0" name="is_sms" class="ec-base-chk" value="T" type="checkbox"  />동의함</label><p>쇼핑몰에서 제공하는 유익한 이벤트 소식을 SMS로 받으실 수 있습니다.</p>
+                </td>
+            </tr>
+<tr>
+<th scope="row">이메일 </th>
+                <td><input id="email1" name="cust_email"  value="" type="text"  />@<input id="email2" name="cust_email" readonly="readonly" value="" type="text"  /><select id="email3" >
+<option value="" selected="selected">- 이메일 선택 -</option>
+<option value="naver.com">naver.com</option>
+<option value="daum.net">daum.net</option>
+<option value="nate.com">nate.com</option>
+<option value="hotmail.com">hotmail.com</option>
+<option value="yahoo.com">yahoo.com</option>
+<option value="empas.com">empas.com</option>
+<option value="korea.com">korea.com</option>
+<option value="dreamwiz.com">dreamwiz.com</option>
+<option value="gmail.com">gmail.com</option>
+<option value="etc">직접입력</option>
+</select></td>
+            </tr>
+<tr class="">
+<th scope="row">이메일 수신여부 </th>
+                <td><label for=is_news_mail0><input id="is_news_mail0" name="is_news_mail"  class="ec-base-chk" value="T" type="checkbox"  />동의함</label><p>쇼핑몰에서 제공하는 유익한 이벤트 소식을 이메일로 받으실 수 있습니다.</p>
+                </td>
+            </tr>
+<tr class="">
+<th scope="row">평생회원</th>
+
+                <td>
+
+<input id="is_lifetime0" name="is_lifetime" value="T" type="radio"  /><label for="is_lifetime0" >동의함</label>
+<input id="is_lifetime1" name="is_lifetime" value="F" type="radio" checked="checked"  /><label for="is_lifetime1" >동의안함</label>
+                    <ul class="txtDesc">
+<li>평생회원으로 가입하시면 <strong>프롬헤드투토</strong> 회원 탈퇴시까지는 휴면회원으로 전환되지 않으며, 고객님의 개인정보가 탈퇴시까지 안전하게 보관됩니다.</li>
+<li class="displaynone">지금 평생회원으로 가입하시면 쿠폰혜택을 드립니다. (쿠폰혜택을 받으신 경우, 3개월간 평생회원을 유지하셔야 합니다.)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 class="">추가정보</h3>
+<div class="boardWrite typeAddinfo">
+        <table border="1" summary="">
+<caption>회원 추가정보</caption>
+        <tbody>
+
+
+<tr class="">
+<th scope="row">생년월일 </th>
+                <td><input id="birth_year" name="cust_birth"  class="inputTypeText" maxlength="4" value="" type="text"  /> 년 <input id="birth_month" name="birth_month" class="inputTypeText"  maxlength="2" value="" type="text"  /> 월 <input id="birth_day" name="cust_birth"  class="inputTypeText"  maxlength="2" value="" type="text"  /> 일 <span class="birth "><input id="is_solar_calendar0" name="is_solar_calendar" value="T" type="radio" checked="checked"  /><label for="is_solar_calendar0" >양력</label>
+<input id="is_solar_calendar1" name="is_solar_calendar" value="F" type="radio"  /><label for="is_solar_calendar1" >음력</label></span>
+</td>
+            </tr>
+<tr class="">
+<th scope="row">결혼기념일</th>
+                <td><input id="marry_year" name="cust_marrday" class="inputTypeText"  maxlength="4" value="" type="text"  /> 년 <input id="marry_month" name="cust_marrday"  class="inputTypeText"  maxlength="2" value="" type="text"  /> 월 <input id="marry_day" name="cust_marrday"  class="inputTypeText"  maxlength="2" value="" type="text"  /> 일</td>
+            </tr>
+<tr class="">
+<th scope="row">배우자생일 </th>
+                <td><input id="partner_year" name="cust_wifebirth"  class="inputTypeText" maxlength="4" value="" type="text"  /> 년 <input id="partner_month" name="partner_month"  class="inputTypeText"  maxlength="2" value="" type="text"  /> 월 <input id="partner_day" name="partner_day"  class="inputTypeText"  maxlength="2" value="" type="text"  /> 일</td>
+            </tr>
+
+<tr class="">
+<th scope="row">지역 </th>
+                <td><select id="region" name="cust_area" >
+<option value="region_00">선택</option>
+<option value="region_01">경기</option>
+<option value="region_02">서울</option>
+<option value="region_03">인천</option>
+<option value="region_04">강원</option>
+<option value="region_05">충남</option>
+<option value="region_06">충북</option>
+<option value="region_07">대전</option>
+<option value="region_08">경북</option>
+<option value="region_09">경남</option>
+<option value="region_10">대구</option>
+<option value="region_11">부산</option>
+<option value="region_12">울산</option>
+<option value="region_13">전북</option>
+<option value="region_14">전남</option>
+<option value="region_15">광주</option>
+<option value="region_16">제주</option>
+<option value="region_17">해외</option>
+</select></td>
+            </tr>
+
+
+</tbody>
+</table>
+</div>
+
+
+
+   
+<div class="">
+        <h3>개인정보 취급 위탁 동의(선택)</h3>
+        <div class="agreeArea">
+            <div class="agree">
+                아래 내용의 동의 여부는 회원가입에 영향을 미치지 않습니다. 단, 동의 거부시 서비스 이용에 제한이 있을 수 있습니다.<br />
+카카오톡 사용자일 경우 안내 메시지를 카카오톡으로 보내 드립니다<br />
+<br />
+- 위탁받는 자(수탁업체) :CJ대한통운<br />
+- 위탁업무의 내용:상품배송<br />
+<br />
+- 위탁받는 자(수탁업체) :LG CNS<br />
+- 위탁업무의 내용:카카오톡중개서비스<br />
+<br />
+<br />
+<br />
+<br />
+            </div>
+            <p class="check"><span>개인정보 취급 위탁에 동의하십니까?</span> <input id="" name=""  type="checkbox"  /><label for="agree_consignment_check0" >동의함</label></p>
+        </div>
+    </div>
+
+<div class="btnArea center">
+         <input type="submit" class="btn btn-primary" value="회원정보수정" />
+        <a href="main.jsp">취소</a>
+        <span class="right">
+            <a href="" onclick="">회원탈퇴</a>
+        </span>
+    </div>
+
+
+   
+
+
+
+
+</form>
+        <hr class="layout"/><hr class="layout"/>
+    
+    
+<div id="footer">
+
+            <div class="xans-element- xans-layout xans-layout-footer "><div class="utilMenu">
+                    <a href="/index.html">home</a>
+                    <a href="/shopinfo/company.html">about us</a>
+                    <a href="/member/agreement.html">agreement</a>
+                    <a href="/member/privacy.html" style="font-weight:700; color: #C52D2D;">privacy policy</a>
+                    <a href="/shopinfo/guide.html">shop guide</a>
+                    <a href="https://www.doortodoor.co.kr/main/index.jsp" target="_blank">delivery</a>
+                </div>
+                </div>
+                </div>
+               
+                
+ </body>
+</html>               
+--%> 

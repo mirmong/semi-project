@@ -1,0 +1,50 @@
+package semi.service;
+
+import java.sql.SQLException;
+import java.util.List;
+import semi.dao.ProductDao;
+import semi.vo.Category;
+import semi.vo.ProductDetail;
+
+public class ProductService {
+	
+	private final static int WEEKLY_BEST_COUNT = 5;
+	
+	private static ProductService instance;
+	
+	private ProductDao productDao;
+	
+	private ProductService() {
+		productDao = ProductDao.getInstance();
+	}
+	
+	public static ProductService getInstance() {
+		return instance;
+	}
+	
+
+// 김유호 [ 시작 ] -----------------------------------------------------------------------------------------------------------
+
+	
+	public List<ProductDetail> getWeeklyBestProductsByCategory(Category category) throws SQLException{
+		List<Category> categories = productDao.getAllMainCategories();
+		
+		if(categories.isEmpty())
+			throw new RuntimeException("카테고리 관련 데이터가 존재하지 않습니다.");
+		
+		for(Category c : categories) {
+			if(c.getNo() == category.getNo()) {
+				return productDao.getWeeklyBestProductsByCategory(category);
+			}
+		}
+		
+		throw new RuntimeException("매개변수category와 동일한 카테고리를 찾을 수 없습니다.");
+	}
+
+	
+	
+
+// 김유호 [ 끝 ] -----------------------------------------------------------------------------------------------------------	
+
+	
+}

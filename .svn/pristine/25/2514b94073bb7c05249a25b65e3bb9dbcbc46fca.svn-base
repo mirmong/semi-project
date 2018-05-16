@@ -1,0 +1,429 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+  
+  <style type="text/css">
+
+	.titleArea{
+		margin:20px 0px 60px;	
+	}
+	
+	.titleArea h2{
+		font-family: 'Open Sans' , '맑은고딕'';
+		letter-spacing:0.07em;
+		font-weight:600;
+		text-transform:uppercase;
+		font-size:13px;
+		color:#555;
+		text-align:center;
+		margin:10px auto 15px;
+	}
+
+
+}
+
+
+
+.xans-myshop-wishlist .empty {
+    font-size:15px;
+    margin: 50px 0;
+    text-align: center;
+    font-weight: bold;
+    color: #757575;
+
+}
+
+.xans-myshop-wishlist table {
+    table-layout: fixed;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    color: #555;
+    line-height: 1.5;
+    margin: 20px 0 0;
+    font-size: 11px;
+}
+
+
+
+
+
+.xans-myshop-wishlistbutton {
+    overflow: hidden;
+    margin: 20px 0 0;
+    text-align: right;
+}
+.xans-myshop-wishlist .empty {
+    margin: 50px 0;
+    text-align: center;
+    font-weight: bold;
+    color: #757575;
+}
+.xans-myshop-wishlistbutton span.left {
+    float: left;
+}
+
+.xans-myshop-wishlistbutton strong.ctrlTxt {
+    margin: 0 6px 0 0px;
+    color: #555;
+    line-height: 22px;
+    font-size: 13px;
+}
+strong, b {
+    font-weight: bold;
+}
+.xans-myshop-wishlist table {
+    table-layout: fixed;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    color: #555;
+    line-height: 1.5;
+    margin: 20px 0 0;
+    font-size: 11px;
+}
+
+user agent stylesheet
+a:-webkit-any-link {
+    color: -webkit-link;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.xans-myshop-wishlist .empty {
+    margin: 50px 0;
+    text-align: center;
+    font-weight: bold;
+    color: #757575;
+}
+.container {
+    width: 1304px;
+    min-height: 600px;
+    margin: 0 auto;
+}
+
+.contents02 {
+    width: 1000px;
+    min-height: 500px;
+    margin: 80px auto 80px;
+}
+p {
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+
+
+html, body, div, dl, dt, dd, ul, ol, li, 
+h1, h2, h3, h4, h5, h6, pre, code, form, 
+fieldset, legend, input, textarea, p, blockquote, th, td, img {
+    margin: 0;
+    padding: 0;
+}
+
+
+.xans-myshop-wishlist table {
+    table-layout: fixed;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    color: #555;
+    line-height: 1.5;
+    margin: 20px 0 0;
+    font-size: 11px;
+}
+
+table {
+    width: 100%;
+    border: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+
+}
+
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+
+}
+
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+    
+}
+
+.xans-myshop-wishlist table td {
+    padding: 8px 0 5px;
+    border-top: 1px solid #ccc;
+    text-align: center;
+    vertical-align: middle;
+    word-wrap: break-word;
+}
+
+.titleArea {
+    margin: 22px 0px 60px;
+}
+
+th, td {
+    border: 0;
+            text-align:center;
+}
+
+ input, select, textarea {
+    font-size: 100%;
+    font-family: "돋움",Dotum;
+    color: #353535;
+    vertical-align: middle;
+}
+
+html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, img {
+    margin: 0;
+    padding: 0;
+}
+.xans-myshop-wishlist table .thumb {
+    width: 60px;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+user agent stylesheet
+a:-webkit-any-link {
+    color: -webkit-link;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.xans-myshop-wishlist table td.mileage, .xans-myshop-wishlist table td.delivery {
+    color: #757575;
+}
+.xans-myshop-wishlist table .mileage {
+    width: 85px;
+}
+
+.xans-myshop-wishlist table th {
+    padding: 6px 0 4px;
+    font-weight: normal;
+}
+.xans-myshop-wishlist table th:first-child {
+    border-left: 0;
+}
+.xans-myshop-wishlist table .chk {
+    width: 27px;
+}
+
+.xans-myshop-wishlist table .thumb {
+    width: 60px;
+}
+
+.xans-myshop-wishlist table .product {
+    width: auto;
+}
+
+.xans-myshop-wishlist table .price {
+    width: 95px;
+}
+
+.xans-myshop-wishlist table .mileage {
+    width: 85px;
+}
+
+.xans-myshop-wishlist table .delivery {
+    width: 90px;
+}
+
+.xans-myshop-wishlist table .charge {
+    width: 70px;
+}
+.xans-myshop-wishlist table .total {
+    width: 90px;
+}
+
+.xans-myshop-wishlist table .button {
+    width: 106px;
+}
+
+.xans-myshop-wishlist table .thumb {
+    width: 60px;
+}
+
+.xans-myshop-wishlist table td.product {
+    padding-left: 10px;
+    text-align: left;
+}
+
+.xans-myshop-wishlist table .price {
+    width: 95px;
+}
+
+.xans-myshop-wishlist table td.mileage, .xans-myshop-wishlist table td.delivery {
+    color: #757575;
+}
+.xans-myshop-wishlist table td.mileage, .xans-myshop-wishlist table td.delivery {
+    color: #757575;
+}
+
+.xans-myshop-wishlist table td {
+    padding: 8px 0 5px;
+    border-top: 1px solid #ccc;
+    text-align: center;
+    vertical-align: middle;
+    word-wrap: break-word;
+}
+
+.xans-myshop-wishlist table .total {
+    width: 90px;
+}
+
+.xans-myshop-wishlist table .button {
+    width: 106px;
+}
+input, select, textarea {
+    font-size: 100%;
+    font-family: "돋움",Dotum;
+    color: #353535;
+    vertical-align: middle;
+}
+
+
+
+</style>
+  
+  
+</head>
+<body>
+<div class="container">
+	<div class="contents02">
+		<div class="titleArea">
+				<h2>WISH LIST</h2>
+		</div>
+		
+		<div class="xans-element- xans-myshop xans-myshop-wishlist xans-record-">
+
+			<%--if(장바구니가 안비었으면) --%>
+			<table border="1" summary class="displaynone">
+				<caption>관심상품 목록</caption>
+				
+				<thead>
+					<tr>
+						<th scope="col" class="chk">
+							<input type="checkbox" onclick="">
+						</th>
+						<th scope="col" class="thumb">이미지</th>
+						<th scope="col" class="product">상품정보</th>
+						<th scope="col" class="price">판매가</th>
+						<th scope="col" class="mileage">적립금</th>
+						<th scope="col" class="delivery">배송구분</th>
+						<th scope="col" class="change">배송비</th>
+						<th scope="col" class="total">합계</th>
+						<th scope="col" class="button">선택</th>
+					</tr>
+				</thead>
+				
+				<tbody class="xans-element- xans-myshop xans-myshop-wishlistitem">
+					<tr class="xans-record-">
+						<td>
+							<input name="wish_idx[]" id="wish_idx_0"
+							 enable-order="1" reserve-order="N" enable-purchase="1"
+							 class is-set-product="F" value="196589" type="checkbox" />
+						</td>
+						<td class="thumb">
+							<a href=""><img src="/semi/images/mypage/적립.gif" /></a>
+						</td>
+						<td class="product">
+							<a href="" >
+								<strong>상품명</strong>
+							</a>
+							<ul class="xans-element- xans-myshop xans-myshop-optionall option">
+								<il class="xans-record-">
+									<strong class="displaynone"></strong>
+									"옵션"
+									<span class="displaynone">개</span><br>
+									
+									
+								</il>
+							</ul>
+						</td>
+						<td class="price">
+							<strong>20,000원</strong>
+						</td>
+						
+						<td class="mileage">
+							<img src="/semi/images/mypage/적립.gif" class="icon_img" alt="적립금"/>
+								200원
+						</td>
+							
+						<td class="delivery">
+							기본배송
+							<div class="displayone">(해외배송가능)</div>
+						</td>
+						<td>
+							<span>2,500원<br></span>
+							조건
+						</td>
+						<td class="total">22,500원</td>
+						<td class="button">
+							<a href="" onclick="">
+								<img src="/semi/images/mypage/주문하기.jpg" alt="주문하기"/>
+							</a>
+							<a href="" onclick="">
+								<img src="/semi/images/mypage/장바구니담기.jpg" alt="장바구니담기"/>
+							</a>
+							<a href="" onclick="">
+								<img src="/semi/images/mypage/관심삭제하기.jpg" alt="삭제"/>
+							</a>
+							
+						</td>
+					</tr>
+				</tbody>
+				
+				
+			</table>
+			<%--} --%>
+			<p class="empty">관심상품 목록이 없습니다.</p>
+		</div>
+		
+		<div class="xans-element- xans-myshop xans-myshop-wishlistbutton xans-record-">
+			<span class="left">
+				<strong class="ctrlTxt">선택상품을</strong>
+				<a href="" onclick=";'">
+					<img src="/semi/images/mypage/삭제하기.jpg" alt="삭제하기" >
+				</a>
+				
+				<a href="" onclick=";'">
+					<img src="/semi/images/mypage/장바구니.jpg" alt="장바구니" >
+				</a>
+			</span>
+			
+			<a href="" onclick="();">
+				<img src="/semi/images/mypage/전체상품주문2.jpg" alt="상품주문" >
+			</a>
+			
+			<a href="" onclick="();">
+				<img src="/semi/images/mypage/관심상품비우기2.jpg" alt="상품비우기" >
+			</a>
+			
+			
+			
+			
+		</div>
+		
+		
+		
+		
+	</div>
+</div>
+</body>
+</html>
+    

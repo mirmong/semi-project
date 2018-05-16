@@ -1,0 +1,1040 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="fromheadtotoe">
+
+	<typeAlias alias="AdminAccount" type="semi.vo.AdminAccount"/>
+	<typeAlias alias="Customer" type="semi.vo.Customer"/>
+	<typeAlias alias="PasswordHint" type="semi.vo.PasswordHint"/>
+	<typeAlias alias="Event" type="semi.vo.Event"/>
+	<typeAlias alias="Notice" type="semi.vo.Notice"/>
+	<typeAlias alias="OrderDetail" type="semi.vo.OrderDetail"/>
+	<typeAlias alias="Product" type="semi.vo.ProductDetail"/>
+	<typeAlias alias="ProductQuestions" type="semi.vo.ProductQuestions"/>
+	<typeAlias alias="Category" type="semi.vo.Category"/>
+	<typeAlias alias="ProductReviews" type="semi.vo.ProductReviews"/>
+	<typeAlias alias="Qna" type="semi.vo.Qna"/>
+	<typeAlias alias="Review" type="semi.vo.Review"/>
+	<typeAlias alias="AdminComment" type="semi.vo.AdminComment"/>
+
+
+<!-- *admin [ 시작 ] ############################################################################################################# -->
+
+	<select id="getAdminCommentInfoByReviewNo" resultClass="AdminComment" parameterClass="map">
+		select
+			A.COMMENT_CONTENTS as commentContents
+			,A.ADMIN_ACCOUNT_NO as no
+			,C.ADMIN_ACCOUNT_ID as id
+			,D.cnt as cnt
+		from
+			review_comment A, Product_reviews B, ADMIN_ACCOUNTS C
+			,(select
+					count(*) as cnt
+				from
+					review_comment Q, Product_reviews W
+				where
+					Q.REVIEW_NO = W.REVIEW_NO
+					and Q.review_no = #reviewNoOne#) D
+		where
+			A.REVIEW_NO = B.REVIEW_NO
+			and A.ADMIN_ACCOUNT_NO = C.ADMIN_ACCOUNT_NO
+			and B.review_no = #reviewNoTwo#
+	</select>
+
+<!-- *admin [ 끝 ] ############################################################################################################## -->
+<!-- ############################################################################################################################ -->
+<!-- ############################################################################################################################ -->
+<!-- ############################################################################################################################ -->
+<!-- *customer [ 시작 ] ############################################################################################################ -->
+
+	<select id="quesstion" resultClass="PasswordHint" >
+		select
+			QUESTION_NO questionNo, 
+			QUESTION_CONTENTS questionContents
+		from
+			PASSWORD_QUESTIONS
+	</select>
+
+	<select id="myQuestion" resultClass="PasswordHint" parameterClass="int" >
+		SELECT
+			ph.CUSTOMER_NO customerNo,
+			ph.QUESTION_NO questionNo,
+			ph.HINT_ANSWER answer,
+			pq.QUESTION_CONTENTS questionContents
+		from
+ 			PASSWORD_QUESTIONS pq,PASSWORD_HINT ph
+		where 
+			pq.QUESTION_NO = ph.QUESTION_NO
+		and 
+			ph.CUSTOMER_NO = #value#
+		
+	</select>
+
+	<insert id="addCustomerHint" parameterClass="PasswordHint">
+			insert into PASSWORD_HINT
+				(CUSTOMER_NO, QUESTION_NO,HINT_ANSWER)
+			values
+				(CUSTOMER_SEQ.CURRVAL,#questionNo#,#answer#)
+	</insert>
+	
+	<insert id="addCustomer" parameterClass="Customer">
+		insert into CUSTOMERS
+			(CUSTOMER_NO, 
+			 CUSTOMER_ID, 
+			 CUSTOMER_PWD, 
+			 CUSTOMER_NAME, 
+			 CUSTOMER_TEL, 
+			 CUSTOMER_EMAIL, 
+			 CUSTOMER_STATUS, 
+			 CUSTOMER_POSTCODE, 
+			 CUSTOMER_ADDRESS_1, 
+			 CUSTOMER_ADDRESS_2, 
+			 CUSTOMER_GRADE,
+			 CUSTOMER_POINT,
+			 CREATE_DATE )
+		values 
+			(
+			CUSTOMER_SEQ.nextval,
+			#id#,
+			#pwd#,
+			#name#,
+			#tel#,
+			#email#,
+			'정상',
+			#postcode#,
+			#firstAddress#,
+			#secondAddress#,
+			'BRONZE',
+			#point#,
+			sysdate)
+	</insert>
+	
+	<select id="login" parameterClass="String" resultClass="Customer">
+		select
+			CUSTOMER_NO no, 
+			 CUSTOMER_ID id, 
+			 CUSTOMER_PWD pwd, 
+			 CUSTOMER_NAME name, 
+			 CUSTOMER_TEL tel, 
+			 CUSTOMER_EMAIL email, 
+			 CUSTOMER_STATUS status, 
+			 CUSTOMER_POSTCODE postcode, 
+			 CUSTOMER_ADDRESS_1 firstAddress, 
+			 CUSTOMER_ADDRESS_2 secondAddress, 
+			 CUSTOMER_GRADE grade,
+			 CUSTOMER_POINT point,
+			 CREATE_DATE createDate
+		from
+			CUSTOMERS
+		where
+			CUSTOMER_ID=#value#	
+	</select>
+	
+	<update id="deleteCustomr" parameterClass="String" >
+		Update 
+			CUSTOMERS 
+		set
+			CUSTOMER_STATUS ='탈퇴'
+		where 
+			CUSTOMER_ID=#value#
+	</update>
+	
+    <select id="getCustomerByEmail" parameterClass="String" resultClass="Customer">
+	    	select
+				CUSTOMER_ID  id, 
+				 CUSTOMER_EMAIL email,
+				CUSTOMER_NAME  name,
+				CREATE_DATE createDate
+			from
+				CUSTOMERS
+			where
+				CUSTOMER_EMAIL=#value#	
+    </select>
+    
+    <select id="allCustomer" resultClass="Customer">
+			select
+				 CUSTOMER_NO no, 
+				 CUSTOMER_ID id, 
+				 CUSTOMER_PWD pwd, 
+				 CUSTOMER_NAME name, 
+				 CUSTOMER_TEL tel, 
+				 CUSTOMER_EMAIL email, 
+				 CUSTOMER_STATUS status, 
+				 CUSTOMER_POSTCODE postcode, 
+				 CUSTOMER_ADDRESS_1 firstAddress, 
+				 CUSTOMER_ADDRESS_2 secondAddress, 
+				 CUSTOMER_GRADE grade,
+				 CUSTOMER_POINT point,
+				 CREATE_DATE createDate
+			from
+				CUSTOMERS
+	</select>
+	
+	<select id="getCustomerByName" resultClass="Customer" parameterClass="string">
+		select
+			CUSTOMER_NO no, 
+			CUSTOMER_ID id, 
+			CUSTOMER_PWD pwd, 
+			CUSTOMER_NAME name, 
+			CUSTOMER_TEL tel, 
+			CUSTOMER_EMAIL email, 
+			CUSTOMER_STATUS status, 
+			CUSTOMER_POSTCODE postcode, 
+			CUSTOMER_ADDRESS_1 firstAddress, 
+			CUSTOMER_ADDRESS_2 secondAddress, 
+			CUSTOMER_GRADE grade,
+			CUSTOMER_POINT point,
+			CREATE_DATE createDate
+		from
+			CUSTOMERS
+		where
+			customer_name = #value#
+	</select>
+	
+	
+	<update id="modifyCoustomer" parameterClass="Customer" >
+		Update 
+			CUSTOMERS 
+		set
+			CUSTOMER_PWD  = #pwd#,
+			CUSTOMER_POSTCODE  =  #postcode#,
+			CUSTOMER_ADDRESS_1  =  #firstAddress#,
+			CUSTOMER_ADDRESS_2   =  #secondAddress#,
+			CUSTOMER_TEL   =  #tel#, 
+			CUSTOMER_EMAIL   =  #email#
+			
+		where 
+			CUSTOMER_ID=#id#
+	</update>
+	
+	<update id="modifyHint" parameterClass="PasswordHint" >
+		Update
+			PASSWORD_HINT
+		set
+			QUESTION_NO   =#questionNo#,
+			HINT_ANSWER   = #answer#
+		
+		where
+			CUSTOMER_NO=#questionNo#	
+				
+	</update>
+	
+
+	
+
+    <select id="allsearch" resultClass="Customer">
+		select
+			CUSTOMER_NO no, 
+			 CUSTOMER_ID id, 
+			 CUSTOMER_PWD pwd, 
+			 CUSTOMER_NAME name, 
+			 CUSTOMER_TEL tel, 
+			 CUSTOMER_EMAIL email, 
+			 CUSTOMER_STATUS status, 
+			 CUSTOMER_POSTCODE postcode, 
+			 CUSTOMER_ADDRESS_1 firstAddress, 
+			 CUSTOMER_ADDRESS_2 secondAddress, 
+			 CUSTOMER_GRADE grade,
+			 CUSTOMER_POINT point,
+			 CREATE_DATE cust_createdate
+		from
+			CUSTOMERS
+	</select>
+	
+	<select id="getCustomerById" parameterClass="int" resultClass="Customer">
+		select
+			CUSTOMER_NO as no, 
+			 CUSTOMER_ID as id, 
+			 CUSTOMER_PWD as pwd, 
+			 CUSTOMER_NAME as name, 
+			 CUSTOMER_TEL as tel, 
+			 CUSTOMER_EMAIL as email, 
+			 CUSTOMER_STATUS as status, 
+			 CUSTOMER_POSTCODE as postcode, 
+			 CUSTOMER_ADDRESS_1 as firstAddress, 
+			 CUSTOMER_ADDRESS_2 as secondAddress, 
+			 CUSTOMER_GRADE as grade,
+			 CUSTOMER_POINT as point,
+			 CREATE_DATE as cust_createdate
+		from
+			CUSTOMERS
+		where CUSTOMER_NO = #value#
+	</select>
+
+<!-- *customer [ 끝 ] ############################################################################################################ -->
+<!-- ############################################################################################################################ -->
+<!-- ############################################################################################################################ -->
+<!-- ############################################################################################################################ -->
+<!-- *event [ 시작 ] ############################################################################################################# -->
+
+	<select id="getAllEvents" resultClass="Event">
+		select
+			E.event_no				as no
+			, E.event_subject		as subject
+			, E.create_date			as createDate
+			, A.admin_account_id	as adminName
+			, E.event_banner		as banner
+		from
+			events E, admin_accounts A
+		where
+			E.admin_account_no = A.admin_account_no
+	</select>
+	
+	<select id="getDetailEvent" parameterClass="int" resultClass="Event">
+		select
+			E.event_no				as no
+			, E.event_subject		as subject
+			, E.create_date			as createDate
+			, A.admin_account_id	as adminName
+			, E.event_banner		as banner
+			, E.event_viewcount		as viewCount
+			, E.event_contents		as contents
+		from
+			events E, admin_accounts A
+		where
+			E.admin_account_no = A.admin_account_no
+		and E.event_no = #value#
+	</select>
+	
+	<update id="eventCountByNo" parameterClass="int">
+		update
+			events
+		set
+			event_viewcount = event_viewcount + 1
+		where
+			event_no = #value#
+	</update>
+	
+	<select id="getNextEvent" parameterClass="int" resultClass="Event">
+		select
+			event_no		as no
+			,event_subject	as subject
+		from
+			events
+		where event_no in(
+			(select
+				min(event_no)
+			from
+				events
+			where
+				event_no > #value#)
+			)
+	</select>
+	
+	<select id="getPrevEvent" parameterClass="int" resultClass="Event">
+		select
+			event_no		as no
+			,event_subject	as subject
+		from
+			events
+		where event_no in(
+			(select
+				max(event_no)
+			from
+				events
+			where
+				event_no &lt; #value#)
+			)
+	</select>
+
+<!-- *event [ 끝 ] ############################################################################################################## -->
+<!-- ############################################################################################################################ -->
+<!-- ############################################################################################################################ -->
+<!-- ############################################################################################################################ -->
+<!-- *notice [ 시작 ] ############################################################################################################# -->
+
+	<select id="getAllNotice" resultClass="Notice">
+		select
+			N.notice_no				as no
+			, A.admin_account_id	as adminId
+			, N.notice_subject		as subject
+			, N.notice_viewcount	as viewCount
+			, N.create_date			as createDate
+		from
+			notices N, admin_accounts A
+		where
+			N.admin_account_no = A.admin_account_no
+	</select>
+	
+	<select id="getDetailNotice" parameterClass="int" resultClass="Notice">
+		select
+			N.notice_no				as no
+			, A.admin_account_id	as adminId
+			, N.notice_subject		as subject
+			, N.notice_viewcount	as viewCount
+			, N.create_date			as createDate
+			, N.notice_contents		as contents
+		from
+			notices N, admin_accounts A
+		where
+			N.admin_account_no = A.admin_account_no
+		and N.notice_no = #value#
+	</select>
+	
+	<update id="noticeCountByNo" parameterClass="int">
+		update
+			notices
+		set
+			notice_viewcount = notice_viewcount + 1
+		where
+			notice_no = #value#
+	</update>
+	
+	<select id="getNextNotice" parameterClass="int" resultClass="Notice">
+		select
+			notice_no		as no
+			,notice_subject	as subject
+		from
+			notices
+		where notice_no in(
+			(select
+				min(notice_no)
+			from
+				notices
+			where
+				notice_no > #value#)
+			)
+	</select>
+	
+	<select id="getPrevNotice" parameterClass="int" resultClass="Notice">
+		select
+			notice_no		as no
+			,notice_subject	as subject
+		from
+			notices
+		where notice_no in(
+			(select
+				max(notice_no)
+			from
+				notices
+			where
+				notice_no &lt; #value#)
+			)
+	</select>
+
+<!-- *notice [ 끝 ] ############################################################################################################## -->
+<!-- ############################################################################################################################ -->
+<!-- ############################################################################################################################ -->
+<!-- ############################################################################################################################ -->
+<!-- *order [ 시작 ] ############################################################################################################## -->
+
+
+
+<!-- *order [ 끝 ] ############################################################################################################### -->
+<!-- ############################################################################################################################ -->
+<!-- ############################################################################################################################ -->
+<!-- ############################################################################################################################ -->
+<!-- *product [ 시작 ] ############################################################################################################# -->
+ 
+ 
+<!-- *김유호 시작 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+ 	
+	<resultMap class="java.util.HashMap" id="index.product">
+		<result property="productNo" 	column="productNo" />
+		<result property="name" 		column="name" />
+		<result property="price" 		column="price" />
+		<result property="detail" 		column="detail" />
+		<result property="discount" 	column="discount" />
+		<result property="imgBig" 		column="imgBig" />
+		<result property="imgPortrait1" column="imgPortrait1" />
+		<result property="imgPortrait2" column="imgPortrait2" />
+	</resultMap>
+
+	<select id="getProductsByCreateDate" parameterClass="map" resultMap="index.product">
+		select
+			product_no				as productNo,
+			product_img_big			as imgBig,
+			product_img_portrait_1	as imgPortrait1,
+			product_img_portrait_2	as imgPortrait2,
+			product_name			as name,
+			product_price			as price,
+			product_detail			as detail,
+			product_discount		as discount
+		from (
+				select 
+					product_no,
+					product_img_big,	
+					product_img_portrait_1,
+					product_img_portrait_2,
+					product_name,
+					product_price,
+					product_detail,	
+					product_discount	,
+					row_number () over (order by create_date desc) 	as "rownum"
+				from 
+					products
+				where
+					create_date &gt;= #startDate#
+				and
+					create_date &lt;= #endDate#
+				)
+		where 
+			"rownum" &lt;= #resultCount#
+	</select>
+
+	<select id="getBestSalesProductsByPeriod" parameterClass="map" resultMap="index.product">
+		select 
+			P.product_no				as productNo,
+			P.product_img_big			as imgBig,
+			P.product_img_portrait_1	as imgPortrait1,
+			P.product_img_portrait_2	as imgPortrait2,
+			P.product_name				as name,
+			P.product_price				as price,
+			P.product_detail			as detail,
+			P.product_discount			as discount
+		from ( 
+				select
+					row_number() over (order by sum(order_qty) desc) as "rownum",
+					OD.product_no,
+					OD.order_no
+				from
+					order_detail OD , orders O
+				where
+					OD.order_no = O.order_no
+				and
+					O.order_date &gt;= #periodStartDate#
+				and
+					O.order_date &lt;= #periodEndDate#
+				group by
+					OD.product_no , OD.order_no
+			   ) BP, products P
+		where 
+			BP.product_no = P.product_no
+		and
+			BP."rownum" &lt;= #resultCount#
+	</select>
+
+	<select id="getBestSalesProductsByPeriodAndCategory" parameterClass="map" resultMap="index.product">
+		select 
+			P.product_no				as productNo,
+			P.product_img_big			as imgBig,
+			P.product_img_portrait_1	as imgPortrait1,
+			P.product_img_portrait_2	as imgPortrait2,
+			P.product_name				as name,
+			P.product_price				as price,
+			P.product_detail			as detail,
+			P.product_discount			as discount
+		from ( 
+				select
+					row_number() over (order by sum(order_qty) desc) as "rownum",
+					OD.product_no,
+					OD.order_no
+				from
+					order_detail OD , orders O
+				where
+					OD.order_no = O.order_no
+				and
+					O.order_date &gt;= #periodStartDate#
+				and
+					O.order_date &lt;= #periodEndDate#
+				group by
+					OD.product_no , OD.order_no
+			   ) BP, products P , categories C
+		where 
+			BP.product_no = P.product_no
+		and
+			C.category_no = P.category_no
+		and
+			C.category_name = #categoryName#
+		and
+			BP."rownum" &lt;= #resultCount#
+	</select>
+	
+	<select id="getAllMainCategories" resultClass="Category">
+		select 
+			category_no as "no",
+			category_name as name
+		from 
+			categories
+		where 
+			category_no = main_category_no
+	</select>
+	
+<!-- *김유호 끝 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+
+	<select id="getProductByNumber" parameterClass="int" resultClass="Product">
+		select
+			P.product_no as "no"
+			,P.category_no as categoryNo
+			,P.product_name as name
+			,P.product_price as price
+			,P.product_point as "point"
+			,P.product_discount as discount
+			,P.product_detail as detail
+			,P.product_status as status
+			,P.product_img_portrait_1 as imgPortrait1
+			,P.product_img_portrait_2 as imgPortrait2
+			,P.product_img_big as imgBig
+			,S.product_color as color
+			,S.product_size as "size"
+			,S.product_qty as qty
+		from
+			products P, product_stock S
+		where
+			P.product_no = S.product_no
+			and P.product_no = #value#
+	</select>
+
+	<select id="getProductColorByProNo" parameterClass="int" resultClass="string">
+		select 
+			DISTINCT color
+		from (select
+				P.product_no as "no"
+				,P.category_no as categoryNo
+				,P.product_name as name
+				,P.product_price as price
+				,P.product_point as "point"
+				,P.product_discount as discount
+				,P.product_detail as detail
+				,P.product_status as status
+				,P.product_img_portrait_1 as imgPortrait1
+				,P.product_img_portrait_2 as imgPortrait2
+				,P.product_img_big as imgBig
+				,S.product_color as color
+				,S.product_size as "size"
+				,S.product_qty as qty
+			from
+				products P, product_stock S
+			where
+				P.product_no = S.product_no
+				and P.product_no = #value#)
+	</select>
+	
+	<select id="getProductSizeByProNo" parameterClass="int" resultClass="string">
+		select 
+			DISTINCT "size"
+		from (select
+				P.product_no as "no"
+				,P.category_no as categoryNo
+				,P.product_name as name
+				,P.product_price as price
+				,P.product_point as "point"
+				,P.product_discount as discount
+				,P.product_detail as detail
+				,P.product_status as status
+				,P.product_img_portrait_1 as imgPortrait1
+				,P.product_img_portrait_2 as imgPortrait2
+				,P.product_img_big as imgBig
+				,S.product_color as color
+				,S.product_size as "size"
+				,S.product_qty as qty
+			from
+				products P, product_stock S
+			where
+				P.product_no = S.product_no
+				and P.product_no = #value#)
+	</select>
+
+	<select id="getProductQuestionsByProNo" parameterClass="int" resultClass="ProductQuestions">
+		select
+			question_no as quesNo
+			,product_no as proNo
+			,customer_no as custNo
+			,question_subject as subject
+			,question_contents as contents
+			,question_status as status
+			,question_password as password
+			,question_viewcount as viewcount
+			,create_date as createDate
+		from
+			product_questions
+		where
+			product_no = #value#
+	</select>
+	
+	<select id="getSixReviewImagesByProNo" parameterClass="int" resultClass="string">
+		select
+			review_img as img
+		from (select 
+					review_img, row_number ( ) over (order by create_date desc) as rn
+				from
+					product_reviews
+				where
+					product_no = #value#)
+		where 
+			rn &lt;= 6
+	</select>
+	
+	<select id="getFourReviewImagesByProNo" parameterClass="int" resultClass="string">
+		select
+			review_img as img
+		from (select 
+					review_img, row_number ( ) over (order by create_date desc) as rn
+				from
+					product_reviews
+				where
+					product_no = #value#)
+		where 
+			rn &lt;= 4
+	</select>
+	
+	<select id="getProductReviewsByProNo" resultClass="ProductReviews" parameterClass="int">
+		select
+			review_no as reviewNo
+			,product_no as proNo
+			,customer_no as custNo
+			,review_contents as contents
+			,review_recommend_cnt as recommendCnt
+			,review_grade as grade
+			,review_status as status
+			,create_date as createDate
+			,review_img as img
+			,review_customer_weight as custWeight
+			,review_customer_height as custHeight
+			,review_customer_size as custSize
+		from
+			product_reviews
+		where
+			product_no = #value#
+	</select>
+	
+	<select id="getProductScoreByProNo" resultClass="double" parameterClass="int">
+		select
+			trunc(avg(review_grade),1) as avg
+		from 
+			product_reviews
+		where
+			PRODUCT_NO = #value#
+	</select>
+	
+	<update id="plusReviewLike" parameterClass="map">
+		update
+			product_reviews
+		set
+			review_recommend_cnt = review_recommend_cnt+1
+		where
+			product_no = #proNo#
+			and customer_no = #custNo#
+	</update>
+	
+	<update id="minusReviewLike" parameterClass="map">
+		update
+			product_reviews
+		set
+			review_recommend_cnt = review_recommend_cnt-1
+		where
+			product_no = #proNo#
+			and customer_no = #custNo# 
+	</update>
+	 
+	<select id="getReviewLike" parameterClass="map" resultClass="int">
+		select
+			review_recommend_cnt as recommend
+		FROM
+			product_reviews
+		where
+			PRODUCT_NO = #proNo#
+			and CUSTOMER_NO = #custNo#
+	</select>
+	
+	<select id="getSoldCountTopThreeProductNo" resultClass="int">
+		select 
+			product_no as topThree
+		from (select row_number ( ) over (order by sum(order_qty) desc) as rn, product_no
+				from ORDER_DETAIL
+				group by product_no)
+		where
+			rn &lt;= 3
+	</select>
+<!-- *product [ 끝 ] ############################################################################################################## -->
+<!-- ############################################################################################################################ -->
+<!-- ############################################################################################################################ -->
+<!-- ############################################################################################################################ -->
+<!-- *qna [ 시작 ] ################################################################################################################ -->
+
+	<select id="getAllQuestions" resultClass="Qna">
+		select
+			C.customer_name				as custName
+			, C.customer_grade			as customerGrade
+			, P.product_img_big			as proImg
+			, Q.question_no				as quesNo
+			, Q.question_subject		as quSubject
+			, Q.question_viewcount		as quViewcount
+			, Q.create_date				as quCreateDate
+		from
+			product_questions Q, customers C, products P
+		where
+			Q.customer_no = C.customer_no
+		and Q.product_no = P.product_no
+	</select>
+	
+	<select id="getDetailQuestion" parameterClass="int" resultClass="Qna">
+		select
+			C.customer_name				as custName
+			, Q.question_no				as quesNo
+			, Q.question_subject		as quSubject
+			, Q.question_contents		as quContents
+			, Q.question_viewcount		as quViewcount
+			, Q.create_date				as quCreateDate
+		from
+			product_questions Q, customers C
+		where
+			Q.customer_no = C.customer_no
+		and Q.question_no = #value#
+	</select>
+	
+	<select id="getThisAnswer" parameterClass="int" resultClass="Qna">
+		select
+			A.answer_subject		as awSubject
+			, A.answer_contents		as awContents
+			, A.answer_viewcount	as awViewcount
+			, A.create_date			as awCreateDate
+			, M.admin_account_id	as adminId
+		from
+			product_questions Q, product_answers A, admin_accounts M
+		where
+			A.question_no = Q.question_no
+		and A.admin_account_no = M.admin_account_no
+		and A.question_no = #value#
+	</select>
+	
+	<select id="getPassword" parameterClass="int" resultClass="Qna">
+		select
+			question_password		as password
+		from
+			product_questions
+		where
+			question_no = #value#
+	</select>
+	
+	<update id="countQuestionByNo" parameterClass="int">
+		update
+			product_questions
+		set
+			question_viewcount = question_viewcount + 1
+		where
+			question_no = #value#
+	</update>
+	
+	<update id="countAnswerByNo" parameterClass="int">
+		update
+			product_answers
+		set
+			answer_viewcount = answer_viewcount + 1
+		where
+			question_no = #value#
+	</update>
+
+<!-- *qna [ 끝 ] ################################################################################################################## -->
+<!-- ############################################################################################################################ -->
+<!-- ############################################################################################################################ -->
+<!-- ############################################################################################################################ -->
+<!-- *review [ 시작 ] ################################################################################################################ -->
+
+	<select id="getThisReviews" parameterClass="int" resultClass="Review">
+		select
+	 		  review_contents		as reviewContent
+			, review_img			as reviewImg
+		from
+			(select
+				R.review_contents, R.review_img, P.product_no, ROW_NUMBER() over(order by R.review_grade desc) as rn
+			from
+				product_reviews R , products P
+			WHERE
+	 			P.product_no = R.product_no
+	 		and P.product_no = #value#)
+		where
+			rn &lt;= 1
+	</select>
+	
+	<select id="getThisGrade" parameterClass="int" resultClass="Review">
+		select
+			   nvl(trunc(avg(R.review_grade),1),0.0	) as grade
+			  ,count(P.product_no) 					as reviewCount
+		from
+			products P, product_reviews R
+		where
+			P.product_no = R.product_no
+		and P.product_no = #value#
+	</select>
+	
+	<select id="getAllReviews" resultClass="Review">
+		select
+			  P.product_no			as proNo
+			, P.product_name		as proName
+			, P.product_price		as price
+			, P.product_img_big		as proImg
+			, C.category_name		as category
+		from
+			products P, categories C
+		where
+			P.category_no = C.category_no
+	</select>
+	
+	<select id="getReviewsByCategory" parameterClass="int" resultClass="Review">
+		select
+			  P.product_no			as proNo
+			, P.product_name		as proName
+			, P.product_price		as price
+			, P.product_img_big		as proImg
+			, C.category_name		as category
+		from
+			products P, categories C
+		where
+			P.category_no = C.category_no
+		and C.main_category_no = #value#
+	</select>
+	
+	<select id="getReviewsByProName" resultClass="Review">
+		select
+			  P.product_no			as proNo
+			, P.product_name		as proName
+			, P.product_price		as price
+			, P.product_img_big		as proImg
+			, C.category_name		as category
+		from
+			products P, categories C
+		where
+			P.category_no = C.category_no
+		order by
+			P.product_name
+	</select>
+	
+	<select id="getReviewsByLowPrice" resultClass="Review">
+		select
+			  P.product_no			as proNo
+			, P.product_name		as proName
+			, P.product_price		as price
+			, P.product_img_big		as proImg
+			, C.category_name		as category
+		from
+			products P, categories C
+		where
+			P.category_no = C.category_no
+		order by
+			P.product_price
+	</select>
+	
+	<select id="getReviewsByHighPrice" resultClass="Review">
+		select
+			  P.product_no			as proNo
+			, P.product_name		as proName
+			, P.product_price		as price
+			, P.product_img_big		as proImg
+			, C.category_name		as category
+		from
+			products P, categories C
+		where
+			P.category_no = C.category_no
+		order by
+			P.product_price desc
+	</select>
+	
+	<select id="getReviewsByHighGrade" resultClass="Review">
+		select
+			  P.product_no								as proNo
+			, P.product_name							as proName
+			, P.product_price							as price
+			, P.product_img_big							as proImg
+			, C.category_name							as category
+			, nvl(trunc(avg(R.review_grade),1),0.0	) 	as grade
+		from
+			products P, categories C, product_reviews R
+		where
+			P.category_no = C.category_no
+		and P.product_no = R.product_no
+		group by
+			  P.product_no			
+			, P.product_name	
+			, P.product_price	
+			, P.product_img_big	
+			, C.category_name
+		order by
+			grade desc
+	</select>
+	
+	<select id="getReviewsByManys" resultClass="Review">
+		select
+			  P.product_no			as proNo
+			, P.product_name		as proName
+			, P.product_price		as price
+			, P.product_img_big		as proImg
+			, C.category_name		as category
+			, count(P.product_no) 	as reviewCount
+		from
+			products P, categories C, product_reviews R
+		where
+			P.category_no = C.category_no
+		and P.product_no = R.product_no
+		group by
+			  P.product_no			
+			, P.product_name	
+			, P.product_price	
+			, P.product_img_big	
+			, C.category_name
+		order by
+			reviewCount desc
+	</select>
+	
+	<select id="getReviewsByBestSell" resultClass="Review">
+		select
+			  P.product_no			as proNo
+			, P.product_name		as proName
+			, P.product_price		as price
+			, P.product_img_big		as proImg
+			, C.category_name		as category
+			, count(O.product_no) 	as orderCount
+		from
+			products P, categories C, order_detail O
+		where
+			P.category_no = C.category_no
+		and P.product_no = O.product_no
+		group by
+			  P.product_no			
+			, P.product_name	
+			, P.product_price	
+			, P.product_img_big	
+			, C.category_name
+		order by
+			orderCount desc
+	</select>
+	
+	<select id="getReviewsByHighSale" resultClass="Review">
+		select
+			  P.product_no			as proNo
+			, P.product_name		as proName
+			, P.product_price		as price
+			, P.product_img_big		as proImg
+			, C.category_name		as category
+		from
+			products P, categories C
+		where
+			P.category_no = C.category_no
+		order by
+			P.product_discount desc
+	</select>
+	
+	
+	<insert id="addNewReview" parameterClass="Review">
+		insert into
+			product_reviews
+				(review_no 
+				,product_no 
+				,customer_no 
+				,review_contents
+				,review_grade
+				,review_img 
+				,review_customer_weight 
+				,review_customer_height 
+				,review_customer_size)
+		values
+				(product_review_seq.nextval
+				,#proNo#
+				,#custNo#
+				,#reviewContent#
+				,#grade#
+				,#reviewImg#
+				,#custWeight#
+				,#custheight#
+				,#custSize# )
+	</insert>
+<!-- *review [ 끝 ] ############################################################################################################## -->
+<!-- ############################################################################################################################ -->
+<!-- ############################################################################################################################ -->
+<!-- ############################################################################################################################ -->
+
+</sqlMap>

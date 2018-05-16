@@ -1,0 +1,35 @@
+package semi.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import semi.utils.IbatisUtil;
+import semi.vo.ProductDetail;
+
+public class ProductDao {
+
+	private static ProductDao instance;
+	
+	private SqlMapClient sqlMapper;
+	
+	static {
+		instance = new ProductDao();
+	}
+	
+	private ProductDao() {
+		sqlMapper = IbatisUtil.getsqlMap();
+	}
+	
+	public static ProductDao getInstance() {
+		return instance;
+	}	
+	
+	public ProductDetail getProductByNumber(int no) throws SQLException {
+		return (ProductDetail) IbatisUtil.getsqlMap().queryForObject("getProductByNumber", no);		 
+	}
+	
+	
+}

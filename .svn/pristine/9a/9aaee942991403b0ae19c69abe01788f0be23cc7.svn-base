@@ -1,0 +1,256 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<html lang="ko">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<%@ include file="../include/uppermost-nav.jsp"%>
+<%@ include file="../style/ywj/detailstyle.jsp"%>
+	<div id="wrap">
+		<div id="container">
+			<div id="contents02">
+				<div class="xans-element- xans-board xans-board-readpackage-4 xans-board-readpackage xans-board-4 ">
+					<div class="xans-element- xans-board xans-board-title-4 xans-board-title xans-board-4 ">
+						<div class="title">
+							<h2><font color="#555555">Q&amp;A</font></h2>
+							<p>상품 Q&amp;A입니다.</p>
+						</div>
+					</div>
+					<form id="BoardDelForm" name="" action="/exec/front/Board/del/6"
+						method="post" enctype="multipart/form-data">
+						<input id="no" name="no" value="74120" type="hidden"> <input
+							id="bulletin_no" name="bulletin_no" value="42855" type="hidden">
+						<input id="board_no" name="board_no" value="6" type="hidden">
+						<input id="member_id" name="member_id" value="mintgarden"
+							type="hidden"> <input id="list_url" name="list_url"
+							value="/board/product/list.html?board_no=6" type="hidden">
+						<input id="bdf_modify_url" name="bdf_modify_url"
+							value="/board/product/modify.html?board_act=edit&amp;no=74120&amp;board_no=6"
+							type="hidden"> <input id="bdf_del_url" name="bdf_del_url"
+							value="/exec/front/Board/del/6" type="hidden"> <input
+							id="bdf_action_type" name="bdf_action_type" value=""
+							type="hidden">
+						<div
+							class="xans-element- xans-board xans-board-read-4 xans-board-read xans-board-4">
+							<!--
+            $login_page_url = /member/login.html
+            $deny_access_url = /board/product/list.html
+        -->
+							<div class="boardView ">
+								<table border="1" summary="">
+									<caption>상품 게시판 상세</caption>
+									<tbody>
+										<tr>
+											<th scope="row">제목</th>
+											<td>*답글에 대한 재답글은 확인하지 않습니다*</td>
+										</tr>
+										<tr>
+											<th scope="row">작성자</th>
+											<td>프롬헤드투토 <span class="displaynone">(ip:)</span>
+											</td>
+										</tr>
+										<tr class="etcArea">
+											<td colspan="2">
+												<ul>
+													<li class="date "><strong class="th">작성일</strong> <span
+														class="td">2016-04-22</span></li>
+													<li class="recom displaynone"><strong class="th">추천</strong>
+														<span class="td"><a href="#none"
+															onclick="BOARD_READ.article_vote('/exec/front/Board/vote/6?no=74120&amp;board_no=6&amp;page=&amp;return_url=/board/product/read.html');">
+																<img
+																src="http://img.echosting.cafe24.com/skin/base_ko_KR/board/btn_recommend.gif"
+																alt="추천하기">
+														</a></span></li>
+													<li class="hit "><strong class="th">조회수</strong> <span
+														class="td">2322</span></li>
+												</ul>
+											</td>
+										</tr>
+										<tr class="view">
+											<td colspan="2">
+												<div class="detail">
+													<p>
+														<br>
+													</p>
+													<p>
+														<br>
+													</p>
+													<p>
+														<br>
+													</p>
+													<p>
+														<br>
+													</p>
+													<p>프롬헤드투토 입니다.♥</p>
+													<p>
+														<br>
+													</p>
+													<p>
+														<br>
+													</p>
+													<p>
+														<br>저희가 고객님께 답변해드리는 내용에 다시 재답글을 달아주시는 경우가 종종 있는데요~
+													</p>
+													<p>재답글의 경우 글이 그날 그날 작성되었는지 일일이 확인이 어렵습니다.</p>
+													<p>
+														<br>
+													</p>
+													<p>
+														<br>
+													</p>
+													<p>
+														<span style="color: red;">이미 답변이 달린 게시물에 추가적인 문의가
+															있으신 분들은</span>
+													</p>
+													<p>
+														<span style="color: red;">새로 글을 작성해주시면 정성껏 대답해드리고
+															있습니다^^</span>
+													</p>
+													<p>
+														<br>
+													</p>
+													<p>
+														<br>
+													</p>
+													<p>항상 프롬헤드투토를 이용해주셔서 진심으로 감사드리고 있습니다.</p>
+													<p>앞으로도 많은 관심 부탁드려요 ^^</p>
+												</div>
+											</td>
+										</tr>
+										<tr class="attach displaynone">
+											<th scope="row">첨부파일</th>
+											<td></td>
+										</tr>
+										<tr class="displaynone boardpassword">
+											<th scope="row">비밀번호</th>
+											<td><input id="password" name="password" fw-filter=""
+												fw-label="비밀번호" fw-msg=""
+												onkeydown="if (event.keyCode == 13 || event.which == 13) { return false; }"
+												value="" type="password"> <span class="info">
+													<img
+													src="http://img.echosting.cafe24.com/skin/base_ko_KR/board/ico_warning.gif"
+													alt=""> 삭제하려면 비밀번호를 입력하세요.
+											</span></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="btnArea miniType displaynone ">
+								<span class="left"> <a href="#none" onclick=""
+									class="admin displaynone"><img
+										src="/web/upload/madeleine/boardBTN/btn_board8.jpg"
+										alt="관리자게시"></a> <a href="#none" onclick=""
+									class="admin displaynone"><img
+										src="/web/upload/madeleine/boardBTN/btn_board9.jpg" alt="게시안함"></a>
+									<a href="#none" onclick=""><img
+										src="/web/upload/madeleine/boardBTN/btn_board10.jpg"
+										alt="스팸신고"></a> <a href="#none" onclick=""><img
+										src="/web/upload/madeleine/boardBTN/btn_board11.jpg"
+										alt="스팸해제"></a>
+								</span>
+							</div>
+							<div class="btnArea ">
+								<span class="left"><a
+									href="/board/product/list.html?board_act=list&amp;board_no=6"><img
+										src="/web/upload/madeleine/boardBTN/btn_board4.jpg" alt="목록"></a></span>
+								<a href="#none"
+									onclick="BOARD_READ.article_delete('BoardDelForm','6');"
+									class="displaynone"><img
+									src="/web/upload/madeleine/boardBTN/btn_board7.jpg" alt="삭제"></a>
+								<a
+									href="/board/product/modify.html?board_act=edit&amp;no=74120&amp;board_no=6"
+									class="displaynone"><img
+									src="/web/upload/madeleine/boardBTN/btn_board5.jpg" alt="수정"></a>
+								<a
+									href="/board/product/reply.html?board_act=reply&amp;no=74120&amp;board_no=6"
+									class=""><img
+									src="/web/upload/madeleine/boardBTN/btn_board12.jpg" alt="답변"></a>
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<div
+					class="xans-element- xans-board xans-board-commentpackage-4 xans-board-commentpackage xans-board-4 ">
+					<!-- 코멘트 리스트 -->
+					<!-- 코멘트 페이징 -->
+					<!-- 댓글 수정 -->
+					<form id="commentForm" name=""
+						action="/exec/front/Board/CommentUpdate/6" method="post"
+						enctype="multipart/form-data" style="display: none;">
+						<input id="board_no" name="board_no" value="6" type="hidden">
+						<input id="no" name="no" value="74120" type="hidden"> <input
+							id="comment_no" name="comment_no" value="" type="hidden">
+						<input id="member_id" name="member_id" value="" type="hidden">
+						<div
+							class="xans-element- xans-board xans-board-commentform-4 xans-board-commentform xans-board-4 ">
+							<fieldset>
+								<legend>댓글 수정</legend>
+								<p>
+									비밀번호 : <input id="comment_password" name="comment_password"
+										fw-filter="isFill" fw-label="댓글비밀번호" fw-msg="" value=""
+										type="password"> <span class="secret displaynone"><label>
+											비밀댓글</label></span>
+								</p>
+								<div class="view">
+									<textarea id="comment_modify" name="comment_modify"
+										fw-filter="isFill" fw-label="댓글내용" fw-msg=""></textarea>
+									<span class="submit"> <a href="#none"
+										onclick="BOARD_COMMENT.comment_update_ok('commentForm');"><img
+											src="http://img.echosting.cafe24.com/skin/base_ko_KR/board/btn_comment_modify.gif"
+											alt="수정"></a> <a href="#none"
+										onclick="BOARD_COMMENT.comment_cancel_ok('commentForm');"><img
+											src="http://img.echosting.cafe24.com/skin/base_ko_KR/board/btn_comment_cancel.gif"
+											alt="취소"></a>
+									</span>
+								</div>
+								<p class="displaynone">/ byte</p>
+							</fieldset>
+						</div>
+					</form>
+					<!-- 비밀글 확인 -->
+					<form id="commentSecretForm" name=""
+						action="/exec/front/Board/CommentSecret/6" method="post"
+						enctype="multipart/form-data" style="display: none;">
+						<input id="board_no" name="board_no" value="6" type="hidden">
+						<input id="comment_no" name="comment_no" value="" type="hidden">
+						<input id="pass_check" name="pass_check" value="F" type="hidden">
+						<div
+							class="xans-element- xans-board xans-board-commentformsecret-1002 xans-board-commentformsecret xans-board-1002 ">
+							<p>
+								비밀번호 : <input id="secure_password" name="secure_password"
+									fw-filter="isFill" fw-label="댓글비밀번호" fw-msg="" value=""
+									type="password"> <a href="#none"
+									onclick="BOARD_COMMENT.show_secret_comment('commentSecretForm');"><img
+									src="http://img.echosting.cafe24.com/skin/base_ko_KR/board/btn_ico_submit.gif"
+									alt="확인"></a> <a href="#none"
+									onclick="BOARD_COMMENT.hide_secret_comment_form('commentSecretForm');"><img
+									src="http://img.echosting.cafe24.com/skin/base_ko_KR/board/btn_ico_cancel.gif"
+									alt="취소"></a>
+							</p>
+						</div>
+					</form>
+					<!-- 댓글 쓰기 -->
+					<!-- 댓글의 댓글 쓰기 -->
+				</div>
+
+
+
+
+				<!-- 관리자 전용 메뉴 -->
+				<!-- //관리자 전용 메뉴 -->
+
+			</div>
+			<hr class="layout">
+		</div>
+		<hr class="layout">
+	</div>
+	<%@ include file="../include/lowermost-footer.jsp"%>
+</body>
+</html>

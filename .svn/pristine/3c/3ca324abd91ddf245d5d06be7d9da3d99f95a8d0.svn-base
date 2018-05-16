@@ -1,0 +1,36 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="titleArea">
+    <h2>Find Password</h2>
+    <p>비밀번호 찾기</p>
+</div>
+
+<div class="xans-element- xans-member xans-member-findpasswdresult "><div class="findPw">
+        
+        <p class="desc">비밀번호가 고객님 메일로 발송되었습니다.</p>
+        <div class="memberInfo">
+            <p class="info">저희 쇼핑몰를 이용해주셔서 감사합니다.</p>
+            
+            <p class="thumbDesc">
+                <strong><span class="authssl_member_id">*****</span></strong> 회원님의 패스워드를<br/><span><span class="authssl_email">*****</span></span>으로 보내드렸습니다.<br/>고객님 즐거운 쇼핑 하세요!
+            </p>
+        </div>
+        <p class="copy">
+            고객님의 비밀번호가 성공적으로 발송되었습니다. 항상 고객님의 <br/>
+            즐겁고 편리한 쇼핑을 위해 최선의 노력을 다하는 쇼핑몰이 되도록 하겠습니다.
+        </p>
+        <p class="button">
+            <a href="/member/login.html">로그인</a>
+        </p>
+    </div>
+</div>
+        <hr class="layout"/><hr class="layout"/>
+</body>
+</html>

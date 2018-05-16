@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="product">
+
+	<typeAlias alias="Product" type="semi.vo.ProductDetail"/>
+	<typeAlias alias="ProductQuestions" type="semi.vo.ProductQuestions"/>
+	<typeAlias alias="Category" type="semi.vo.Category"/>
+	<typeAlias alias="ProductReviews" type="semi.vo.ProductReviews"/>
+	
+
+<!-- 김유호 [ 시작 ] ///////////////////////////////////////////////////////////////////////////////////////////// -->
+
+
+
+	
+	<select id="getAllMainCategories" resultClass="Category">
+		select 
+			category_no as "no",
+			categoty_name as name
+		from 
+			categories
+		where 
+			category_no = main_category_no
+	</select>
+
+
+<!-- 김유호 [ 끝 ] ////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+<!-- 송재호 [ 시작 ] //////////////////////////////////////////////////////////////////////////////////////////////  -->
+
+	<select id="getProductByNumber" parameterClass="int" resultClass="Product">
+		select
+			P.product_no as "no"
+			,P.category_no as categoryNo
+			,P.product_name as name
+			,P.product_price as price
+			,P.product_point as "point"
+			,P.product_discount as discount
+			,P.product_detail as detail
+			,P.product_status as status
+			,P.product_img_portrait_1 as imgPortrait1
+			,P.product_img_portrait_2 as imgPortrait2
+			,P.product_img_big as imgBig
+			,S.product_color as color
+			,S.product_size as "size"
+			,S.product_qty as qty
+		from
+			products P, product_stock S
+		where
+			P.product_no = S.product_no
+			and P.product_no = #value#
+	</select>
+
+	<select id="getProductColorByProNo" parameterClass="int" resultClass="string">
+		select 
+			DISTINCT color
+		from (select
+				P.product_no as "no"
+				,P.category_no as categoryNo
+				,P.product_name as name
+				,P.product_price as price
+				,P.product_point as "point"
+				,P.product_discount as discount
+				,P.product_detail as detail
+				,P.product_status as status
+				,P.product_img_portrait_1 as imgPortrait1
+				,P.product_img_portrait_2 as imgPortrait2
+				,P.product_img_big as imgBig
+				,S.product_color as color
+				,S.product_size as "size"
+				,S.product_qty as qty
+			from
+				products P, product_stock S
+			where
+				P.product_no = S.product_no
+				and P.product_no = #value#)
+	</select>
+	
+	<select id="getProductSizeByProNo" parameterClass="int" resultClass="string">
+		select 
+			DISTINCT "size"
+		from (select
+				P.product_no as "no"
+				,P.category_no as categoryNo
+				,P.product_name as name
+				,P.product_price as price
+				,P.product_point as "point"
+				,P.product_discount as discount
+				,P.product_detail as detail
+				,P.product_status as status
+				,P.product_img_portrait_1 as imgPortrait1
+				,P.product_img_portrait_2 as imgPortrait2
+				,P.product_img_big as imgBig
+				,S.product_color as color
+				,S.product_size as "size"
+				,S.product_qty as qty
+			from
+				products P, product_stock S
+			where
+				P.product_no = S.product_no
+				and P.product_no = #value#)
+	</select>
+
+	<select id="getProductQuestionsByProNo" parameterClass="int" resultClass="ProductQuestions">
+		select
+			question_no as quesNo
+			,product_no as proNo
+			,customer_no as custNo
+			,question_subject as subject
+			,question_contents as contents
+			,question_status as status
+			,question_password as password
+			,question_viewcount as viewcount
+			,create_date as createDate
+		from
+			product_questions
+		where
+			product_no = #value#
+	</select>
+	
+	<select id="getSixReviewImagesByProNo" parameterClass="int" resultClass="string">
+		select
+			review_img as img
+		from (select 
+					review_img, row_number ( ) over (order by create_date desc) as rn
+				from
+					product_reviews
+				where
+					product_no = #value#)
+		where 
+			rn &lt;= 6
+	</select>
+	
+	<select id="getFourReviewImagesByProNo" parameterClass="int" resultClass="string">
+		select
+			review_img as img
+		from (select 
+					review_img, row_number ( ) over (order by create_date desc) as rn
+				from
+					product_reviews
+				where
+					product_no = #value#)
+		where 
+			rn &lt;= 4
+	</select>
+	
+	<select id="getProductReviewsByProNo" resultClass="ProductReviews" parameterClass="int">
+		select
+			review_no as reviewNo
+			,product_no as proNo
+			,customer_no as custNo
+			,review_contents as contents
+			,review_recommend_cnt as recommendCnt
+			,review_grade as grade
+			,review_status as status
+			,create_date as createDate
+			,review_img as img
+		from
+			product_reviews
+		where
+			product_no = #value#
+	</select>
+	
+	<select id="getProductScoreByProNo" resultClass="double" parameterClass="int">
+		select
+			trunc(avg(review_grade),1) as avg
+		from 
+			product_reviews
+		where
+			PRODUCT_NO = #value#
+	</select>
+	
+	<update id="plusReviewLike" parameterClass="map">
+		update
+			product_reviews
+		set
+			review_recommend_cnt = review_recommend_cnt+1
+		where
+			product_no = #proNo#
+			and customer_no = #custNo#
+	</update>
+	
+	<update id="minusReviewLike" parameterClass="map">
+		update
+			product_reviews
+		set
+			review_recommend_cnt = review_recommend_cnt-1
+		where
+			product_no = #proNo#
+			and customer_no = #custNo# 
+	</update>
+<!-- 송재호 [ 끝 ] //////////////////////////////////////////////////////////////////////////////////////////////  -->
+</sqlMap>

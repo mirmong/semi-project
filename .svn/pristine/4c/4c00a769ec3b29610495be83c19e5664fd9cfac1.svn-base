@@ -1,0 +1,78 @@
+package semi.vo;
+
+import java.sql.Date;
+
+public class Question {
+	private int questionNo;
+	private int productNo;
+	private int customerNo;
+	private String questionSubject;
+	private String questionContecnts;
+	private String questionStatus;
+	private String questionPassword;
+	private int questionViewcount;
+	private Date createDate;
+	
+	
+	
+	
+	public int getQuestionNo() {
+		return questionNo;
+	}
+	public void setQuestionNo(int questionNo) {
+		this.questionNo = questionNo;
+	}
+	public int getProductNo() {
+		return productNo;
+	}
+	public void setProductNo(int productNo) {
+		this.productNo = productNo;
+	}
+	public int getCustomerNo() {
+		return customerNo;
+	}
+	public void setCustomerNo(int customerNo) {
+		this.customerNo = customerNo;
+	}
+	public String getQuestionSubject() {
+		return questionSubject;
+	}
+	public void setQuestionSubject(String questionSubject) {
+		this.questionSubject = questionSubject;
+	}
+	public String getQuestionContecnts() {
+		return questionContecnts;
+	}
+	public void setQuestionContecnts(String questionContecnts) {
+		this.questionContecnts = questionContecnts;
+	}
+	public String getQuestionStatus() {
+		return questionStatus;
+	}
+	public void setQuestionStatus(String questionStatus) {
+		this.questionStatus = questionStatus;
+	}
+	public String getQuestionPassword() {
+		return questionPassword;
+	}
+	public void setQuestionPassword(String questionPassword) {
+		this.questionPassword = questionPassword;
+	}
+	public int getQuestionViewcount() {
+		return questionViewcount;
+	}
+	public void setQuestionViewcount(int questionViewcount) {
+		this.questionViewcount = questionViewcount;
+	}
+	public Date getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+	
+	
+	
+	
+	
+}

@@ -1,0 +1,49 @@
+package semi.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import semi.utils.IbatisUtil;
+import semi.vo.Notice;
+
+public class NoticeDao {
+
+	private static NoticeDao instance;
+	
+	private SqlMapClient sqlMapper;
+	
+	static {
+		instance = new NoticeDao();
+	}
+	
+	public NoticeDao() {
+
+	}
+	
+	public static NoticeDao getInstance() {
+		return instance;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Notice> getAllNotice() throws SQLException {
+		return IbatisUtil.getsqlMap().queryForList("getAllNotice");
+	}
+	
+	public Notice getDetailNotice(int no) throws SQLException {
+		return (Notice) IbatisUtil.getsqlMap().queryForObject("getDetailNotice", no);
+	}
+	
+	public void noticeCountByNo(int no) throws SQLException {
+		IbatisUtil.getsqlMap().update("noticeCountByNo", no);
+	}
+	
+	public Notice getNextNotice(int no) throws SQLException {
+		return (Notice) IbatisUtil.getsqlMap().queryForObject("getNextNotice", no);
+	}
+	
+	public Notice getPrevNotice(int no) throws SQLException {
+		return (Notice) IbatisUtil.getsqlMap().queryForObject("getPrevNotice", no);
+	}
+}

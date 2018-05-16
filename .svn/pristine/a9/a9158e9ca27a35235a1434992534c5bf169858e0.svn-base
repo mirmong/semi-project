@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="qna">
+
+	<typeAlias alias="Qna" type="semi.vo.Qna"/>
+	
+	<select id="getAllQuestions" resultClass="Qna">
+		select
+			C.customer_name				as custName
+			, P.product_img_big			as proImg
+			, Q.question_no				as quesNo
+			, Q.question_subject		as quSubject
+			, Q.question_viewcount		as quViewcount
+			, Q.create_date				as quCreateDate
+		from
+			product_questions Q, customers C, products P
+		where
+			Q.customer_no = C.customer_no
+		and Q.product_no = P.product_no
+	</select>
+	
+	<select id="getDetailQuestion" parameterClass="int" resultClass="Qna">
+		select
+			C.customer_name				as custName
+			, Q.question_no				as quesNo
+			, Q.question_subject		as quSubject
+			, Q.question_contents		as quContents
+			, Q.question_viewcount		as quViewcount
+			, Q.create_date				as quCreateDate
+		from
+			product_questions Q, customers C
+		where
+			Q.customer_no = C.customer_no
+		and Q.question_no = #value#
+	</select>
+	
+	<select id="getThisAnswer" parameterClass="int" resultClass="Qna">
+		select
+			A.answer_subject		as awSubject
+			, A.answer_contents		as awContents
+			, A.answer_viewcount	as awViewcount
+			, A.create_date			as awCreateDate
+			, M.admin_account_id	as adminId
+		from
+			product_questions Q, product_answers A, admin_accounts M
+		where
+			A.question_no = Q.question_no
+		and A.admin_account_no = M.admin_account_no
+		and A.question_no = #value#
+	</select>
+	
+	<select id="getPassword" parameterClass="int" resultClass="Qna">
+		select
+			question_password
+		from
+			product_questions
+		where
+			question_no = #value#
+	</select>
+</sqlMap>

@@ -1,0 +1,57 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="semi.vo.Review"%>
+<%@page import="semi.dao.CustomerDao"%>
+<%@page import="semi.vo.Customer"%>
+<%@page import="com.google.gson.Gson"%>
+<%@page import="semi.vo.ProductReviews"%>
+<%@page import="java.util.List"%>
+<%@page import="semi.dao.ProductDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("utf-8");
+	int order = Integer.parseInt(request.getParameter("order"));
+	int proNo = Integer.parseInt(request.getParameter("proNo"));
+	ProductDao productDao = ProductDao.getInstance();
+	CustomerDao customerDao = CustomerDao.getInstance();
+
+	List<ProductReviews> reviews = null;
+	List<Customer> customers = new ArrayList<>();
+	
+	if (order == 1) {
+		
+		reviews = productDao.getProductReviewsByProNoOrderByNew(proNo);
+		for (ProductReviews r : reviews) {
+
+			customers.add(customerDao.getCustomerByReviewNo(r.getReviewNo()));
+		}
+		
+	} else if (order == 2) {
+		
+		reviews = productDao.getProductReviewsByProNoOrderbyGrade(proNo);
+		for (ProductReviews r : reviews) {
+
+			customers.add(customerDao.getCustomerByReviewNo(r.getReviewNo()));
+		}
+		
+	} else if (order == 3) {
+		
+		reviews = productDao.getProductReviewsByProNoOrderbyWithPic(proNo);
+		for (ProductReviews r : reviews) {
+
+			customers.add(customerDao.getCustomerByReviewNo(r.getReviewNo()));
+		}
+	}
+	
+	Map<String, Object> result = new HashMap<>();
+	result.put("reviews", reviews);
+	result.put("customers", customers);
+	
+	Gson gson = new Gson();
+	String jsontext = gson.toJson(result);
+	
+
+	out.write(jsontext);	
+%>

@@ -1,0 +1,27 @@
+ 
+
+<%@page import="semi.vo.Customer"%>
+<%@page import="semi.dao.CustomerDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	String id = request.getParameter("id");
+	String passwd = request.getParameter("passwd");
+
+	CustomerDao customerDao = new CustomerDao();
+	Customer customer =  customerDao.login(id);
+	
+	if(customer == null) {
+		response.sendRedirect("main.jsp?fail=invalid");
+		return;
+	} 
+		if(!customer.getPwd().equals(passwd)) {
+			response.sendRedirect("main.jsp?fail=invalid");
+			return;
+	} 
+
+
+	session.setAttribute("loginuser",customer);
+	response.sendRedirect("main.jsp");
+	
+%>

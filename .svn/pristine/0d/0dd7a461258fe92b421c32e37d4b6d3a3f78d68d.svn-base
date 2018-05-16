@@ -1,0 +1,39 @@
+<%--
+<%@page import="fromheadto.vo.Fromcustomer"%>
+<%@page import="fromheadto.dao.Fromcustomerdao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+ 	Fromcustomerdao fromcustomerdao = new Fromcustomerdao();
+ 	Fromcustomer fromcustomer = new Fromcustomer();
+
+	String cust_id = request.getParameter("cust_id");
+	String cust_password = request.getParameter("cust_password");
+	String cust_passwordconfirm = request.getParameter("cust_passwordconfirm");
+	String cust_name = request.getParameter("cust_name");
+	String cust_addres = request.getParameter("cust_addres");
+	String cust_addres1 = request.getParameter("cust_addres1");
+	String cust_addres2 = request.getParameter("cust_addres2");
+	String cust_phone = request.getParameter("cust_phone");
+	String cust_phone2 = request.getParameter("cust_phone2");
+	String cust_phone3 = request.getParameter("cust_phone3");	
+	String cust_email = request.getParameter("cust_email");
+	String cust_email2 = request.getParameter("cust_email2");
+	String cust_que = request.getParameter("cust_que");
+	
+	fromcustomer.setCust_id(cust_id);
+	fromcustomer.setCust_password(cust_password);
+	fromcustomer.setCust_name(cust_name);
+	fromcustomer.setCust_postcode(cust_addres);
+	fromcustomer.setCust_addres1(cust_addres1);
+	fromcustomer.setCust_addres2(cust_addres2);
+	fromcustomer.setCust_tel(cust_phone+"-"+cust_phone2+"-"+cust_phone3);
+	fromcustomer.setCust_email(cust_email+"@"+cust_email2);
+
+	fromcustomerdao.addcustomer(fromcustomer);
+	session.setAttribute("loginuser",fromcustomer);
+	response.sendRedirect("loginwel.jsp");	
+%>
+
+ --%>

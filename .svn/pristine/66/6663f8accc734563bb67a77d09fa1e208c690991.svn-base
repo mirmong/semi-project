@@ -1,0 +1,25 @@
+package semi.dao;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import semi.utils.IbatisUtil;
+
+public class AdminDao {
+
+	private static AdminDao instance;
+	
+	private SqlMapClient sqlMapper;
+	
+	static {
+		instance = new AdminDao();
+	}
+	
+	private AdminDao() {
+		sqlMapper = IbatisUtil.getsqlMap();
+	}
+	
+	public static AdminDao getInstance() {
+		return instance;
+	}
+	
+}

@@ -1,0 +1,219 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="semi.vo.Review"%>
+<%@page import="java.util.List"%>
+<%@page import="semi.dao.ReviewDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<html lang="ko">
+<style>
+
+</style>
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<%@ include file="/include/uppermost-nav.jsp"%>
+<%@ include file="/style/ywj/reviewstyle.jsp" %>
+<%
+	ReviewDao reviewDao = ReviewDao.getInstance();
+	List<Review> reviews = new ArrayList<>();
+	
+	String categoryStr = request.getParameter("cgno");
+	
+	if(categoryStr == null){
+		categoryStr = "0";
+	}
+			
+	int category = Integer.parseInt(categoryStr);
+	
+	if (category == 0) {
+		reviews = reviewDao.getAllReviews();
+		
+	} else {
+
+		reviews = reviewDao.getReviewsByCategory(category);
+		
+	}
+%>
+<div class="container col-xs-12" id="id-main-contents">
+		<div id="wrap">
+			<div id="container">
+				<div id="contents02">
+					<div
+						class="xans-element- xans-board xans-board-listpackage-4 xans-board-listpackage xans-board-4 ">
+						<div
+							class="xans-element- xans-board xans-board-title-4 xans-board-title xans-board-4 ">
+							<div class="title">
+								<h2>
+									<font color="#555555">review</font>
+								</h2>
+								<p>상품 사용후기입니다.</p>
+							</div>
+						</div>
+						<div style="margin: 0 auto; text-align: center;">
+							<img src="/semi/images/ywj/reviewevent.jpg">
+						</div>
+						<div>
+							<div class="row">
+								<div class="col-sm-4">
+									<ul>
+										<li style="margin: 44px;"><a href="#"><img src="/semi/images/ywj/Desert.jpg" width="215" height="237"></a></li>
+									</ul>
+								</div>
+								<div class="col-sm-4">
+									<ul>
+										<li style="margin: 44px;"><a href="#"><img src="/semi/images/ywj/Desert.jpg" width="215" height="237"></a></li>
+									</ul>
+								</div>
+								<div class="col-sm-4">
+									<ul>
+										<li style="margin: 44px;"><a href="#"><img src="/semi/images/ywj/Desert.jpg" width="215" height="237"></a></li>
+									</ul>
+								</div>
+								<div class="col-sm-4">
+									<ul>
+										<li style="margin: 44px;"><a href="#"><img src="/semi/images/ywj/Desert.jpg" width="215" height="237"></a></li>
+									</ul>
+								</div>
+								<div class="col-sm-4">
+									<ul>
+										<li style="margin: 44px;"><a href="#"><img src="/semi/images/ywj/Desert.jpg" width="215" height="237"></a></li>
+									</ul>
+								</div>
+								<div class="col-sm-4">
+									<ul>
+										<li style="margin: 44px;"><a href="#"><img src="/semi/images/ywj/Desert.jpg" width="215" height="237"></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					<div id="content">
+						<div class="products_index_gallery">
+							<div class="btn-group">
+							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+							    CATEGORY <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu" role="menu">
+							    <li><a href="/semi/review/list.jsp?cgno=0">All</a></li>
+							    <li class="divider"></li>
+							    <li><a href="/semi/review/list.jsp?cgno=1">TOP</a></li>
+							    <li><a href="/semi/review/list.jsp?cgno=5">OUTER</a></li>
+							    <li><a href="/semi/review/list.jsp?cgno=6">DRESS</a></li>
+							    <li><a href="/semi/review/list.jsp?cgno=7">BOTTOM</a></li>
+							    <li><a href="/semi/review/list.jsp?cgno=12">SKIRT</a></li>
+							    <li><a href="/semi/review/list.jsp?cgno=13">SHOES</a></li>
+							    <li><a href="/semi/review/list.jsp?cgno=14">BAG</a></li>
+							    <li><a href="/semi/review/list.jsp?cgno=15">ACC</a></li>
+							  </ul>
+							</div>
+							<div class="btn-group pull-right">
+							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+							    LINE UP <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu" role="menu">
+							    <li><a href="/semi/review/list.jsp?cgno=0">All</a></li>
+							    <li class="divider"></li>
+							    <li><a href="/semi/review/list.jsp?cgno=1">이름순</a></li>
+							    <li><a href="/semi/review/list.jsp?cgno=1">낮은 가격순</a></li>
+							    <li><a href="/semi/review/list.jsp?cgno=1">높은 가격순</a></li>
+							    <li><a href="/semi/review/list.jsp?cgno=1">최고 세일순</a></li>
+							    <li><a href="/semi/review/list.jsp?cgno=1">높은 평점순</a></li>
+							    <li><a href="/semi/review/list.jsp?cgno=1">최다 리뷰순</a></li>
+							    <li><a href="/semi/review/list.jsp?cgno=1">최고 판매량순</a></li>
+							    
+							  </ul>
+							</div>
+							<div class="products_index_gallery__body">
+								<%
+								
+									for (Review review : reviews) {
+										Review grade = reviewDao.getThisGrade(review.getProNo());
+										List<Review> contents = reviewDao.getThisReviews(review.getProNo());
+										
+										if (grade.getReviewCount() != 0) {
+								%>
+								<div class="product products_index_gallery_product products_index_gallery_product--visible" id="product_15665" style="">
+									<div class="products_index_gallery_product__image_box">
+										<a href="http://fromheadtotoe.kr/product/detail.html?cate_no=1&product_no=14036" data-link-target="window">
+											<img src="/semi/images/kyh/<%=review.getProImg() %>" class="products_index_gallery_product__image smooth--loaded">
+											<script>
+									        	fimg("product_img_15665", 512, 346);
+											</script>
+										</a>
+									</div>
+									<div class="products_index_gallery_product__sections">
+										<div class="products_index_gallery_product__section products_index_gallery_product__section--detail">
+											<a class="products_index_gallery_product__section_link" data-link-target="window" href="#">
+												<div class="products_index_gallery_product__detail_name">
+													<%=review.getProName() %>
+												</div>
+												<div class="products_index_gallery_product__detail_price">
+													<%=review.getPriceDF() %>원
+												</div>
+											</a>
+										</div>
+										<div class="products_index_gallery_product__section products_index_gallery_product__section--review_summary">
+											<a class="products_index_gallery_product__section_link" href="#" data-link-target="window">
+												<div class="products_index_gallery_product__review_summary_average_score_title">
+													평점
+												</div>
+												<div class="products_index_gallery_product__review_summary_average_score">
+													<%=grade.getGrade() %>
+												</div>
+												<div class="products_index_gallery_product__review_summary_reviews_count">
+													<%=grade.getReviewCount() %>개의 리뷰
+												</div>
+											</a>
+										</div>
+										<%
+											for (Review content : contents) {
+										%>
+										<div class="products_index_gallery_product__section">
+											<a class="js-link-fullscreen-popup" data-url="/fromheadtotoe.kr/reviews/50900?widget_env=100">
+												<div class="products_index_gallery_product__review_inner">
+													<div class="products_index_gallery_product__review_image_box">
+														<img src="/semi/images/kyh/<%=content.getReviewImg() %>" style="width: 36px; height: 36px;" class="products_index_gallery_product__review_image js-review-image smooth--loaded">
+													</div>
+													<div class="products_index_gallery_product__review_message">
+														<%=content.getReviewContent() %>
+													</div>
+												</div>
+											</a>
+										</div>
+										<%
+											}
+										%>
+										<div class="products_index_gallery_product__section products_index_gallery_product__section--category">
+											<a class="products_index_gallery_product__section_link" data-link-target="window" href="#">
+												<div class="products_index_gallery_product__category_name">
+													<%=review.getCategory().toUpperCase() %>
+												</div>
+												<div class="products_index_gallery_product__category_description">
+													카테고리의 상품입니다.
+												</div>
+											</a>
+										</div>
+									</div>
+								</div>
+									<%
+										}
+									}
+									%>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr class="layout">
+	</div>
+	<hr class="layout">
+</div>
+	<%@ include file="/include/lowermost-footer.jsp"%>
+</body>
+</html>

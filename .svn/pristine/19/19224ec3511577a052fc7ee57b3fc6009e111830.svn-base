@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="notice">
+
+	<typeAlias alias="Notice" type="semi.vo.Notice"/>
+
+	<select id="getAllNotice" resultClass="Notice">
+		select
+			N.notice_no				as no
+			, A.admin_account_id	as adminId
+			, N.notice_subject		as subject
+			, N.notice_viewcount	as viewCount
+			, N.create_date			as createDate
+		from
+			notices N, admin_accounts A
+		where
+			N.admin_account_no = A.admin_account_no
+	</select>
+	
+	<select id="getDetailNotice" parameterClass="int" resultClass="Notice">
+		select
+			N.notice_no				as no
+			, A.admin_account_id	as adminId
+			, N.notice_subject		as subject
+			, N.notice_viewcount	as viewCount
+			, N.create_date			as createDate
+			, N.notice_contents		as contents
+		from
+			notices N, admin_accounts A
+		where
+			N.admin_account_no = A.admin_account_no
+		and N.notice_no = #value#
+	</select>
+	
+	<update id="noticeCountByNo" parameterClass="int">
+		update
+			notices
+		set
+			notice_viewcount = notice_viewcount + 1
+		where
+			notice_no = #value#
+	</update>
+	
+	<select id="getNextNotice" parameterClass="int" resultClass="Notice">
+		select
+			notice_no		as no
+			,notice_subject	as subject
+		from
+			notices
+		where notice_no in(
+			(select
+				min(notice_no)
+			from
+				notices
+			where
+				notice_no > #value#)
+			)
+	</select>
+	
+	<select id="getPrevNotice" parameterClass="int" resultClass="Notice">
+		select
+			notice_no		as no
+			,notice_subject	as subject
+		from
+			notices
+		where notice_no in(
+			(select
+				max(notice_no)
+			from
+				notices
+			where
+				notice_no &lt; #value#)
+			)
+	</select>
+</sqlMap>

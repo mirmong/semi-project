@@ -1,0 +1,36 @@
+<%@page import="com.google.gson.Gson"%>
+<%@page import="semi.dao.CustomerDao"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="semi.dao.ProductDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("utf-8");
+	String plusOrMinus = request.getParameter("plusOrMinus");
+	
+	int proNo = Integer.parseInt(request.getParameter("proNo"));
+	int custNo = Integer.parseInt(request.getParameter("custNo"));
+	
+	CustomerDao customerDao = CustomerDao.getInstance();
+	ProductDao productDao = ProductDao.getInstance();
+	
+	Map<String, Object> map = new HashMap<>();
+	
+	map.put("proNo", proNo);
+	map.put("custNo", custNo);
+	
+	if ("plus".equals(plusOrMinus)) {
+		productDao.plusReviewLike(map);
+	} else if ("minus".equals(plusOrMinus)) {
+		productDao.minusReviewLike(map);
+	}
+	
+	int like = productDao.getReviewLike(map);
+
+	Gson gson = new Gson();
+	String likes = gson.toJson(like);
+	out.write(likes);
+	
+	// dao에서 뽑아낸 , 상품번호와 고객번호가 일치하는 것의 recommend를 뽑아서 likes로 주자.
+%>

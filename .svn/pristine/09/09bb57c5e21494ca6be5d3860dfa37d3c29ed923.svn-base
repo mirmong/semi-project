@@ -1,0 +1,14 @@
+<%@ page language="java" contentType="text/plain; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	String id = request.getParameter("id");
+
+	String likes = "";
+	
+	if ("help-pluslike".equals(id)) {
+		likes = "1";
+	} else if ("help-minuslike".equals(id)) {
+		likes = "0";
+	}
+	out.write(likes);
+%>

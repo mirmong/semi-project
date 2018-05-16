@@ -1,0 +1,88 @@
+package semi.updown;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+/*
+ * @WebServlet에는 이 서블릿의 실행을 요청하는 url을 지정한다.
+ * @MultipartConfig 이 서블릿이 멀티파트요청을 처리할 수 있는 서블릿임을 지정.
+ * 
+ * javax.servlet.http.part는 첨부파일 정보를 포함하는 객체다.
+ *  - 첨부파일 필드명
+ *  - 첨부파일 컨텐츠 타입
+ *  - 첨부파일 사이즈
+ *  - 첨부파일 데이터
+ */
+@WebServlet(urlPatterns="/uploadto")
+@MultipartConfig
+public class FileuploadServlet extends HttpServlet {
+	
+	// 파일 저장위치
+	private static final String SAVE_DIR = "c:/upload/formfile/";
+	
+	//private FormfileDao formfileDao = new FormfileDao();
+	
+	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response) 
+	throws ServletException, IOException {
+		System.out.println("멀티파트 요청을 받았습니다.");
+		
+		request.setCharacterEncoding("utf-8");
+		
+		//입력필드의 값 읽어오기
+		String reviewContent = request.getParameter("review-textarea");
+		//System.out.println("서식명: " + name);
+		
+		int score = Integer.parseInt(request.getParameter("score"));
+		// System.out.println("설명: " + memo);
+		
+		//첨부파일 처리하기
+		Part part =  request.getPart("picture");
+		
+		String filename = this.extractFilename(part);
+		
+		filename = System.currentTimeMillis() + filename;
+		//String contentType = part.getContentType();
+		long filesize = part.getSize();
+		
+		// 첨부파일을 지정된 디렉토리에 저장하기
+		if (filesize != 0) {
+			part.write(SAVE_DIR + filename);
+			
+			// 첨부파일 정보를 database에 저장한다.
+//			Formfile formfile = new Formfile();
+//			formfile.setName(name);
+//			formfile.setFilename(filename);
+//			formfile.setMemo(memo);
+//			formfile.setSize(filesize);
+//			try {
+//				formfileDao.insertFormfile(formfile);
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+		}
+		response.sendRedirect("/semi/product/detail.jsp?pro-no=1&qna-pno=1&review-pno=1");
+	}
+	
+	private String extractFilename(Part part) {
+		String filename = "";
+		String contentDisposition = part.getHeader("content-disposition");
+		String[] items = contentDisposition.split(";");
+		for (String item : items) {
+			if (item.trim().startsWith("filename")) {
+				filename = item.substring(item.indexOf("=")+2, item.length() -1);
+			}
+		}
+		return filename;
+	}
+	
+	
+}

@@ -1,0 +1,64 @@
+<%-- 
+<%@page import="fromheadto.vo.Fromcustomer"%>
+<%@page import="fromheadto.dao.Fromcustomerdao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="xans-element- xans-member xans-member-joincomplete "><div class="joinComplete">
+<p class="desc">회원가입이 완료 되었습니다.</p>
+<script type="text/javascript">
+var S_sta1_memberInfo = '<span class="authssl_member_id">*****</span>!@!_!@!<span class="authssl_c_name">*****</span>';
+</script>
+<div class="memberInfo">
+<p class="info">저희 쇼핑몰을 이용해 주셔서 감사합니다.</p>
+             <%
+            
+      		Fromcustomer fromcustomer = (Fromcustomer) session.getAttribute("loginuser");
+      		
+      		
+      		%>
+      		
+<ul>
+<li>
+<strong>ID</strong><span><span class="authssl_member_id"><%=fromcustomer.getCust_id() %></span></span>
+</li>
+
+<li>
+<strong>name</strong><span><span class="authssl_c_name"><%=fromcustomer.getCust_name() %></span></span>
+</li>
+
+<li>
+<strong>e-mail</strong><span><span class="authssl_c_email"><%=fromcustomer.getCust_email() %></span></span>
+</li>
+
+ </ul>
+</div>
+        
+        <p class="button">
+            <a href="main.jsp" class="displaynone">login</a>
+            <a href="main.jsp">home</a>
+        </p>
+    </div>
+</div>
+<!--MSLOG start-->
+
+<!--MSLOG end-->
+<!-- This script is For CTS Start -->
+<script type='text/javascript'>
+	var m_jn='join';	// 가입정보
+	var m_jid='member';	// 가입 시 입력한 아이디
+</script>
+  <hr class="layout"/><hr class="layout"/>
+</body>
+</html>
+--%>

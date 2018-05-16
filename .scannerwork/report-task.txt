@@ -1,0 +1,6 @@
+projectKey=wonjung1:project
+serverUrl=http://192.168.10.253:9000
+serverVersion=6.7.3.38370
+dashboardUrl=http://192.168.10.253:9000/dashboard/index/wonjung1:project
+ceTaskId=AWNJLQLzPY5ixdt3PMAr
+ceTaskUrl=http://192.168.10.253:9000/api/ce/task?id=AWNJLQLzPY5ixdt3PMAr

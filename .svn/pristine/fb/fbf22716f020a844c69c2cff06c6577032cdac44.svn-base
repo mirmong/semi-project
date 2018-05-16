@@ -1,0 +1,74 @@
+package semi.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import semi.utils.IbatisUtil;
+import semi.vo.Review;
+
+public class ReviewDao {
+
+	private static ReviewDao instance;
+	
+	private SqlMapClient sqlMapper;
+	
+	static {
+		instance = new ReviewDao();
+	}
+	
+	private ReviewDao() {
+		sqlMapper = IbatisUtil.getsqlMap();
+	}
+	
+	public static ReviewDao getInstance() {
+		return instance;
+	}	
+	
+	@SuppressWarnings("unchecked")
+	public List<Review> getAllReviews() throws SQLException {
+		return sqlMapper.queryForList("getAllReviews");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Review> getReviewsByCategory (String category) throws SQLException {
+		return sqlMapper.queryForList("getReviewsByCategory", category);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Review> getReviewsByProName () throws SQLException {
+		return sqlMapper.queryForList("getReviewsByProName");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Review> getReviewsByLowPrice () throws SQLException {
+		return sqlMapper.queryForList("getReviewsByLowPrice");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Review> getReviewsByHighPrice () throws SQLException {
+		return sqlMapper.queryForList("getReviewsByHighPrice");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Review> getReviewsByHighGrade () throws SQLException {
+		return sqlMapper.queryForList("getReviewsByHighGrade");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Review> getReviewsByManys () throws SQLException {
+		return sqlMapper.queryForList("getReviewsByManys");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Review> getReviewsByBestSell () throws SQLException {
+		return sqlMapper.queryForList("getReviewsByBestSell");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Review> getReviewsByHighSale () throws SQLException {
+		return sqlMapper.queryForList("getReviewsByHighSale");
+	}
+	
+}

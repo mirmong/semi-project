@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="event">
+
+	<typeAlias alias="Event" type="semi.vo.Event"/>
+
+	<select id="getAllEvents" resultClass="Event">
+		select
+			E.event_no				as no
+			, E.event_subject		as subject
+			, E.create_date			as createDate
+			, A.admin_account_id	as adminName
+			, E.event_banner		as banner
+		from
+			events E, admin_accounts A
+		where
+			E.admin_account_no = A.admin_account_no
+	</select>
+	
+	<select id="getDetailEvent" parameterClass="int" resultClass="Event">
+		select
+			E.event_no				as no
+			, E.event_subject		as subject
+			, E.create_date			as createDate
+			, A.admin_account_id	as adminName
+			, E.event_banner		as banner
+			, E.event_viewcount		as viewCount
+			, E.event_contents		as contents
+		from
+			events E, admin_accounts A
+		where
+			E.admin_account_no = A.admin_account_no
+		and E.event_no = #value#
+	</select>
+	
+	<update id="eventCountByNo" parameterClass="int">
+		update
+			events
+		set
+			event_viewcount = event_viewcount + 1
+		from
+			event_no = #value#
+	</update>
+	
+	<select id="getNextEvent" parameterClass="int" resultClass="Event">
+		select
+			event_no		as no
+			,event_subject	as subject
+		from
+			events
+		where event_no in(
+			(select
+				min(event_no)
+			from
+				events
+			where
+				event_no > #value#)
+			)
+	</select>
+	
+	<select id="getPrevEvent" parameterClass="int" resultClass="Event">
+		select
+			event_no		as no
+			,event_subject	as subject
+		from
+			events
+		where event_no in(
+			(select
+				max(event_no)
+			from
+				events
+			where
+				event_no &lt; #value#)
+			)
+	</select>
+</sqlMap>

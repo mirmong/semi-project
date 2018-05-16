@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="review">
+
+	<typeAlias alias="Review" type="semi.vo.Review"/>
+	
+	<select id="getThisReviews" parameterClass="int" resultClass="Review">
+		select
+			  R.review_contents		as reviewContent
+			, R.review_img			as reviewImg
+		from
+			products P, product_reviews R
+		where
+			P.product_no = R.product_no
+		and P.product_no = #value#
+	</select>
+	
+	<select id="getThisGrade" parameterClass="int" resultClass="Review">
+		select
+			   trunc(avg(R.review_grade),1)	as grade
+		from
+			products P, product_reviews R
+		where
+			P.product_no = R.product_no
+		and P.product_no = #value#
+	</select>
+	
+	<select id="getThisReviewCount" parameterClass="int" resultClass="Review">
+		select
+			  count(P.product_no) 		as reviewCount
+		from
+			products P, product_reviews R
+		where
+			P.product_no = R.product_no
+		and P.product_no = #value#
+	</select>
+	
+	<select id="getAllReviews" resultClass="Review">
+		select
+			  P.product_no			as proNo
+			, P.product_name		as proName
+			, P.product_price		as price
+			, P.product_img_big		as proImg
+			, C.category_name		as category
+		from
+			products P, categories C
+		where
+			P.category_no = C.category_no
+	</select>
+	
+	<select id="getReviewsByCategory" parameterClass="string" resultClass="Review">
+		select
+			  P.product_no			as proNo
+			, P.product_name		as proName
+			, P.product_price		as price
+			, P.product_img_big		as proImg
+			, C.category_name		as category
+		from
+			products P, categories C
+		where
+			P.category_no = C.category_no
+		and C.category_name = #value#
+	</select>
+	
+	<select id="getReviewsByProName" resultClass="Review">
+		select
+			  P.product_no			as proNo
+			, P.product_name		as proName
+			, P.product_price		as price
+			, P.product_img_big		as proImg
+			, C.category_name		as category
+		from
+			products P, categories C
+		where
+			P.category_no = C.category_no
+		order by
+			P.product_name
+	</select>
+	
+	<select id="getReviewsByLowPrice" resultClass="Review">
+		select
+			  P.product_no			as proNo
+			, P.product_name		as proName
+			, P.product_price		as price
+			, P.product_img_big		as proImg
+			, C.category_name		as category
+		from
+			products P, categories C
+		where
+			P.category_no = C.category_no
+		order by
+			P.product_price
+	</select>
+	
+	<select id="getReviewsByHighPrice" resultClass="Review">
+		select
+			  P.product_no			as proNo
+			, P.product_name		as proName
+			, P.product_price		as price
+			, P.product_img_big		as proImg
+			, C.category_name		as category
+		from
+			products P, categories C
+		where
+			P.category_no = C.category_no
+		order by
+			P.product_price desc
+	</select>
+	
+	<!--
+	<select id="getReviewsByHighGrade" resultClass="Review">
+		
+	</select>
+	
+	<select id="getReviewsByManys" resultClass="Review">
+		select
+			  P.product_no			as proNo
+			, P.product_name		as proName
+			, P.product_price		as price
+			, P.product_img_big		as proImg
+			, C.category_name		as category
+		from
+			products P, categories C
+		where
+			P.category_no = C.category_no
+		and C.category_name = #value#
+	</select>
+	
+	<select id="getReviewsByBestSell" resultClass="Review">
+		select
+			  P.product_no			as proNo
+			, P.product_name		as proName
+			, P.product_price		as price
+			, P.product_img_big		as proImg
+			, C.category_name		as category
+		from
+			products P, categories C
+		where
+			P.category_no = C.category_no
+		and C.category_name = #value#
+	</select>
+	-->
+	
+	<select id="getReviewsByHighSale" resultClass="Review">
+		select
+			  P.product_no			as proNo
+			, P.product_name		as proName
+			, P.product_price		as price
+			, P.product_img_big		as proImg
+			, C.category_name		as category
+		from
+			products P, categories C
+		where
+			P.category_no = C.category_no
+		order by
+			P.product_discount desc
+	</select>
+	
+</sqlMap>

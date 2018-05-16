@@ -1,0 +1,56 @@
+<%-- 
+<%@page import="fromheadto.vo.Fromcustomer"%>
+<%@page import="fromheadto.dao.Fromcustomerdao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+ 	Fromcustomerdao fromcustomerdao = new Fromcustomerdao();
+ 	Fromcustomer fromcustomer = new Fromcustomer();
+
+	String cust_id = request.getParameter("cust_id");
+	String cust_password = request.getParameter("cust_password");
+	String cust_passwordconfirm = request.getParameter("cust_passwordconfirm");
+	String cust_name = request.getParameter("cust_name");
+	String cust_addres = request.getParameter("cust_addres");
+	String cust_addres1 = request.getParameter("cust_addres1");
+	String cust_addres2 = request.getParameter("cust_addres2");
+	String cust_tel = request.getParameter("cust_tel");
+	String cust_tel2 = request.getParameter("cust_tel2");
+	String cust_tel3 = request.getParameter("cust_tel3");	
+	String cust_phone = request.getParameter("cust_phone");
+	String cust_phone2 = request.getParameter("cust_phone2");
+	String cust_phone3 = request.getParameter("cust_phone3");	
+	String cust_email = request.getParameter("cust_email");
+	String cust_email2 = request.getParameter("cust_email2");
+	String cust_birth = request.getParameter("cust_birth");
+	String cust_birth2 = request.getParameter("cust_birth2");
+	String cust_birth3 = request.getParameter("cust_birth3");
+	String cust_marrday = request.getParameter("cust_marrday");
+	String cust_marrday2 = request.getParameter("cust_marrday2");
+	String cust_marrday3 = request.getParameter("cust_marrday3");
+	String cust_wifebirth = request.getParameter("cust_wifebirth");
+	String cust_wifebirth2 = request.getParameter("cust_wifebirth2");
+	String cust_wifebirth3 = request.getParameter("cust_wifebirth3");
+	String cust_area = request.getParameter("cust_area");
+	String cust_que = request.getParameter("cust_que");
+	
+	
+	fromcustomer.setCust_id(cust_id);
+	fromcustomer.setCust_password(cust_password);
+	fromcustomer.setCust_passwordconfirm(cust_passwordconfirm);
+	fromcustomer.setCust_name(cust_name);
+	fromcustomer.setCust_addres(cust_addres+"-"+cust_addres1+"-"+cust_addres2);
+	fromcustomer.setCust_tel(cust_tel+"-"+cust_tel2+"-"+cust_tel3);
+	fromcustomer.setCust_phone(cust_phone+"-"+cust_phone2+"-"+cust_phone3);
+	fromcustomer.setCust_email(cust_email+"@"+cust_email2);
+	fromcustomer.setCust_birth(cust_birth+cust_birth2+cust_birth3);
+	fromcustomer.setCust_marrday(cust_marrday+cust_marrday2+cust_marrday3);
+	fromcustomer.setCust_wifebirth(cust_marrday+cust_wifebirth2+cust_marrday3);
+	fromcustomer.setCust_area(cust_area);
+	fromcustomer.setCust_que(cust_que);
+	fromcustomerdao.addcustomer(fromcustomer);
+	session.setAttribute("loginuser",fromcustomer);
+	response.sendRedirect("loginwel.jsp");	
+%>
+--%>

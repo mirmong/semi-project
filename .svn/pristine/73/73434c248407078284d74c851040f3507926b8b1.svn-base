@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="product">
+
+	<typeAlias alias="Product" type="semi.vo.ProductDetail"/>
+
+	<select id="getProductByNumber" parameterClass="int" resultClass="Product">
+		select
+			P.product_no as "no"
+			,P.category_no as categoryNo
+			,P.product_name as name
+			,P.product_price as price
+			,P.product_point as "point"
+			,P.product_discount as discount
+			,P.product_detail as detail
+			,P.product_status as status
+			,P.product_img_portrait_1 as imgPortrait1
+			,P.product_img_portrait_2 as imgPortrait2
+			,P.product_img_big as imgBig
+			,S.product_color as color
+			,S.product_size as "size"
+			,S.product_qty as qty
+		from
+			products P, product_stock S
+		where
+			P.product_no = S.product_no
+			and P.product_no = #value#
+	</select>
+
+</sqlMap>

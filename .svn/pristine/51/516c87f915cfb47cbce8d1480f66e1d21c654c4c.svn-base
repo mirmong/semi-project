@@ -1,0 +1,25 @@
+package semi.dao;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import semi.utils.IbatisUtil;
+
+public class NoticeDao {
+
+	private static NoticeDao instance;
+	
+	private SqlMapClient sqlMapper;
+	
+	static {
+		instance = new NoticeDao();
+	}
+	
+	private NoticeDao() {
+		sqlMapper = IbatisUtil.getsqlMap();
+	}
+	
+	public static NoticeDao getInstance() {
+		return instance;
+	}
+	
+}

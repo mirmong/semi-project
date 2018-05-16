@@ -1,0 +1,80 @@
+package semi.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import semi.utils.IbatisUtil;
+import semi.vo.Customer;
+import semi.vo.PasswordHint;
+
+public class CustomerDao {
+
+	private static CustomerDao instance;
+	
+	private SqlMapClient sqlMapper;
+	
+	static {
+		instance = new CustomerDao();
+	} 
+	
+	private CustomerDao() {
+		sqlMapper = IbatisUtil.getsqlMap();
+	}
+	
+	public static CustomerDao getInstance() {
+		return instance;
+	}
+	
+	public void addCustomer(Customer customer) throws  SQLException {
+		sqlMapper.insert("addCustomer",customer);
+	}
+	
+	public Customer login(String cust_id) throws SQLException {
+		return (Customer) sqlMapper.queryForObject("login",cust_id);
+		
+	}
+
+	public Customer getCustomerByEmail(String Email) throws SQLException {
+		return (Customer) sqlMapper.queryForObject("getCustomerByEmail",Email);
+	}
+/*	 
+	public Customer getCustomerById(int no) throws SQLException {
+		return (Customer) sqlMapper.queryForObject("getCustomerById",no);
+	}
+*/
+	public void modifyCoustomer(String custid) throws SQLException {
+		sqlMapper.update("modifyCoustomer", custid);
+	}
+	
+	public void modifyHint(int no) throws SQLException {
+		sqlMapper.update("modifyHint", no);
+	}
+	@SuppressWarnings("unchecked")
+	public List<PasswordHint> quesstion() throws SQLException {
+		return (List<PasswordHint>) IbatisUtil.getsqlMap().queryForList("quesstion");
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Customer> allCustomer() throws SQLException {
+		return (List<Customer>) IbatisUtil.getsqlMap().queryForList("allCustomer");
+		
+	} 
+	public void addCustomerHint(PasswordHint passwordHint) throws  SQLException {
+		sqlMapper.insert("addCustomerHint",passwordHint);
+	}
+	
+	public PasswordHint myQuestion(int no) throws SQLException {
+		SqlMapClient sqlMapper = IbatisUtil.getsqlMap();
+		PasswordHint passwordHint = (PasswordHint) sqlMapper.queryForObject("myQuestion", no);
+		return passwordHint;
+	}
+	// 송재호 시작 -------------------------------------------------------------------------
+	public Customer getCustomerByName(String name) throws SQLException {
+		return (Customer) sqlMapper.queryForObject("getCustomerByName", name);
+	}
+	// 송재호 끝 --------------------------------------------------------------------------
+	
+}

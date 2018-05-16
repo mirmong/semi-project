@@ -1,0 +1,39 @@
+package semi.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import semi.utils.IbatisUtil;
+import semi.vo.CartItem;
+import semi.vo.PointDetail;
+
+public class OrderDao {
+
+	private static OrderDao instance;
+	
+	private SqlMapClient sqlMapper;
+	
+	static {
+		instance = new OrderDao();
+	}
+	
+	private OrderDao() {
+		sqlMapper = IbatisUtil.getsqlMap();
+	}
+	
+	public static OrderDao getInstance() {
+		return instance;
+	}		
+	
+	public PointDetail getchargeconsumePoint(int customerno) throws SQLException {
+		return (PointDetail) sqlMapper.queryForObject("getchargeconsumePoint",customerno);
+		
+	}
+	
+	public List<CartItem> getCartlist(int custNo) throws SQLException{
+		return (List<CartItem>) sqlMapper.queryForList("getCartlist", custNo);
+	}
+	
+}

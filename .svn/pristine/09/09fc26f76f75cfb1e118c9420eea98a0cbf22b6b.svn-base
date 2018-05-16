@@ -1,0 +1,216 @@
+package semi.service;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.time.DateUtils;
+
+import semi.dao.ProductDao;
+import semi.vo.Category;
+
+public class ProductService {
+	
+	private final static int WEEKLY_BEST_PRODUCT_PERIOD_DAYS = 7;
+
+	private final static int BEST_PRODUCT_PERIOD_MONTHS = 6;
+	
+	private final static int NEW_ARRIVAL_PERIOD_MONTHS = 2;
+	
+	private final static int WEB_SERVICE_PERIOD_MONTHS = 36;
+	
+	
+	public final static int WEEKLY_BEST_ROWS = 3;
+	
+	public final static int WEEKLY_BEST_COLS = 3;
+	
+	
+	public final static int NEW_ARRIVAL_ROWS = 4;
+	
+	public final static int NEW_ARRIVAL_COLS = 4;
+	
+	
+	public final static int BEST_PRODUCT_ROWS = 4;
+	
+	public final static int BEST_PRODUCT_COLS = 4;
+	
+	
+	public final static int PRODUCT_ROWS = 6;
+	
+	public final static int PRODUCT_COLS = 4;
+	
+	
+	private static ProductService instance;
+	
+	private ProductDao productDao;
+	
+	static {
+		instance = new ProductService();
+	}
+	
+	private ProductService() {
+		productDao = ProductDao.getInstance();
+	}
+	
+	public static ProductService getInstance() {
+		return instance;
+	}
+	
+
+// 김유호 [ 시작 ] -----------------------------------------------------------------------------------------------------------
+
+	/*
+	 * 주간 베스트 상품 조회 - weekly best products 테이블
+	 * startRownum = 결과 데이터의 시작 인덱스
+	 * endRownum = 결과 데이터의 끝 인덱스
+	 * from = 계산 시작 날짜	(판매일 기준)
+	 * to = 계산 끝 날짜 (판매일 기준)
+	 * categoryNo = 검색할 카테고리 번호
+	 * 페이징 처리가 필요없다면 overload된 메소드를 이용
+	 */
+	
+	public List<Map<String, Object>> getProductsToDisplayWeeklyBestTable(int categoryNo) throws SQLException{
+		
+		int pageNumber = 1;
+		Date to = new Date();
+		Date from = DateUtils.addDays(to, -WEEKLY_BEST_PRODUCT_PERIOD_DAYS);
+
+		int rowsPerPage = WEEKLY_BEST_COLS * WEEKLY_BEST_ROWS;
+		int startRownum = 1 + (((pageNumber - 1) * rowsPerPage));
+		int endRownum = startRownum + rowsPerPage - 1;
+		
+		Map<String, Object> params = new HashMap<>();
+		
+		//params.put("orderJoinWay", "(+)");
+		//params.put("stockJoinWay", "(+)");
+		params.put("productStatus", "정상");
+		params.put("categoryNo", categoryNo);
+		params.put("startRownum", startRownum);
+		params.put("endRownum", endRownum);
+		params.put("from", from);
+		params.put("to", to);
+		
+		List<Map<String,Object>> products = productDao.getProductsBySalesWithCategory(params);
+//		if(products.isEmpty())
+//			throw new RuntimeException("주간 베스트 상품 없음");
+		return products;
+	}
+	
+	/*
+	 * 신규 출시 상품조회 - new arrivals item 테이블
+	 * startRownum = 결과 데이터의 시작 인덱스
+	 * endRownum = 결과 데이터의 끝 인덱스
+	 * from = 계산 시작 날짜	(출시일 기준)
+	 * to = 계산 끝 날짜 (출시일 기준)
+	 * categoryNo = 검색할 카테고리 번호
+	 * 페이징 처리가 필요없다면 overload된 메소드를 이용
+	 */
+	
+	public List<Map<String, Object>> getProductsToDisplayNewArrivalTable(int categoryNo) throws SQLException {
+		
+		int pageNumber = 1;
+		Date to = new Date();
+		Date from = DateUtils.addMonths(to, -NEW_ARRIVAL_PERIOD_MONTHS);
+		
+		int rowsPerPage = NEW_ARRIVAL_COLS * NEW_ARRIVAL_ROWS;
+		int startRownum = 1 + (((pageNumber - 1) * rowsPerPage));
+		int endRownum = startRownum + rowsPerPage - 1;
+
+		Map<String, Object> params = new HashMap<>();
+		
+		//params.put("orderJoinWay", "(+)");
+		//params.put("stockJoinWay", "(+)");
+		params.put("productStatus", "정상");
+		params.put("categoryNo", categoryNo);
+		params.put("startRownum", startRownum);
+		params.put("endRownum", endRownum);
+		params.put("from", from);
+		params.put("to", to);
+		
+		List<Map<String, Object>> products = productDao.getProductsByReleaseDateWithCategory(params);
+		//		if(products.isEmpty())
+//			throw new RuntimeException("최근 출시 상품 없음");
+		
+		return products;
+	}
+	
+	/*
+	 * 베스트 상품 조회 - best products 테이블
+	 * startRownum = 결과 데이터의 시작 인덱스
+	 * endRownum = 결과 데이터의 끝 인덱스
+	 * from = 계산 시작 날짜	(판매일 기준)
+	 * to = 계산 끝 날짜 (판매일 기준)
+	 * categoryNo = 검색할 카테고리 번호
+	 * 페이징 처리가 필요없다면 overload된 메소드를 이용
+	 */ 
+	
+	public List<Map<String, Object>> getProdutsToDisplayBestTable(int categoryNo) throws SQLException {
+		
+		int pageNumber = 1;
+		Date to = new Date();
+		Date from = DateUtils.addMonths(to, -BEST_PRODUCT_PERIOD_MONTHS);
+
+		int rowsPerPage = BEST_PRODUCT_COLS * BEST_PRODUCT_ROWS;
+		int startRownum = 1 + (((pageNumber - 1) * rowsPerPage));
+		int endRownum = startRownum + rowsPerPage - 1;
+		
+		Map<String, Object> params = new HashMap<>();
+		
+		//params.put("stockJoinWay", " ");
+		params.put("productStatus", "정상");
+		params.put("categoryNo", categoryNo);
+		params.put("startRownum", startRownum);
+		params.put("endRownum", endRownum);
+		params.put("from", from);
+		params.put("to", to);
+		
+		List<Map<String, Object>> products = productDao.getProductsBySalesWithCategory(params);
+//		if(products.isEmpty())
+//			throw new RuntimeException("베스트 상품없음");
+		
+		return products;
+	}
+	
+	public List<Map<String, Object>> getProductsToDisplayProductsTable(int pageNumber, int categoryNo) throws SQLException {
+		
+		Date to = new Date();
+		Date from = DateUtils.addMonths(to, -WEB_SERVICE_PERIOD_MONTHS);
+
+		int rowsPerPage = PRODUCT_COLS * PRODUCT_ROWS;
+		int startRownum = 1 + (((pageNumber - 1) * rowsPerPage));
+		int endRownum = startRownum + rowsPerPage - 1;
+		
+		Map<String, Object> params = new HashMap<>();
+		
+		//params.put("stockJoinWay", " ");
+		params.put("productStatus", "정상");
+		params.put("categoryNo", categoryNo);
+		params.put("startRownum", startRownum);
+		params.put("endRownum", endRownum);
+		params.put("from", from);
+		params.put("to", to);
+		
+		List<Map<String, Object>> products = productDao.getProductsByReleaseDateWithCategory(params);
+		
+		return products;
+	}	
+	
+	public Category getCategoryByNo(int categoryNo) throws SQLException {
+		return productDao.getCategoryByNo(categoryNo);
+	}
+	
+	public List<Category> getCategoriesByLevel(int level) throws SQLException {
+		return productDao.getCategoriesByLevel(level);
+	}
+	
+	public List<Category> getSubCategoriesByNo(int categoryNo) throws SQLException {
+		return productDao.getSubCategoriesByNo(categoryNo);
+	}
+	
+// 김유호 [ 끝 ] -----------------------------------------------------------------------------------------------------------	
+
+	
+}

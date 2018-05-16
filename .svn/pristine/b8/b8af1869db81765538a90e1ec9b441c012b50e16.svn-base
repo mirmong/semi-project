@@ -1,0 +1,27 @@
+<%-- 
+<%@page import="fromheadto.vo.Fromcustomer"%>
+<%@page import="fromheadto.dao.Fromcustomerdao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	String cust_id = request.getParameter("cust_id");
+	String cust_passwd = request.getParameter("cust_passwd");
+
+	Fromcustomerdao fromcustomerdao = new Fromcustomerdao();
+	Fromcustomer fromcustomer =  fromcustomerdao.login(cust_id);
+	
+	if(fromcustomer == null) {
+		response.sendRedirect("main.jsp?fail=invalid");
+		return;
+	} 
+		if(!fromcustomer.getCust_password().equals(cust_passwd)) {
+			response.sendRedirect("main.jsp?fail=invalid");
+			return;
+	} 
+
+
+	session.setAttribute("loginuser",fromcustomer);
+	response.sendRedirect("main.jsp");
+	
+%>
+--%>

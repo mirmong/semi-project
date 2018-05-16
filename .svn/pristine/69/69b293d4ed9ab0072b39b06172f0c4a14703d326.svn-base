@@ -1,0 +1,130 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<html lang="ko">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<%@ include file="/include/uppermost-nav.jsp"%>
+<%@ include file="/style/ywj/detailstyle.jsp"%>
+<div class="container col-xs-12" id="id-main-contents">
+	<div id="wrap">
+		<div id="container">
+			<div id="contents02">
+				<div
+					class="xans-element- xans-board xans-board-readpackage-4 xans-board-readpackage xans-board-4 ">
+					<div
+						class="xans-element- xans-board xans-board-title-4 xans-board-title xans-board-4 ">
+						<div class="title">
+							<h2>
+								<font color="#555555">Q&amp;A</font>
+							</h2>
+							<p>상품 Q&amp;A입니다.</p>
+						</div>
+					</div>
+					<div
+						class="xans-element- xans-board xans-board-read-4 xans-board-read xans-board-4">
+						<div class="boardView ">
+							<table border="1" summary="">
+								<caption>상품 게시판 상세</caption>
+								<tbody>
+									<tr>
+										<th scope="row">제목</th>
+										<td>*답글에 대한 재답글은 확인하지 않습니다*</td>
+									</tr>
+									<tr>
+										<th scope="row">작성자</th>
+										<td>프롬헤드투토 <span class="displaynone">(ip:)</span>
+										</td>
+									</tr>
+									<tr class="etcArea">
+										<td colspan="2">
+											<ul>
+												<li class="date "><strong class="th">작성일</strong> <span
+													class="td">2016-04-22</span></li>
+												<li class="hit "><strong class="th">조회수</strong> <span
+													class="td">2322</span></li>
+											</ul>
+										</td>
+									</tr>
+									<tr class="view">
+										<td colspan="2">
+											<div class="detail">
+												<p>
+													<br>
+												</p>
+												<p>
+													<br>
+												</p>
+												<p>
+													<br>
+												</p>
+												<p>
+													<br>
+												</p>
+												<p>프롬헤드투토 입니다.♥</p>
+												<p>
+													<br>
+												</p>
+												<p>
+													<br>
+												</p>
+												<p>
+													<br>저희가 고객님께 답변해드리는 내용에 다시 재답글을 달아주시는 경우가 종종 있는데요~
+												</p>
+												<p>재답글의 경우 글이 그날 그날 작성되었는지 일일이 확인이 어렵습니다.</p>
+												<p>
+													<br>
+												</p>
+												<p>
+													<br>
+												</p>
+												<p>
+													<span style="color: red;">이미 답변이 달린 게시물에 추가적인 문의가
+														있으신 분들은</span>
+												</p>
+												<p>
+													<span style="color: red;">새로 글을 작성해주시면 정성껏 대답해드리고
+														있습니다^^</span>
+												</p>
+												<p>
+													<br>
+												</p>
+												<p>
+													<br>
+												</p>
+												<p>항상 프롬헤드투토를 이용해주셔서 진심으로 감사드리고 있습니다.</p>
+												<p>앞으로도 많은 관심 부탁드려요 ^^</p>
+											</div>
+										</td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+						<div class="btnArea ">
+							<span class="left">
+								<a href="#">
+									<img src="/semi/images/ywj/listbutton.jpg" alt="목록">
+								</a>
+							</span>
+							<a href="#" class="">
+								<img src="/semi/images/ywj/qnabtn.jpg" alt="답변">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr class="layout">
+		</div>
+		<hr class="layout">
+	</div>
+	</div>
+	<%@ include file="/include/lowermost-footer.jsp"%>
+</body>
+</html>

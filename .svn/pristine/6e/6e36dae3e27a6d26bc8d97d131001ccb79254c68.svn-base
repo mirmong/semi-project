@@ -1,0 +1,99 @@
+package semi.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import semi.utils.IbatisUtil;
+import semi.vo.Category;
+import semi.vo.ProductDetail;
+import semi.vo.ProductQuestions;
+import semi.vo.ProductReviews;
+
+public class ProductDao {
+
+	private static ProductDao instance;
+	
+	private SqlMapClient sqlMapper;
+	
+	static {
+		instance = new ProductDao();
+	}
+	
+	private ProductDao() {
+		sqlMapper = IbatisUtil.getsqlMap();
+	}
+	
+	public static ProductDao getInstance() {
+		return instance;
+	}	
+	
+	@SuppressWarnings("unchecked")
+	public List<ProductDetail> getProductByNumber(int no) throws SQLException {
+		return (List<ProductDetail>) sqlMapper.queryForList("getProductByNumber", no);		 
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<String> getProductColorByProNo(int no) throws SQLException {
+		return (List<String>) sqlMapper.queryForList("getProductColorByProNo", no);
+	}
+	@SuppressWarnings("unchecked")
+	public List<String> getProductSizeByProNo(int no) throws SQLException {
+		return (List<String>) sqlMapper.queryForList("getProductSizeByProNo", no);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ProductQuestions> getProductQuestionsByProNo(int no) throws SQLException {
+		return sqlMapper.queryForList("getProductQuestionsByProNo", no);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<String> getSixReviewImagesByProNo(int no) throws SQLException {
+		return (List<String>) sqlMapper.queryForList("getSixReviewImagesByProNo", no);
+	}
+	@SuppressWarnings("unchecked")
+	public List<String> getFourReviewImagesByProNo(int no) throws SQLException {
+		return (List<String>) sqlMapper.queryForList("getFourReviewImagesByProNo", no);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ProductReviews> getProductReviewsByProNo(int no) throws SQLException {
+		return (List<ProductReviews>) sqlMapper.queryForList("getProductReviewsByProNo", no);
+	}
+	
+	public double getProductScoreByProNo(int no) throws SQLException {
+		return (double) sqlMapper.queryForObject("getProductScoreByProNo", no);
+	}
+	
+	public void plusReviewLike(Map<String, Object> map) throws SQLException {
+		sqlMapper.update("plusReviewLike", map);
+	}
+	
+	public void minusReviewLike(Map<String, Object> map) throws SQLException {
+		sqlMapper.update("minusReviewLike", map);
+	}
+	
+	public int getReviewLike(Map<String, Object> map) throws SQLException {
+		return (int)sqlMapper.queryForObject("getReviewLike",  map);
+	}
+	@SuppressWarnings("unchecked")
+	public List<Integer> getSoldCountTopThreeProductNo() throws SQLException {
+		return (List<Integer>) sqlMapper.queryForList("getSoldCountTopThreeProductNo");
+	}
+	//-------------------------------------------- 김유호 [ 시작 ] ------------------------------------------------------
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String,Object>> getWeeklyBestProductsByCategory(Map<String, Object> parameter) throws SQLException{
+		return (List<Map<String,Object>>) sqlMapper.queryForList("getWeeklyBestProductsByCategory", parameter);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Category> getAllMainCategories() throws SQLException{
+		return (List<Category>) sqlMapper.queryForList("getAllMainCategories");
+	}
+	
+	//--------------------------------------------- 김유호 [ 끝 ]-------------------------------------------------------
+	
+}

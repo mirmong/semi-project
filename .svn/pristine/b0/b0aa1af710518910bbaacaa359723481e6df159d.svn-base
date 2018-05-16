@@ -1,0 +1,96 @@
+package semi.service;
+
+import java.sql.SQLException;
+import java.time.ZonedDateTime;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import semi.dao.ProductDao;
+import semi.vo.Category;
+
+public class ProductService {
+	
+	public final static int WEEKLY_BEST_ROWS = 2;
+	
+	public final static int WEEKLY_BEST_COLS = 3;
+	
+	
+	public final static int NEW_ARRIVALS_ROWS = 3;
+	
+	public final static int NEW_ARRIVALS_COLS = 4;
+	
+	
+	private static ProductService instance;
+	
+	private ProductDao productDao;
+	
+	static {
+		instance = new ProductService();
+	}
+	
+	private ProductService() {
+		productDao = ProductDao.getInstance();
+	}
+	
+	public static ProductService getInstance() {
+		return instance;
+	}
+	
+
+// 김유호 [ 시작 ] -----------------------------------------------------------------------------------------------------------
+
+	
+	public List<Map<String, Object>> getNewArrivalsProducts() throws SQLException {
+		Date now = new Date();
+		Date sixMonthAgo = Date.from(ZonedDateTime.now().minusMonths(6).toInstant());
+		int count = NEW_ARRIVALS_COLS * NEW_ARRIVALS_ROWS;
+		
+		Map<String, Object> period = new HashMap<>();
+		period.put("resultCount", count);
+		period.put("periodStartDate", sixMonthAgo);
+		period.put("periodEndDate", now);
+		
+		List<Map<String, Object>> products = productDao.getNewArrivalsProductsByPeriod(period);
+		
+		if(products.isEmpty())
+			throw new RuntimeException("최근 출시 상품이 존재하지 않습니다");
+		
+		return products;
+	}
+	
+	public List<Map<String, Object>> getWeeklyBestProductsByCategory(String categoryName) throws SQLException{
+		List<Category> categories = productDao.getAllMainCategories();
+		
+		if(categories.isEmpty())
+			throw new RuntimeException("카테고리 관련 데이터가 존재하지 않습니다.");
+		
+		final long DAY_IN_MS = 1000 * 60 * 60 * 24;
+		Date now = new Date();
+		Date aweekAgo = new Date(now.getTime() - (DAY_IN_MS * 7));
+		int count = WEEKLY_BEST_COLS * WEEKLY_BEST_ROWS;
+		
+		for(Category c : categories) {
+			if(categoryName.equals(c.getName())) {
+				Map<String, Object> parameter = new HashMap<>();
+				parameter.put("resultCount", count);
+				parameter.put("periodStartDate", aweekAgo);
+				parameter.put("periodEndDate", now);
+				parameter.put("categoryName", categoryName);
+				return productDao.getBestProductsByCategoryAndPeriod(parameter);
+			}
+		}
+		
+		throw new RuntimeException("매개변수categoryName과 동일한 카테고리를 찾을 수 없습니다.");
+	}
+
+	public List<Category> getAllMainCategories() throws SQLException {
+		return productDao.getAllMainCategories();
+	}
+	
+	
+// 김유호 [ 끝 ] -----------------------------------------------------------------------------------------------------------	
+
+	
+}

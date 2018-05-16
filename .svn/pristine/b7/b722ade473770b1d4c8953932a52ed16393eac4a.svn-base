@@ -1,0 +1,164 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<style>
+	.front {
+		z-index: 100;
+	}
+
+	.navbar-right , .navbar-left {
+		width: 320px;
+		border-collapse: collapse;
+		align-content: center;
+		text-align: center;
+	}
+
+	.navbar-fixed-top {
+		border-collapse: collapse;
+	}
+
+	.top-mini-nav {
+		font-size: 9px;
+	}
+	
+	.empty-top-div {
+		height: 50px;
+		z-index: 0;
+	}
+	
+	.main-title {
+		text-align: center;
+		margin-top: 90px;
+	}
+	
+	#id-main-category-ul a {
+		margin-top: 20px;
+	}
+	
+	.main-category-black {
+		color: black;
+		font-weight: normal;
+		font-size: 13px;
+		margin-left: 15px;
+		margin-right: 15px;
+	}
+	
+	.main-category-red {
+		color: rgb(197,45,45)";
+		font-weight: normal;
+		font-size: 13px;
+		margin-left: 15px;
+		margin-right: 15px;
+	}
+	
+	#id-main-category-ul {
+		vertical-align: middle;
+		text-align: center;
+		border-style: solid;
+		border-right: none;
+		border-left: none;
+		border-width: 1px;
+		border-color: rgb(200,200,200);
+		margin-bottom: 0px;
+		padding-bottom: 0px;
+		height: 50px;
+		background-color: white;
+	}
+	
+	#id-main-category-ul li {
+		height: 50px;
+	}
+</style>
+<script>
+	$(window).scroll(function() {
+		var scrollTop = $(this).scrollTop();
+	    if (scrollTop >= 152) {
+	    	fixMainCategory();
+	    } else {
+	    	releaseMainCategory();
+	    }
+	});
+
+	/*
+	window.onscroll = function(){
+	    //var windowHeight = window.innerHeight;
+		// 창 높이
+	    //var documentHeight = document.body.scrollHeight;
+	    // 컨텐츠의 높이
+		var windowScrollTop = document.documentElement.scrollTop;
+	    
+	    // 스크롤 남은 높이
+	    if (windowScrollTop >= 152) {
+	    	fixMainCategory();
+	    } else {
+	    	releaseMainCategory();
+	    }
+	}
+	*/
+	
+	function releaseMainCategory(){
+		var main = document.getElementById("id-main-category");
+		main.classList.remove("navbar-fixed-top");
+		var mainContents = document.getElementById("id-main-contents");
+		mainContents.style.marginTop = "0px";
+	}
+	
+	function fixMainCategory(){
+		var main = document.getElementById("id-main-category");
+		main.classList.add("navbar-fixed-top");
+		var mainContents = document.getElementById("id-main-contents");
+		mainContents.style.marginTop = "90px";
+	}
+</script>
+<div class="container col-xs-12">
+	<div class="top-mini-nav">
+		<nav class="nav navbar-default navbar-fixed-top">
+			<div class="row">
+				<div class="col-xs-6 col-sm-6">
+					<ul class="nav navbar-nav navbar-left front">
+						<li><a href="">NOTICE</a></li>
+						<li><a href="">REVIEW</a></li>
+						<li><a href="">Q&A</a></li>
+						<li><a href="">EVENT</a></li>
+					</ul>
+				</div>
+				<div class="col-xs-6 col-sm-6">
+					<ul class="nav navbar-nav navbar-right front">
+						<li><a href="">LOGOUT</a></li>
+						<li><a href="">MY INFO</a></li>
+						<li><a href="">ORDER</a></li>
+						<li><a href="">MY PAGE</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="main-title">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12">
+					<img alt="main-title" src="/semi/images/kyh/main-title.png">
+				</div>
+			</div>
+		</div>
+		<div class="main-category" id="id-main-category">
+			<div class="empty-top-div"></div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12">
+			       	<ul class="list-inline" id="id-main-category-ul">
+						<li class="list-inline-item"><br><a class="main-category-black" href="">BEST</a></li>
+			            <li class="list-inline-item"><a class="main-category-black" href="">NEW10%</a></li>
+			            <li class="list-inline-item"><a class="main-category-black" href="">OUTER</a></li>
+			            <li class="list-inline-item"><a class="main-category-black" href="">TOP</a></li>
+			            <li class="list-inline-item"><a class="main-category-black" href="">KNIT</a></li>
+			            <li class="list-inline-item"><a class="main-category-black" href="">DRESS</a></li>
+			            <li class="list-inline-item"><a class="main-category-black" href="">PANTS</a></li>
+			            <li class="list-inline-item"><a class="main-category-black" href="">SKIRT</a></li>
+			            <li class="list-inline-item"><a class="main-category-black" href="">SHOES</a></li>
+			            <li class="list-inline-item"><a class="main-category-black" href="">BAG</a></li>
+						<li class="list-inline-item"><a class="main-category-red" href="">자체제작</a></li>
+						<li class="list-inline-item"><a class="main-category-black" href="">ACC</a></li>
+						<li class="list-inline-item"><a class="main-category-black" href="">할인~50%</a></li>
+			        </ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

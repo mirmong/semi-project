@@ -1,0 +1,191 @@
+<%@page import="semi.vo.Customer"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+ 	Customer loggedInUser = (Customer)session.getAttribute("logged-in-user");
+	if(loggedInUser == null){
+		System.out.println("null");
+	} else {
+		System.out.println("ok");
+	}
+%>   
+<style>
+	.container {
+		min-width: 1280px;
+	}
+	
+	.navbar-right , .navbar-left {
+		position: relative;
+		width: 420px;
+		border-collapse: collapse;
+		text-align: center;
+	}
+
+	.navbar-fixed-top {
+		border-collapse: collapse;
+	}
+
+	.top-mini-nav {
+		font-size: 9px;
+	}
+	
+	.empty-top-div  , .empty-top-div *{
+		height: 50px;
+	}
+	
+	.main-title {
+		text-align: center;
+		margin-top: 90px;
+	}
+	
+	.main-category-black {
+		color: black;
+		font-weight: normal;
+		font-size: 13px;
+		margin-left: 15px;
+		margin-right: 15px;
+	}
+	
+	.main-category-red {
+		color: rgb(197,45,45)";
+		font-weight: normal;
+		font-size: 13px;
+		margin-left: 15px;
+		margin-right: 15px;
+	}
+	
+	#id-main-category {
+		margin-top: 50px;
+	}
+	
+	#id-main-category-ul {
+		vertical-align: middle;
+		text-align: center;
+		border-style: solid;
+		border-right: none;
+		border-left: none;
+		border-width: 1px;
+		border-color: rgb(200,200,200);
+		margin-bottom: 0px;
+		padding-bottom: 0px;
+		height: 50px;
+		background-color: white;
+	}
+	
+	#id-main-category-ul li {
+		height: 50px;
+	}
+</style>
+<script>
+	$(window).scroll(function() {
+		var scrollTop = $(this).scrollTop();
+	    if (scrollTop >= 152) {
+	    	fixMainCategory();
+	    } else {
+	    	releaseMainCategory();
+	    }
+	});
+
+	/*
+	window.onscroll = function(){
+	    //var windowHeight = window.innerHeight;
+		// 창 높이
+	    //var documentHeight = document.body.scrollHeight;
+	    // 컨텐츠의 높이
+		var windowScrollTop = document.documentElement.scrollTop;
+	    
+	    // 스크롤 남은 높이
+	    if (windowScrollTop >= 152) {
+	    	fixMainCategory();
+	    } else {
+	    	releaseMainCategory();
+	    }
+	}
+	*/
+
+	var navTopIsFixed = false;
+	
+	function releaseMainCategory(){
+		if(navTopIsFixed){
+			var main = document.getElementById("id-main-category");
+			main.classList.remove("navbar-fixed-top");
+			var mainContents = document.getElementById("id-main-contents");
+			mainContents.style.marginTop = "0px";
+			navTopIsFixed = false;
+		}
+	}
+
+	function fixMainCategory(){
+		if(!navTopIsFixed){
+			var main = document.getElementById("id-main-category");
+			main.classList.add("navbar-fixed-top");
+			var mainContents = document.getElementById("id-main-contents");
+			mainContents.style.marginTop = "90px";
+			navTopIsFixed = true;
+		}
+	}
+</script>
+<div class="container col-xs-12">
+	<div class="top-mini-nav">
+		<nav class="nav navbar-default navbar-fixed-top">
+			<div class="row">
+				<div class="col-xs-6 col-sm-6">
+					<ul class="nav navbar-nav navbar-left">
+						<li><a href="/semi/notice/list.jsp">NOTICE</a></li>
+						<li><a href="/semi/review/list.jsp">REVIEW</a></li>
+						<li><a href="/semi/qna/list.jsp">Q&A</a></li>
+						<li><a href="/semi/event/list.jsp">EVENT</a></li>
+					</ul>
+				</div>
+				<div class="col-xs-6 col-sm-6">
+					<ul class="nav navbar-nav navbar-right">
+					<%
+						if(loggedInUser == null){
+					%>		
+						<li><a href="/semi/member/loginform.jsp">LOGIN</a></li>
+						<li><a href="/semi/member/join.jsp">회원가입</a></li>
+					<%		
+						} else {
+					%>		
+						<li><a href="/semi/member/logout.jsp">LOGOUT</a></li>
+					<%		
+						}
+					%>
+						<li><a href="/semi/member/modify.jsp">MY INFO</a></li>
+						<li><a href="/semi/order/basket.jsp">ORDER</a></li>
+						<li><a href="/semi/myshop/mypage.jsp">MY PAGE</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="main-title">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12">
+					<a href="/semi/index.jsp"><img alt="main-title" src="/semi/images/kyh/main-title.png"></a>
+				</div>
+			</div>
+		</div>
+		<div class="main-category" id="id-main-category">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12">
+			       	<ul class="list-inline" id="id-main-category-ul">
+						<li class="list-inline-item"><br><a class="main-category-black" href="">BEST</a></li>
+			            <li class="list-inline-item"><a class="main-category-black" href="">NEW10%</a></li>
+			            <li class="list-inline-item"><a class="main-category-black" href="">OUTER</a></li>
+			            <li class="list-inline-item"><a class="main-category-black" href="">TOP</a></li>
+			            <li class="list-inline-item"><a class="main-category-black" href="">KNIT</a></li>
+			            <li class="list-inline-item"><a class="main-category-black" href="">DRESS</a></li>
+			            <li class="list-inline-item"><a class="main-category-black" href="">PANTS</a></li>
+			            <li class="list-inline-item"><a class="main-category-black" href="">SKIRT</a></li>
+			            <li class="list-inline-item"><a class="main-category-black" href="">SHOES</a></li>
+			            <li class="list-inline-item"><a class="main-category-black" href="">BAG</a></li>
+						<li class="list-inline-item"><a class="main-category-red" href="">자체제작</a></li>
+						<li class="list-inline-item"><a class="main-category-black" href="">ACC</a></li>
+						<li class="list-inline-item"><a class="main-category-black" href="">할인~50%</a></li>
+			        </ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

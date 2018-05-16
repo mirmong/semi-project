@@ -1,0 +1,294 @@
+<%@page import="semi.vo.Review"%>
+<%@page import="java.util.List"%>
+<%@page import="semi.dao.ReviewDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<html lang="ko">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<%@ include file="/include/uppermost-nav.jsp"%>
+<%@ include file="/style/ywj/reviewstyle.jsp" %>
+<%
+	ReviewDao reviewDao = ReviewDao.getInstance();
+	List<Review> reviews = reviewDao.getAllReviews();
+%>
+<div class="container col-xs-12" id="id-main-contents">
+		<div id="wrap">
+			<div id="container">
+				<div id="contents02">
+					<div
+						class="xans-element- xans-board xans-board-listpackage-4 xans-board-listpackage xans-board-4 ">
+						<div
+							class="xans-element- xans-board xans-board-title-4 xans-board-title xans-board-4 ">
+							<div class="title">
+								<h2>
+									<font color="#555555">review</font>
+								</h2>
+								<p>상품 사용후기입니다.</p>
+							</div>
+						</div>
+						<div style="margin: 0 auto; text-align: center;">
+							<img src="/semi/images/ywj/reviewevent.jpg">
+						</div>
+						<div>
+							<div class="row">
+								<div class="col-sm-4">
+									<ul>
+										<li style="margin: 44px;"><a href="#"><img src="/semi/images/ywj/Desert.jpg" width="215" height="237"></a></li>
+									</ul>
+								</div>
+								<div class="col-sm-4">
+									<ul>
+										<li style="margin: 44px;"><a href="#"><img src="/semi/images/ywj/Desert.jpg" width="215" height="237"></a></li>
+									</ul>
+								</div>
+								<div class="col-sm-4">
+									<ul>
+										<li style="margin: 44px;"><a href="#"><img src="/semi/images/ywj/Desert.jpg" width="215" height="237"></a></li>
+									</ul>
+								</div>
+								<div class="col-sm-4">
+									<ul>
+										<li style="margin: 44px;"><a href="#"><img src="/semi/images/ywj/Desert.jpg" width="215" height="237"></a></li>
+									</ul>
+								</div>
+								<div class="col-sm-4">
+									<ul>
+										<li style="margin: 44px;"><a href="#"><img src="/semi/images/ywj/Desert.jpg" width="215" height="237"></a></li>
+									</ul>
+								</div>
+								<div class="col-sm-4">
+									<ul>
+										<li style="margin: 44px;"><a href="#"><img src="/semi/images/ywj/Desert.jpg" width="215" height="237"></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					<div id="content">
+						<div class="products_index_gallery">
+							<div class="products_index_gallery__head" data-search-url="#">
+								<div class="products_index__head_default">
+									<div class="products_index__select_category">
+										<i class="products_index__category_icon sprites-category"></i>
+										<div class="select2-container select2 minimal_select js-search-trigger js-search-field" id="s2id_category_id">
+											<a href="javascript:void(0)" onclick="return false;" class="select2-choice" tabindex="-1">
+												<div class="select2-chosen">카테고리 선택</div>
+												<abbr class="select2-search-choice-close"></abbr>
+												<span class="select2-arrow">
+													<b></b>
+												</span>
+												<span class="products_index__dropdown_icon select2__dropdown_icon"></span>
+											</a>
+											<input class="select2-focusser select2-offscreen" type="text" id="s2id_autogen1">
+											<div class="select2-drop select2-display-none minimal_select">
+												<div class="select2-search select2-search-hidden select2-offscreen">
+													<input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input">
+												</div>
+												<ul class="select2-results"></ul>
+											</div>
+										</div>
+										<select name="category_id" id="category_id" class="select2 minimal_select js-search-trigger js-search-field select2-offscreen" data-dropdown-auto-width="true" data-dropdown-icon-class="products_index__dropdown_icon" tabindex="-1">
+											<option>카테고리 선택</option>
+											<option value="1">TOP</option>
+											<option value="5">OUTER</option>
+											<option value="6">DRESS</option>
+											<option value="7">BOTTOMS</option>
+											<option value="12">SKIRT</option>
+											<option value="13">SHOES</option>
+											<option value="14">BAG</option>
+											<option value="15">ETC</option>
+										</select>
+									</div>
+									<div class="products_index__head_right">
+										<div class="products_index__select_sort">
+											<div class="select2-container select2 minimal_select js-search-trigger js-search-field">
+												<a href="javascript:void(0)" onclick="return false;" class="select2-choice" tabindex="-1">
+													<div class="select2-chosen">최신 리뷰순</div>
+													<abbr class="select2-search-choice-close"></abbr>
+													<span class="select2-arrow">
+														<b></b>
+													</span>
+													<span class="products_index__dropdown_icon select2__dropdown_icon"></span>
+												</a>
+												<input class="select2-focusser select2-offscreen" type="text" id="s2id_autogen2">
+												<div class="select2-drop select2-display-none minimal_select">
+													<div class="select2-search select2-search-hidden select2-offscreen">
+														<input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input">
+													</div>
+													<ul class="select2-results"></ul>
+												</div>
+											</div>
+											<select name="sort" id="sort" class="select2 minimal_select js-search-trigger js-search-field select2-offscreen" data-dropdown-auto-width="true" data-dropdown-icon-class="products_index__dropdown_icon" tabindex="-1">
+												<option value="1">상품 이름순</option>
+												<option value="2">낮은 가격순</option>
+												<option value="3">높은 가격순</option>
+												<option value="4">리뷰 평점순</option>
+												<option value="5">리뷰 많은순</option>
+												<option value="6">최고 판매량순</option>
+												<option value="7">할인순</option>
+											</select>
+										</div>
+										<div class="products_index__head_separator"></div>
+										<a class="products_index__search_button">
+											<i class="sprites-search"></i>
+										</a>
+									</div>
+								</div>
+								<div class="products_index__advanced_search hidden">
+									<div class="products_index__advanced_search_inner">
+										<div class="select2-container select2-container-multi tokenized_input js-search-trigger js-search-field" id="s2id_query">
+											<ul class="select2-choices">
+												<li class="select2-search-field">
+													<input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input select2-default" id="s2id_autogen4" maxlength="30">
+												</li>
+											</ul>
+											<div class="select2-drop select2-drop-multi select2-display-none tokenized_input js-search-trigger js-search-field">
+												<ul class="select2-results"></ul>
+											</div>
+											<a class="tokenized_input__clear_button">
+												<i class="sprites-tokenized-input-clear"></i>
+											</a>
+										</div>
+										<input type="hidden" name="query" id="query" class="tokenized_input js-search-trigger js-search-field select2-offscreen" data-placeholder="검색어를 입력해 주세요" tabindex="-1">
+										<div class="products_index__select_price_range_box">
+											<div class="select2-container select2 minimal_select js-search-trigger js-search-field products_index__select_price_range" id="s2id_price_range">
+												<a href="javascript:void(0)" onclick="return false;" class="select2-choice" tabindex="-1">
+													<div class="select2-chosen">가격대 선택</div>
+													<abbr class="select2-search-choice-close"></abbr>
+													<span class="select2-arrow">
+														<b></b>
+													</span>
+													<span class="sprites-icon-drop-down select2__dropdown_icon"></span>
+												</a>
+												<input class="select2-focusser select2-offscreen" type="text" id="s2id_autogen3">
+												<div class="select2-drop select2-display-none minimal_select">
+													<div class="select2-search select2-search-hidden select2-offscreen">
+														<input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input">
+													</div>
+													<ul class="select2-results"></ul>
+												</div>
+											</div>
+											<select name="price_range" id="price_range" class="select2 minimal_select js-search-trigger js-search-field products_index__select_price_range select2-offscreen" data-dropdown-auto-width="true" tabindex="-1">
+												<option value=>가격대 선택</option>
+												<option value="-10000">1만원 이하</option>
+												<option value="10000-30000">1만원 이상 ~ 3만원 미만</option>
+												<option value="30000-50000">3만원 이상 ~ 5만원 미만</option>
+												<option value="50000-100000">5만원 이상 ~ 10만원 미만</option>
+												<option value="100000-">10만원 이상</option>
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="products_index_gallery__body">
+								<div class="products_index_gallery__content">
+								<%
+									for (Review review : reviews) {
+										Review grade = reviewDao.getThisGrade(review.getProNo());
+										List<Review> contents = reviewDao.getThisReviews(review.getProNo());
+								%>
+									<div class="products_index_gallery__products grid js-pagination-list" data-columns-count="4" data-column-class="products_index_gallery__products_column" data-item-class="products_index_gallery_product" data-align-row="false" data-grid-initialized="true" >
+										<div class="products_index_gallery__products_column products_index_gallery__products_column_0" style="width: 25%;" >
+											<div class="product products_index_gallery_product products_index_gallery_product--visible" id="product_15447">
+												<div class="products_index_gallery_product__image_box">
+													<a href="http://fromheadtotoe.kr/product/detail.html?cate_no=1&product_no=13905" data-link-target="window">
+														<img src="/semi/images/kyh/<%=review.getProImg() %>" class="products_index_gallery_product__image smooth--loaded" id="product_img_15447">
+														<script> 
+												        fimg("product_img_15447", 512, 346);
+												        </script>
+													</a>
+												</div>
+												<div class="products_index_gallery_product__sections">
+													<div class="products_index_gallery_product__section products_index_gallery_product__section--detail">
+														<a class="products_index_gallery_product__section_link" data-link-target="window" href="http://fromheadtotoe.kr/product/detail.html?cate_no=1&product_no=13905">
+															<div class="products_index_gallery_product__detail_name"><%=review.getProName() %></div>
+															<div class="products_index_gallery_product__detail_price"><%=review.getPrice() %></div>
+														</a>
+													</div>
+													<%
+														if (grade == null) {
+													%>
+													<div class="products_index_gallery_product__section products_index_gallery_product__section--review_summary">
+														<a class="products_index_gallery_product__section_link" href="http://fromheadtotoe.kr/product/detail.html?cate_no=1&product_no=13905" data-link-target="window">
+															<div class="products_index_gallery_product__review_summary_average_score_title">평점</div>
+															<div class="products_index_gallery_product__review_summary_average_score">0</div>
+															<div class="products_index_gallery_product__review_summary_reviews_count">0개의 리뷰</div>
+														</a>
+													</div>
+													<%
+														} else {
+													%>
+													<div class="products_index_gallery_product__section products_index_gallery_product__section--review_summary">
+														<a class="products_index_gallery_product__section_link" href="http://fromheadtotoe.kr/product/detail.html?cate_no=1&product_no=13905" data-link-target="window">
+															<div class="products_index_gallery_product__review_summary_average_score_title">평점</div>
+															<div class="products_index_gallery_product__review_summary_average_score"><%=grade.getGrade() %></div>
+															<div class="products_index_gallery_product__review_summary_reviews_count"><%=grade.getReviewCount() %>개의 리뷰</div>
+														</a>
+													</div>
+													<%
+														}
+														for(Review content : contents) {
+															if(content == null) {
+													%>
+													<div class="products_index_gallery_product__section">
+														<a class="js-link-fullscreen-popup" data-url="/fromheadtotoe.kr/reviews/50696?widget_env=100">
+															<div class="products_index_gallery_product__review_inner">
+																<div class="products_index_gallery_product__review_image_box">
+																	<img src="/semi/images/kyh/<%=content.getReviewImg() %>" class="products_index_gallery_product__review_image js-review-image smooth--loaded">
+																</div>
+																<div class="products_index_gallery_product__review_message">리뷰가 존재하지 않습니다.</div>
+															</div>
+														</a>
+													</div>
+													<%
+																
+															} else {
+													%>
+													<div class="products_index_gallery_product__section">
+														<a class="js-link-fullscreen-popup" data-url="/fromheadtotoe.kr/reviews/50696?widget_env=100">
+															<div class="products_index_gallery_product__review_inner">
+																<div class="products_index_gallery_product__review_image_box">
+																	<img src="/semi/images/kyh/<%=content.getReviewImg() %>" class="products_index_gallery_product__review_image js-review-image smooth--loaded">
+																</div>
+																<div class="products_index_gallery_product__review_message"><%=content.getReviewContent() %></div>
+															</div>
+														</a>
+													</div>
+													<%
+															}
+														}
+													%>
+													<div class="products_index_gallery_product__section products_index_gallery_product__section--category">
+														<a class="products_index_gallery_product__section_link" data-link-target="window" href="http://fromheadtotoe.kr/product/list.html?cate_no=7">
+															<div class="products_index_gallery_product__category_name"><%=review.getCategory() %></div>
+															<div class="products_index_gallery_product__category_description">카테고리의 상품입니다</div>
+														</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<%
+									}
+									%>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr class="layout">
+	</div>
+	<hr class="layout">
+</div>
+	<%@ include file="/include/lowermost-footer.jsp"%>
+</body>
+</html>

@@ -1,0 +1,45 @@
+package semi.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import semi.utils.IbatisUtil;
+import semi.vo.Qna;
+
+public class QnaDao {
+
+	private static QnaDao instance;
+	
+	private SqlMapClient sqlMapper;
+	
+	static {
+		instance = new QnaDao();
+	}
+	
+	private QnaDao() {
+		sqlMapper = IbatisUtil.getsqlMap();
+	}
+	
+	public static QnaDao getInstance() {
+		return instance;
+	}	
+	
+	@SuppressWarnings("unchecked")
+	public List<Qna> getAllQuestions() throws SQLException {
+		return sqlMapper.queryForList("getAllQuestions");
+	}
+	
+	public Qna getDetailQuestion(int no) throws SQLException {
+		return (Qna) sqlMapper.queryForObject("getDetailQuestion", no);
+	}
+	
+	public Qna getThisAnswer(int no) throws SQLException {
+		return (Qna) sqlMapper.queryForList("getThisAnswer", no);
+	}
+	
+	public Qna getPassword(int no) throws SQLException {
+		return (Qna) sqlMapper.queryForObject("getPassword", no);
+	}
+}

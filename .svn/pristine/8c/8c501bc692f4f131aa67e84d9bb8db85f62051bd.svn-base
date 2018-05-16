@@ -1,0 +1,23 @@
+package semi.service;
+
+import semi.dao.OrderDao;
+import semi.dao.ProductDao;
+
+public class OrderService {
+	
+	private static OrderService instance;
+	
+	static {
+		instance = new OrderService();
+	}
+	
+	private OrderService() {
+		ProductDao.getInstance();
+		OrderDao.getInstance();
+	}
+	
+	public static OrderService getInstance() {
+		return instance;
+	}
+	
+}

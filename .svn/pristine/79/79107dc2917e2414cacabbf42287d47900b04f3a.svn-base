@@ -1,0 +1,32 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="semi.service.ProductService"%>
+<%@page import="java.util.Date"%>
+<%@page import="semi.utils.JsonUtil"%>
+<%@page import="java.util.List"%>
+<%@page import="com.google.gson.Gson"%>
+<%@page import="com.google.gson.GsonBuilder"%>
+<%@page import="semi.dao.ProductDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("utf-8");
+	String categoryName = request.getParameter("category-name");
+	ProductService productService = ProductService.getInstance();
+	
+	List<Map<String, Object>> bestProducts = productService.getBestProductsByCategory(categoryName);
+	Map<String,Integer> bestTableInfo = new HashMap<>();
+	bestTableInfo.put("weeklyBestRows", productService.getWeeklyBestRows());
+	bestTableInfo.put("weeklyBestCols", productService.getWeeklyBestCols());
+	
+	Map<String, Object> resultMap = new HashMap<>();
+	resultMap.put("bestTableInfo", bestTableInfo);
+	resultMap.put("bestProducts", bestProducts);
+	
+	GsonBuilder gsonBuilder = new GsonBuilder();
+	gsonBuilder.registerTypeAdapter(Date.class, new JsonUtil.DateSerializer());
+	Gson gson = gsonBuilder.create();
+	String jsonText = gson.toJson(resultMap);
+	
+	out.write(jsonText);
+%>

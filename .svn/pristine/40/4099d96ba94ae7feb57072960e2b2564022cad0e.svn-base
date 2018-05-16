@@ -1,0 +1,140 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<html lang="ko">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<%@ include file="../include/uppermost-nav.jsp" %>
+<%@ include file="../style/ywj/detailstyle.jsp" %>
+<div id="wrap">
+	<div id="container">
+		<div id="contents02">
+			<div class="xans-element- xans-board xans-board-readpackage-8 xans-board-readpackage xans-board-8 ">
+				<div class="xans-element- xans-board xans-board-title-8 xans-board-title xans-board-8 ">
+					<div class="title">
+						<h2><font color="#333333">EVENT</font></h2>
+						<p>이벤트</p>
+					</div>
+				</div>
+					<div
+						class="xans-element- xans-board xans-board-read-8 xans-board-read xans-board-8">
+						<div class="boardView ">
+							<table border="1" summary="">
+								<caption>게시판 상세</caption>
+								<tbody>
+									<tr>
+										<th scope="row">제목</th>
+										<td>[진행중인 이벤트]신상10% 할인 이벤트</td>
+									</tr>
+									<tr>
+										<th scope="row">작성자</th>
+										<td>프롬헤드투토 <span class="">(ip:106.254.219.3)</span>
+										</td>
+									</tr>
+									<tr class="etcArea">
+										<td colspan="2">
+											<ul>
+												<li class="date "><strong class="th">작성일</strong> <span
+													class="td">2017-09-22</span></li>
+												<li class="hit "><strong class="th">조회수</strong> <span
+													class="td">361</span></li>
+											</ul>
+										</td>
+									</tr>
+									<tr class="view">
+										<td colspan="2">
+											<div class="detail">
+												<img
+													src="//fromheadtotoe.kr/file_data/mintgarden/2017/09/22/3e2e615a18180152d3cd8211403cd3a9.jpg"
+													border="0" alt=""><br>
+												<p>
+													<br>
+												</p>
+												<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													&nbsp;&nbsp; 매일매일 업데이트 되는 신상 10%로 할인된 금액으로 만나보세요 ♥</p>
+											</div>
+										</td>
+									</tr>
+									<tr class="attach ">
+										<th scope="row">첨부파일</th>
+										<td><a href="#none"
+											onclick="BOARD_READ.file_download('/exec/front/Board/download/?no=201046&amp;realname=2017/09/22/3e2e615a18180152d3cd8211403cd3a9.jpg&amp;filename=10%신상팝업01.jpg');">10%신상팝업01.jpg</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="btnArea ">
+							<span class="left"><a
+								href="#"><img
+									src="/web/upload/madeleine/boardBTN/btn_board4.jpg" alt="목록"></a></span>
+						</div>
+					</div>
+			</div>
+
+			<div
+				class="xans-element- xans-board xans-board-commentpackage-8 xans-board-commentpackage xans-board-8 ">
+				<!-- 코멘트 리스트 -->
+				<!-- 코멘트 페이징 -->
+				<!-- 댓글 수정 -->
+				<form id="commentForm" name=""
+					action="/exec/front/Board/CommentUpdate/8" method="post"
+					enctype="multipart/form-data" style="display: none;">
+					<input id="board_no" name="board_no" value="8" type="hidden">
+					<input id="no" name="no" value="201046" type="hidden"> <input
+						id="comment_no" name="comment_no" value="" type="hidden">
+					<input id="member_id" name="member_id" value="" type="hidden">
+					<div
+						class="xans-element- xans-board xans-board-commentform-8 xans-board-commentform xans-board-8 ">
+						<fieldset>
+							<legend>댓글 수정</legend>
+							<p>
+								비밀번호 : <input id="comment_password" name="comment_password"
+									fw-filter="isFill" fw-label="댓글비밀번호" fw-msg="" value=""
+									type="password">
+							</p>
+							<div class="view">
+								<textarea id="comment_modify" name="comment_modify"
+									fw-filter="isFill" fw-label="댓글내용" fw-msg=""></textarea>
+								<span class="submit"> <a href="#none"
+									onclick="BOARD_COMMENT.comment_update_ok('commentForm');"><img
+										src="http://img.echosting.cafe24.com/skin/base_ko_KR/board/btn_comment_modify.gif"
+										alt="수정"></a> <a href="#none"
+									onclick="BOARD_COMMENT.comment_cancel_ok('commentForm');"><img
+										src="http://img.echosting.cafe24.com/skin/base_ko_KR/board/btn_comment_cancel.gif"
+										alt="취소"></a>
+								</span>
+							</div>
+							<p class="displaynone">/ byte</p>
+						</fieldset>
+					</div>
+				</form>
+				<!-- 댓글 쓰기 -->
+				<!-- 댓글의 댓글 쓰기 -->
+			</div>
+
+			<div
+				class="xans-element- xans-board xans-board-movement-8 xans-board-movement xans-board-8 ">
+				<ul>
+					<li class="prev displaynone"><strong>이전글</strong><a href="#"></a>
+					</li>
+					<li class="next "><strong>다음글</strong><a href="#">[종료된
+							이벤트] 신상 5% 할인 이벤트</a></li>
+				</ul>
+			</div>
+		</div>
+		<hr class="layout">
+	</div>
+	<hr class="layout">
+</div>
+<%@ include file="../include/lowermost-footer.jsp" %>
+</body>
+</html>

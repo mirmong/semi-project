@@ -1,0 +1,51 @@
+package semi.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import semi.utils.IbatisUtil;
+import semi.vo.ProductDetail;
+import semi.vo.ProductQuestions;
+
+public class ProductDao {
+
+	private static ProductDao instance;
+	
+	private SqlMapClient sqlMapper;
+	
+	static {
+		instance = new ProductDao();
+	}
+	
+	private ProductDao() {
+		sqlMapper = IbatisUtil.getsqlMap();
+	}
+	
+	public static ProductDao getInstance() {
+		return instance;
+	}	
+	
+	@SuppressWarnings("unchecked")
+	public List<ProductDetail> getProductByNumber(int no) throws SQLException {
+		return (List<ProductDetail>) IbatisUtil.getsqlMap().queryForList("getProductByNumber", no);		 
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<String> getProductColorByProNo(int no) throws SQLException {
+		return (List<String>) IbatisUtil.getsqlMap().queryForList("getProductColorByProNo", no);
+	}
+	@SuppressWarnings("unchecked")
+	public List<String> getProductSizeByProNo(int no) throws SQLException {
+		return (List<String>) IbatisUtil.getsqlMap().queryForList("getProductSizeByProNo", no);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ProductQuestions> getProductQuestionsByProNo(int no) throws SQLException {
+		return IbatisUtil.getsqlMap().queryForList("getProductQuestionsByProNo", no);
+	}
+	
+	
+}

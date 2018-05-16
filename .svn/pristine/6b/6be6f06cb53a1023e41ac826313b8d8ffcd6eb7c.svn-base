@@ -1,0 +1,25 @@
+package semi.dao;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import semi.utils.IbatisUtil;
+
+public class EventDao {
+
+	private static EventDao instance;
+	
+	private SqlMapClient sqlMapper;
+	
+	static {
+		instance = new EventDao();
+	}
+	
+	private EventDao() {
+		sqlMapper = IbatisUtil.getsqlMap();
+	}
+	
+	public static EventDao getInstance() {
+		return instance;
+	}
+	
+}

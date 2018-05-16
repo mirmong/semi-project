@@ -1,0 +1,78 @@
+<%-- 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+  <title>Bootstrap Template</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div id="container">   
+<div id="contents02">
+<div id="wrap">    
+ <%@ include file="../include/header.jsp" %>
+<form id="member_form_4021674551" name=""  method="post" action="login.jsp" >
+<input id="returnUrl" name="returnUrl" value="/index.html" type="hidden"  />
+<input id="forbidIpUrl" name="forbidIpUrl" value="/index.html" type="hidden"  />
+<input id="certificationUrl" name="certificationUrl" value="/intro/adult_certification.html?returnUrl=" type="hidden"  />
+<input id="sIsSnsCheckid" name="sIsSnsCheckid" value="" type="hidden"  />
+<input id="sProvider" name="sProvider" value="" type="hidden"  /><div class="xans-element- xans-member xans-member-login "><!--
+        $defaultReturnUrl = /index.html
+        $forbidIpUrl = member/adminFail.html
+    -->
+<h3></h3>
+<%
+			String fail = request.getParameter("fail");
+			
+			if (fail != null && "invalid".equals(fail)) {
+		%>
+				<div class="alert alert-danger">
+					<strong>로그인 실패</strong> 아이디 혹은 비밀번호가 올바르지 않습니다.
+				</div>
+		<%
+			} else if (fail != null && "deny".equals(fail)) {
+		%>
+			<a href="main.jsp"></a>
+		<%
+			}
+		%>
+<div class="login">
+ <fieldset>
+<div class="loginpart">
+         <p style="font-weight:bold; padding-bottom:10px; color: #333;">MEMBER LOGIN</p>
+           <label class="id"><span>ID</span><input type="text" name="cust_id"  class=""  value=""/></label>
+           <label class="password"><span>PASSWORD</span><input type="password" name="cust_passwd" value=""/></label>
+
+         
+ 		 <p class="security">
+         
+          
+  			     <input type="submit" class="btn btn-primary" value="login" />
+            </div>              
+            <div class="joinpart">
+            <div class="join-btn">
+                <p style="font-weight:bold; color: #333;">WELCOME JOIN!</p>
+                <p style="margin-top:10px;  color: #333;">아직 회원이 아니신가요?</p>   
+                <p style="margin-top:2px; color: #333;">회원가입하시면 다양한 혜택을 받아보실 수 있습니다.</p>   
+                <a href="loginform.jsp">join us</a>
+            </div>
+       <p style="margin: 10px auto 0;">
+             <a href="findid.jsp" style="color: #333;">FIND ID</a> /
+             <a href="findpawsord.jsp" style="color: #333;">FIND PASSWORD</a>
+       </p>
+       </div>
+       </fieldset>
+       </div>
+       </div>
+       </form>
+        </div><hr class="layout"/></div><hr class="layout"/></div>
+       
+
+</body>
+</html>
+--%>

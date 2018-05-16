@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="customer">
+
+	<typeAlias alias="Customer" type="semi.vo.Customer"/>
+	
+	
+	<insert id="addcustomer" parameterClass="Customer">
+		insert into CUSTOMERS
+			(CUSTOMER_NO, 
+			 CUSTOMER_ID, 
+			 CUSTOMER_PWD, 
+			 CUSTOMER_NAME, 
+			 CUSTOMER_TEL, 
+			 CUSTOMER_EMAIL, 
+			 CUSTOMER_STATUS, 
+			 CUSTOMER_POSTCODE, 
+			 CUSTOMER_ADDRESS_1, 
+			 CUSTOMER_ADDRESS_2, 
+			 CUSTOMER_GRADE,
+			 CUSTOMER_POINT,
+			 CREATE_DATE )
+		values 
+			(
+			CUSTOMER_SEQ.nextval,
+			#id#,
+			#pwd#,
+			#name#,
+			#tel#,
+			#email#,
+			'정상',
+			#postcode#,
+			#firstAddress#,
+			#secondAddress#,
+			'BRONZE',
+			sysdate)
+	</insert>
+	<select id="login" parameterClass="String" resultClass="Customer">
+		select
+			CUSTOMER_NO no, 
+			 CUSTOMER_ID id, 
+			 CUSTOMER_PWD pwd, 
+			 CUSTOMER_NAME name, 
+			 CUSTOMER_TEL tel, 
+			 CUSTOMER_EMAIL email, 
+			 CUSTOMER_STATUS status, 
+			 CUSTOMER_POSTCODE postcode, 
+			 CUSTOMER_ADDRESS_1 addres1, 
+			 CUSTOMER_ADDRESS_2 addres2, 
+			 CUSTOMER_GRADE grade,
+			 CUSTOMER_POINT point,
+			 CREATE_DATE cust_createdate
+		from
+			CUSTOMERS
+		where
+			CUSTOMER_ID=#value#	
+	</select>
+	
+	<update id="deletecustom" parameterClass="String">
+	Update CUSTOMERS set CUSTOMER_STATUS where CUSTOMER_ID=#value#
+	</update>
+    <select id="findid" parameterClass="String" resultClass="Customer">
+	    		select
+				CUSTOMER_ID as id, 
+				 CUSTOMER_TEL as tel,
+				CUSTOMER_NAME as name
+			from
+				CUSTOMERS
+			where
+				CUSTOMER_EMAIL=#value#	
+    		
+    </select>
+    	<select id="allsearch" resultClass="Customer">
+		select
+			CUSTOMER_NO no, 
+			 CUSTOMER_ID id, 
+			 CUSTOMER_PWD pwd, 
+			 CUSTOMER_NAME name, 
+			 CUSTOMER_TEL tel, 
+			 CUSTOMER_EMAIL email, 
+			 CUSTOMER_STATUS status, 
+			 CUSTOMER_POSTCODE postcode, 
+			 CUSTOMER_ADDRESS_1 addres1, 
+			 CUSTOMER_ADDRESS_2 addres2, 
+			 CUSTOMER_GRADE grade,
+			 CUSTOMER_POINT point,
+			 CREATE_DATE cust_createdate
+		from
+			CUSTOMERS
+	</select>
+</sqlMap>

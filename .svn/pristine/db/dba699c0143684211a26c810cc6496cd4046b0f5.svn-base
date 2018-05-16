@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="order">
+
+	<typeAlias alias="OrderDetail" type="semi.vo.OrderDetail"/>
+	
+	<insert id="buyProductByColorAndSize" parameterClass="map">
+
+	</insert>
+	
+	<select id="getchargeconsumePoint" parameterClass="int" resultClass="semi.vo.PointDetail">
+		select 
+			c.customer_point as customerPoint,
+			con.CONSUME_amount as productPoint,
+			cha.CHARGE_amount as usedPoint
+		from
+		customers C, orders O, POINTS_CHARGE_HISTORY CHA,POINTS_CONSUME_HISTORY CON
+		where c.customer_no=o.customer_no
+		and o.order_no = cha.order_no
+		and o.order_no = con.order_no
+		and c.customer_no = #value#
+	</select>
+</sqlMap>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="customer">
+
+	<typeAlias alias="Customer" type="semi.vo.Customer"/>
+	<typeAlias alias="PasswordHint" type="semi.vo.PasswordHint"/>
+
+	<select id="quesstion" resultClass="PasswordHint" >
+		select
+			QUESTION_NO questionNo, 
+			QUESTION_CONTENTS questionContents
+		from
+			PASSWORD_QUESTIONS
+	</select>
+
+	<select id="myQuestion" resultClass="PasswordHint" >
+		select
+			QUESTION_NO questionNo, 
+			QUESTION_CONTENTS questionContents
+		from
+			PASSWORD_QUESTIONS
+		where
+			QUESTION_NO = #value#;	
+		
+	</select>
+
+	<insert id="addCustomerHint" parameterClass="PasswordHint">
+			insert into PASSWORD_HINT
+				(CUSTOMER_NO, QUESTION_NO,HINT_ANSWER)
+			values
+				(CUSTOMER_SEQ.CURRVAL,#questionNo#,#answer#)
+	</insert>
+	
+	<insert id="addCustomer" parameterClass="Customer">
+		insert into CUSTOMERS
+			(CUSTOMER_NO, 
+			 CUSTOMER_ID, 
+			 CUSTOMER_PWD, 
+			 CUSTOMER_NAME, 
+			 CUSTOMER_TEL, 
+			 CUSTOMER_EMAIL, 
+			 CUSTOMER_STATUS, 
+			 CUSTOMER_POSTCODE, 
+			 CUSTOMER_ADDRESS_1, 
+			 CUSTOMER_ADDRESS_2, 
+			 CUSTOMER_GRADE,
+			 CUSTOMER_POINT,
+			 CREATE_DATE )
+		values 
+			(
+			CUSTOMER_SEQ.nextval,
+			#id#,
+			#pwd#,
+			#name#,
+			#tel#,
+			#email#,
+			'정상',
+			#postcode#,
+			#firstAddress#,
+			#secondAddress#,
+			'BRONZE',
+			#point#,
+			sysdate)
+	</insert>
+	
+	<select id="login" parameterClass="String" resultClass="Customer">
+		select
+			CUSTOMER_NO no, 
+			 CUSTOMER_ID id, 
+			 CUSTOMER_PWD pwd, 
+			 CUSTOMER_NAME name, 
+			 CUSTOMER_TEL tel, 
+			 CUSTOMER_EMAIL email, 
+			 CUSTOMER_STATUS status, 
+			 CUSTOMER_POSTCODE postcode, 
+			 CUSTOMER_ADDRESS_1 addres1, 
+			 CUSTOMER_ADDRESS_2 addres2, 
+			 CUSTOMER_GRADE grade,
+			 CUSTOMER_POINT point,
+			 CREATE_DATE createDate
+		from
+			CUSTOMERS
+		where
+			CUSTOMER_ID=#value#	
+	</select>
+	
+	<update id="deleteCustom" parameterClass="String">
+		Update 
+			CUSTOMERS 
+		set
+			CUSTOMER_STATUS ='탈퇴'
+		where 
+			CUSTOMER_ID=#value#
+	</update>
+	
+    <select id="getCustomerByEmail" parameterClass="String" resultClass="Customer">
+	    	select
+				CUSTOMER_ID as id, 
+				 CUSTOMER_EMAIL email,
+				CUSTOMER_NAME as name,
+				CREATE_DATE createDate
+			from
+				CUSTOMERS
+			where
+				CUSTOMER_EMAIL=#value#	
+    </select>
+    
+    <select id="allCustomer" resultClass="Customer">
+			select
+				CUSTOMER_NO no, 
+				 CUSTOMER_ID id, 
+				 CUSTOMER_PWD pwd, 
+				 CUSTOMER_NAME name, 
+				 CUSTOMER_TEL tel, 
+				 CUSTOMER_EMAIL email, 
+				 CUSTOMER_STATUS status, 
+				 CUSTOMER_POSTCODE postcode, 
+				 CUSTOMER_ADDRESS_1 addres1, 
+				 CUSTOMER_ADDRESS_2 addres2, 
+				 CUSTOMER_GRADE grade,
+				 CUSTOMER_POINT point,
+				 CREATE_DATE createDate
+			from
+				CUSTOMERS
+	</select>
+	
+	<!-- 송재호 시작 //////////////////////////////////////////////////////////////////////////////////////////////////// -->
+	 
+	<select id="getCustomerByName" resultClass="Customer" parameterClass="string">
+		select
+			CUSTOMER_NO no, 
+			CUSTOMER_ID id, 
+			CUSTOMER_PWD pwd, 
+			CUSTOMER_NAME name, 
+			CUSTOMER_TEL tel, 
+			CUSTOMER_EMAIL email, 
+			CUSTOMER_STATUS status, 
+			CUSTOMER_POSTCODE postcode, 
+			CUSTOMER_ADDRESS_1 addres1, 
+			CUSTOMER_ADDRESS_2 addres2, 
+			CUSTOMER_GRADE grade,
+			CUSTOMER_POINT point,
+			CREATE_DATE createDate
+		from
+			CUSTOMERS
+		where
+			customer_name = #value#
+	</select>
+	
+	<!-- 송재호 끝 /////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+</sqlMap>

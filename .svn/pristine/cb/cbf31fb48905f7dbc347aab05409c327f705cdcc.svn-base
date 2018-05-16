@@ -1,0 +1,143 @@
+package semi.service;
+
+import java.sql.SQLException;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import semi.dao.ProductDao;
+import semi.utils.DateUtil;
+import semi.vo.Category;
+
+public class ProductService {
+	
+	public final static int WEEKLY_BEST_ROWS = 2;
+	
+	public final static int WEEKLY_BEST_COLS = 3;
+	
+	
+	public final static int NEW_ARRIVAL_ROWS = 3;
+	
+	public final static int NEW_ARRIVAL_COLS = 4;
+	
+	
+	public final static int BEST_PRODUCT_ROWS = 3;
+	
+	public final static int BEST_PRODUCT_COLS = 4;
+	
+	
+	private final static int BEST_PRODUCT_PERIOD = 6;
+	
+	private final static int NEW_ARRIVAL_PERIOD = 1;
+	
+	
+	private static ProductService instance;
+	
+	private ProductDao productDao;
+	
+	static {
+		instance = new ProductService();
+	}
+	
+	private ProductService() {
+		productDao = ProductDao.getInstance();
+	}
+	
+	public static ProductService getInstance() {
+		return instance;
+	}
+	
+
+// 김유호 [ 시작 ] -----------------------------------------------------------------------------------------------------------
+
+	/*
+	 * 신규 출시 상품조회
+	 * count = 받을 갯수
+	 * from = 계산 시작 날짜	(출시일 기준 : 1달전)
+	 * now = 계산 끝 날짜 (출시일 기준 : 현재)
+	 */
+	public List<Map<String, Object>> getNewArrivalsProducts() throws SQLException {
+		Date now = new Date();
+		Date from = DateUtil.getDateBeforeMonth(NEW_ARRIVAL_PERIOD);
+		int count = NEW_ARRIVAL_COLS * NEW_ARRIVAL_ROWS;
+		
+		Map<String, Object> parameter = new HashMap<>();
+		parameter.put("resultCount", count);
+		parameter.put("periodStartDate", from);
+		parameter.put("periodEndDate", now);
+		
+		List<Map<String, Object>> products = productDao.getProductsByCreateDate(parameter);
+		
+//		if(products.isEmpty())
+//			throw new RuntimeException("최근 출시 상품이 존재하지 않습니다");
+		
+		return products;
+	}
+	
+	/*
+	 * 베스트 상품 조회
+	 * count = 받을 갯수
+	 * from = 계산 시작 날짜	(판매일 기준 : 6달전)
+	 * now = 계산 끝 날짜 (판매일 기준 : 현재)
+	 */ 
+	public List<Map<String, Object>> getBestProducts() throws SQLException {
+		Date now = new Date();
+		Date from = DateUtil.getDateBeforeMonth(BEST_PRODUCT_PERIOD);
+		int count = BEST_PRODUCT_COLS * BEST_PRODUCT_ROWS;
+		
+		Map<String, Object> parameter = new HashMap<>();
+		parameter.put("resultCount", count);
+		parameter.put("periodStartDate", from);
+		parameter.put("periodEndDate", now);
+		
+		List<Map<String, Object>> products = productDao.getBestSalesProductsByPeriod(parameter);
+		
+//		if(products.isEmpty())
+//			throw new RuntimeException("베스트 상품이 존재하지 않습니다");
+		
+		return products;
+	}
+	
+	/*
+	 * 주간 베스트 상품 조회
+	 * count = 받을 갯수
+	 * from = 계산 시작 날짜	(판매일 기준 : 1주일 기준)
+	 * now = 계산 끝 날짜 (판매일 기준 : 현재)
+	 * categoryName = 검색할 카테고리 이름
+	 */
+	public List<Map<String, Object>> getWeeklyBestProductsByCategory(String categoryName) throws SQLException{
+		long DAY_IN_MS = 1000 * 60 * 60 * 24;
+		Date now = new Date();
+		Date from = new Date(now.getTime() - (DAY_IN_MS * 7));
+		int count = WEEKLY_BEST_COLS * WEEKLY_BEST_ROWS;
+		
+		Map<String, Object> parameter = new HashMap<>();
+		parameter.put("resultCount", count);
+		parameter.put("periodStartDate", from);
+		parameter.put("periodEndDate", now);
+		parameter.put("categoryName", categoryName);
+
+		List<Map<String,Object>> products = productDao.getBestSalesProductsByPeriodAndCategory(parameter);
+//		if(products.isEmpty())
+//			throw new RuntimeException("주간 베스트 상품이 존재하지 않습니다");
+			
+		return products;
+	}
+
+	public Category getDefaultWeeklyBestCategory() throws SQLException {
+		List<Category> categories = getAllMainCategories();
+		return categories.get(0);
+	}
+	
+	public List<Category> getAllMainCategories() throws SQLException {
+		return productDao.getAllMainCategories();
+	}
+	
+	
+// 김유호 [ 끝 ] -----------------------------------------------------------------------------------------------------------	
+
+	
+}

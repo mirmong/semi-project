@@ -1,0 +1,49 @@
+package semi.dao;
+
+import java.sql.SQLException;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import semi.utils.IbatisUtil;
+import semi.vo.Customer;
+
+public class CustomerDao {
+
+	private static CustomerDao instance;
+	
+	private SqlMapClient sqlMapper;
+	
+	static {
+		instance = new CustomerDao();
+	}
+	
+	private CustomerDao() {
+		sqlMapper = IbatisUtil.getsqlMap();
+	}
+	
+	public static CustomerDao getInstance() {
+		return instance;
+	}
+	
+	public void addcustomer(Customer customer) throws  SQLException {
+		sqlMapper.insert("addcustomer",customer);
+	}
+	
+	public Customer login(String cust_id) throws SQLException {
+		return (Customer) sqlMapper.queryForObject("login",cust_id);
+		
+	}
+
+	public Customer findid(String cust_email) throws SQLException {
+		return (Customer) sqlMapper.queryForObject("findid",cust_email);
+	}
+	
+	public Customer getCustomerById(int no) throws SQLException {
+		return (Customer) sqlMapper.queryForObject("getCustomerById",no);
+	}
+	
+
+		
+	
+	
+}

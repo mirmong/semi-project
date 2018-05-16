@@ -1,0 +1,74 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<%@ include file="/include/uppermost-nav.jsp" %>
+<form>
+<div class="container col-xs-12" id="id-main-contents">
+	<div class="header">
+	        <h1>배송 주소록 관리</h1>
+	</div>
+	
+	<div class="content">
+	     <div class="info">
+	         <h2>배송주소록 유의사항</h2>
+	            <ul>
+					<li>배송 주소록은 최대 10개까지 등록할 수 있으며, 별도로 등록하지 않을 경우 최근 배송 주소록 기준으로 자동 업데이트 됩니다.</li>
+	                <li>자동 업데이트를 원하지 않을 경우 주소록 고정 선택을 선택하시면 선택된 주소록은 업데이트 대상에서 제외됩니다.</li>
+	            </ul>
+		 </div>
+	
+	     <div class="boardList">
+	          <table border="1" summary="">
+	                <thead>
+	                	<tr>
+							<th scope="col" class="chk"><span class=""><input id="allCheck" onclick="myshopAddr.checkAll(this)" value="" type="checkbox"  /></span></th>
+	                        <th scope="col" class="button">주소록 고정</th>
+	                        <th scope="col" class="delivery">배송지명</th>
+	                        <th scope="col" class="recipient">수령인</th>
+	                        <th scope="col" class="phone">일반전화</th>
+	                        <th scope="col" class="mobile">휴대전화</th>
+	                        <th scope="col" class="address">주소</th>
+	                        <th scope="col" class="set">배송지관리</th>
+	                    </tr>
+	                </thead>
+					<tbody class="">
+						<tr class="xans-record-">
+							<td><input name="ma_idx[]" value="186260" type="checkbox"  /></td>
+	                        <td><a href="/exec/front/Myshop/Addr/?mode=Fix&ma_idx=186260&ma_fixed_flag=F&return_url=%2Fmyshop%2Faddr_popup%2Flist.html"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_address_clear.gif" class="" alt="해제"/><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_address_fix.gif" class="displaynone" alt="고정"/></a></td>
+	                        <td><span class="authssl_ma_rcv_title_0">*****</span></td>
+	                        <td><span class="authssl_ma_rcv_name_0">*****</span></td>
+	                        <td><span class="authssl_ma_rcv_phone_0">*****</span></td>
+	                        <td><span class="authssl_ma_rcv_mobile_no_0">*****</span></td>
+	                        <td class="address">(<span class="authssl_ma_rcv_zipcode_0">*****</span>)<span class="authssl_ma_rcv_addr1_0">*****</span> <span class="authssl_ma_rcv_addr2_0">*****</span></td>
+	                        <td>
+	                            <a href="#none" onclick="myshopAddr.setAddrToOrder(186260)"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_address_apply.gif" alt="적용"/></a>
+	                            <a href="modify.html?ma_idx=186260"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_address_modify.gif" alt="수정"/></a>
+	                        </td>
+	                    </tr>
+					</tbody>
+					<tbody class="displaynone">
+						<tr>
+							<td colspan="8" class="empty">등록된 주소가 없습니다.</td>
+					    </tr>
+					</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="btnArea">
+	        <a href="#none" onclick="myshopAddr.deleteAddress(); return false;" class=""><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_address_delete.gif" alt="선택 주소록 삭제"/></a>
+	        <a href="register.html"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_address_register.gif" alt="배송지 등록"/></a>
+	</div>
+</div>
+</form>
+</body>
+</html>

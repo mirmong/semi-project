@@ -1,0 +1,254 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="semi.vo.ShippingClass"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+html {
+    width: 100%;
+    height: 100%;
+}
+#id-main-contents9 {
+	margin: 0;
+	padding: 0;
+	width: 800px;
+}
+body#popup {
+    min-width: 0;
+}
+#popup {
+    width: 800px;
+}
+.header9 h1 {
+    height: 45px;
+    padding: 0 0 0 20px;
+    color: #fff;
+    font-size: 14px;
+    font-family: Verdana, Dotum, AppleGothic, sans-serif;
+    line-height: 45px;
+    background: #495164;
+    margin: 0;
+}
+.content9 {
+    padding: 20px 20px 60px;
+}
+.info9 {
+    margin: 0 0 20px;
+    padding: 12px 15px;
+    border: 5px solid #e8e8e8;
+    font-family: Verdana, Dotum, AppleGothic, sans-serif;
+}
+.info9 h2 {
+    margin: 0 0 6px;
+    padding: 0 0 8px;
+    border-bottom: 1px solid #e8e8e8;
+    color: #353535;
+    font-size: 12px;
+    font-weight: bold;
+}
+.info9 ul {
+	margin: 0;
+	padding: 0;
+}
+.info9 li {
+    padding: 0 0 0 9px;
+    color: #757575;
+    line-height: 1.5;
+    background: url(http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_grid.gif) no-repeat 0 7px;
+    font-size: 12px;
+}
+table {
+    width: 100%;
+    border: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+td {
+	border: 0;
+}
+li {
+    list-style: none;
+}
+input, select, textarea {
+    font-size: 100%;
+    font-family: "돋움",Dotum;
+    color: #353535;
+    vertical-align: middle;
+}
+a {
+    text-decoration: none;
+    color: #000;
+}
+.displaynone {
+    display: none !important;
+}
+.boardWrite9 {
+    border: 1px solid #d7d5d5;
+}
+.boardWrite9 table {
+    table-layout: fixed;
+    color: #353535;
+    line-height: 1.5;
+}
+.boardWrite9 tbody tr:first-child th, .xans-myshop-addrregister .boardWrite tbody tr:first-child td {
+    border-top: 0;
+}
+.boardWrite9 th {
+    width: 120px;
+    padding: 11px 0 9px 19px;
+    border-top: 1px solid #e9e9e9;
+    border-right: 1px solid #e9e9e9;
+    font-weight: normal;
+    text-align: left;
+    vertical-align: top;
+    background: #fbfafa;
+    font-family: Verdana, Dotum, AppleGothic, sans-serif;
+    font-size: 12px;
+}
+.boardWrite9 tbody tr:first-child td {
+    border-top: 0;
+}
+#ma_rcv_title, #ma_rcv_name {
+    width: 180px;
+}
+.boardWrite9 input {
+    height: 22px;
+    padding: 0 0 0 9px;
+    border: 1px solid #d5d5d5;
+    line-height: 22px;
+}
+
+.btnArea {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
+    border-top: 1px solid #d7d5d5;
+    text-align: center;
+    background: #fbfafa;
+}
+.boardWrite9 td {
+    width: auto;
+    padding: 8px 0 7px 10px;
+    border-top: 1px solid #e9e9e9;
+    color: #757575;
+    vertical-align: middle;
+}
+#address_zip1, #address_zip2 {
+    width: 60px;
+    padding: 0;
+    text-align: center;
+}
+.boardWrite9 a {
+    text-decoration: none;
+}
+#address_addr1, #address_addr2 {
+    width: 450px;
+    margin: 5px 0 0;
+}
+#ma_rcv_phone1, #ma_rcv_mobile_no1 {
+    width: 60px;
+}
+.boardWrite9 select {
+    margin: 0 4px 0 0;
+    height: 24px;
+    border: 1px solid #d5d5d5;
+    font-size: 100%;
+    font-family: "돋움",Dotum;
+    color: #353535;
+    vertical-align: middle;
+}
+#ma_rcv_phone2, #ma_rcv_phone3, #ma_rcv_mobile_no2, #ma_rcv_mobile_no3 {
+    width: 60px;
+    margin: 0 4px;
+}
+</style>
+<body id="popup">
+<form>
+<div class="container col-xs-12" id="id-main-contents9">
+	<div class="header9">
+	        <h1>배송 주소록 관리</h1>
+	</div>
+	
+	<div class="content9">
+	     <div class="info9">
+	         <h2>배송주소록 유의사항</h2>
+	            <ul>
+					<li>배송 주소록은 최대 10개까지 등록할 수 있으며, 별도로 등록하지 않을 경우 최근 배송 주소록 기준으로 자동 업데이트 됩니다.</li>
+	                <li>자동 업데이트를 원하지 않을 경우 주소록 고정 선택을 선택하시면 선택된 주소록은 업데이트 대상에서 제외됩니다.</li>
+	            </ul>
+		 </div>
+		
+		<%
+			List<ShippingClass> shippingClasses = new ArrayList<>();
+			ShippingClass shippingClass = new ShippingClass();
+		%>
+	     <div class="boardWrite9">
+            <table border="1" summary="">
+				<tbody>
+					<tr>
+						<th scope="row">배송지명</th>
+					        <td><input id="ma_rcv_title" name="ma_rcv_title" fw-filter="isFill" fw-label="배송지명" fw-msg="" class="inputTypeText" placeholder="" value="" type="text"  /></td>
+					</tr>
+					<tr>
+						<th scope="row">성명</th>
+				            <td><input id="ma_rcv_name" name="ma_rcv_name" fw-filter="isFill" fw-label="성명" fw-msg="" class="ec-member-name" placeholder="" value="" type="text"  /></td>
+				    </tr>
+					<tr>
+						<th scope="row">주소</th>
+				            <td>
+				               <input id="address_zip1" name="address_zip1" fw-filter="isMin[3]&isMax[8]" fw-label="우편번호" fw-msg="" class="inputTypeText" placeholder="" readonly="readonly" maxlength="14" value="" type="text"  /> - 
+				               <!-- <input id="address_zip2" name="address_zip2" fw-filter="isMin[3]&isMax[8]" fw-label="우편번호" fw-msg="" class="inputTypeText" placeholder="" readonly="readonly" value="" type="text"  />  -->                           <a href="#none" onclick="ZipcodeFinder.Opener.bind('SearchAddress', 'address_zip1', 'address_zip2', 'address_addr1', 'layer', 'city_name', 'state_name', 'address_addr2' );" id="SearchAddress"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/btn_zipcode.gif" alt="우편번호"/></a><br/>
+				               <input id="address_addr1" name="address_addr1" fw-filter="" fw-label="주소" fw-msg="" class="inputTypeText" placeholder="" readonly="readonly" value="" type="text"  />                            <input id="address_addr2" name="address_addr2" fw-filter="isFill" fw-label="주소" fw-msg="" class="inputTypeText" placeholder="" value="" type="text"  />                        </td>
+				    </tr>
+					<tr>
+						<th scope="row">휴대전화</th>
+						    <td>
+						    	<select id="ma_rcv_mobile_no1" name="ma_rcv_mobile_no[]" fw-filter="isNumber&isFill" fw-label="휴대전화" fw-alone="N" fw-msg="" >
+									<option value="010">010</option>
+									<option value="011">011</option>
+									<option value="016">016</option>
+									<option value="017">017</option>
+									<option value="018">018</option>
+									<option value="019">019</option>
+								</select>-<input id="ma_rcv_mobile_no2" name="ma_rcv_mobile_no[]" maxlength="4" fw-filter="isNumber&isFill" fw-label="휴대전화" fw-alone="N" fw-msg="" value="" type="text"  />-<input id="ma_rcv_mobile_no3" name="ma_rcv_mobile_no[]" maxlength="4" fw-filter="isNumber&isFill" fw-label="휴대전화" fw-alone="N" fw-msg="" value="" type="text"  /></td>
+				    </tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="btnArea">
+	    <a href="#none" onclick="myshopAddr.formCheck();"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_address_register2.gif" alt="등록"/></a>
+        <button style="border:0; background: #fbfafa; padding: 1px;"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_address_cancel.gif" alt="취소" onclick="goAddressList(event)"/></button>
+	</div>
+</div>
+</form>
+</body>
+<script>
+function goAddressList(e) {
+	e.preventDefault();
+	window.open('http://localhost/semi/pay/addressList.jsp','_self' , "width=800, height=541");
+}
+</script>
+</html>

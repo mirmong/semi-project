@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="review">
+
+	<typeAlias alias="Review" type="semi.vo.Review"/>
+	
+	<select id="getAllReviews" resultClass="Review">
+		select
+			P.product_no
+			, P.product_name
+			, P.product_price
+			, P.product_img_big
+			, R.review_contents
+			, R.review_img
+			, R.review_grade
+			, C.category_name
+		from
+			products P, product_reviews R, categories C
+		where
+			P.product_no = R.product_no
+		and P.category_no = C.category_no
+	</select>
+	
+</sqlMap>

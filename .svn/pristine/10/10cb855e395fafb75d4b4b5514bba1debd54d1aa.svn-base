@@ -1,0 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("utf-8");
+	String color = request.getParameter("color");
+	int size = Integer.parseInt(request.getParameter("size"));
+//	String size = request.getParameter("size");
+	
+	//Product pro = new Product();
+	//pro.setColor(color);
+	//pro.setSize(size);
+	
+	//Gson gson = new Gson();
+	//String jsonText = gson.toJson(pro);
+	//out.write(jsonText);
+%>

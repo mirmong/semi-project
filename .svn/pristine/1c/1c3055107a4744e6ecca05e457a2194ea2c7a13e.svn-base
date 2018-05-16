@@ -1,0 +1,20 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="semi.dao.ProductDao"%>
+<%@page import="semi.vo.ProductReviews"%>
+<%@page import="semi.vo.ProductQuestions"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("utf-8");
+
+	String orderBy = request.getParameter("orderBy");
+	int qnaPno = Integer.parseInt(request.getParameter("qnaPno"));
+	int reviewPno = Integer.parseInt(request.getParameter("reviewPno"));
+	int proNo = Integer.parseInt(request.getParameter("proNo"));
+	String isPhoto = request.getParameter("isPhoto");
+	
+	response.sendRedirect("detail.jsp?qna-pno="+qnaPno+"&review-pno="+reviewPno+"&pro-no="+proNo+"&orderBy="+orderBy+"&isPhoto="+isPhoto);
+%>

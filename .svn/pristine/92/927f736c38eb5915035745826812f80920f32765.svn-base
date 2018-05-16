@@ -1,0 +1,224 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<html lang="ko">
+<head>
+  <title>product/list.jsp</title>
+  <title>3조 세미 - '/semi/product/list.jsp'</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+	.container {
+		min-width: 1280px;
+	}
+
+	.parallax {
+	    /* The image used */
+	    background-image: url("/semi/images/kyh/img_parallax.jpg");
+	
+	    /* Set a specific height */
+	    min-height: 500px; 
+	
+	    /* Create the parallax scrolling effect */
+	    background-attachment: fixed;
+	    background-position: center;
+	    background-repeat: no-repeat;
+	    background-size: cover;
+	    margin-bottom: 60px;
+	}
+
+	.mini-label {
+		padding: 6px 14px 6px 14px;
+		border: 3px double rgb(220,220,220);
+		font-size: 10px;
+		font-weight: lighter;
+		color: rgb(170,170,170);
+		border-radius: 20px 2px;
+	}
+
+	.mid-logo {
+		font-size: 60px;
+		line-height: 500px;
+		color: rgb(250,250,250);
+	}
+
+	.product-list {
+		text-align: center;
+	}
+	
+	.product-list td {
+		padding: 5px 5px 65px 5px;
+	}
+	
+	.product-list tr {
+		border-top: 1px solid rgb(200,200,200);
+		border-bottom: 1px solid rgb(200,200,200);
+	}
+
+	.product-title , .product-price-origin {
+		font-size: 11px;
+		font-weight: bold;
+		color: rgb(50,50,50);
+	}
+	
+	.product-price-discount {
+		font-size: 11px;
+		color: rgb(50,50,150);
+	}
+	
+	.product-short-detail {
+		font-size: 11px;
+		color: rgb(150,150,150);
+	}
+
+	.product-best {
+		font-size: 11px;
+	}
+
+	.margin-bottom-div {
+		margin-bottom: 90px;
+	}
+</style>
+<body>
+<%@ include file="/include/uppermost-nav.jsp" %>
+<div class="container col-xs-12" id="id-main-contents" align="center">
+	<div class="row">
+		<div class="parallax">
+			<p><span class="mid-logo">FROM HEAD TOTOE</span></p>
+		</div>
+	</div>
+	<div class="row margin-bottom-div">
+		<label class="mini-label">KNIT</label>
+	</div>
+	<div class="row margin-bottom-div">
+		<table class="product-list">
+			<tbody>
+				<tr>
+					<td>
+						<a href=""><img src="/semi/images/kyh/new-arrivals-single.png"></a>
+						<div>
+							<p><span class="product-title">피치 야상</span></p>
+							<p><span class="product-price-discount">할인판매가 : 78,000 원</span></p>
+							<p><span class="product-short-detail">아름다운 야상</span></p>
+							<p><span class="product-best">베스트 상품</span></p>
+						</div>
+					</td>
+					<td>
+						<a href=""><img src="/semi/images/kyh/new-arrivals-double.png"></a>
+						<div>
+							<p><span class="product-title">피치 야상</span></p>
+							<p><span class="product-price-discount">할인판매가 : 78,000 원</span></p>
+							<p><span class="product-short-detail">아름다운 야상</span></p>
+							<p><span class="product-best">베스트 상품</span></p>
+						</div>
+					</td>
+					<td>
+						<a href=""><img src="/semi/images/kyh/new-arrivals-single.png"></a>
+						<div>
+							<p><span class="product-title">피치 야상</span></p>
+							<p><span class="product-price-discount">할인판매가 : 78,000 원</span></p>
+							<p><span class="product-short-detail">아름다운 야상</span></p>
+							<p><span class="product-best">베스트 상품</span></p>
+						</div>
+					</td>
+					<td>
+						<a href=""><img src="/semi/images/kyh/new-arrivals-double.png"></a>
+						<div>
+							<p><span class="product-title">피치 야상</span></p>
+							<p><span class="product-price-discount">할인판매가 : 78,000 원</span></p>
+							<p><span class="product-short-detail">아름다운 야상</span></p>
+							<p><span class="product-best">베스트 상품</span></p>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href=""><img src="/semi/images/kyh/new-arrivals-single.png"></a>
+						<div>
+							<p><span class="product-title">피치 야상</span></p>
+							<p><span class="product-price-discount">할인판매가 : 78,000 원</span></p>
+							<p><span class="product-short-detail">아름다운 야상</span></p>
+							<p><span class="product-best">베스트 상품</span></p>
+						</div>
+					</td>
+					<td>
+						<a href=""><img src="/semi/images/kyh/new-arrivals-double.png"></a>
+						<div>
+							<p><span class="product-title">피치 야상</span></p>
+							<p><span class="product-price-discount">할인판매가 : 78,000 원</span></p>
+							<p><span class="product-short-detail">아름다운 야상</span></p>
+							<p><span class="product-best">베스트 상품</span></p>
+						</div>
+					</td>
+					<td>
+						<a href=""><img src="/semi/images/kyh/new-arrivals-single.png"></a>
+						<div>
+							<p><span class="product-title">피치 야상</span></p>
+							<p><span class="product-price-discount">할인판매가 : 78,000 원</span></p>
+							<p><span class="product-short-detail">아름다운 야상</span></p>
+							<p><span class="product-best">베스트 상품</span></p>
+						</div>
+					</td>
+					<td>
+						<a href=""><img src="/semi/images/kyh/new-arrivals-double.png"></a>
+						<div>
+							<p><span class="product-title">피치 야상</span></p>
+							<p><span class="product-price-discount">할인판매가 : 78,000 원</span></p>
+							<p><span class="product-short-detail">아름다운 야상</span></p>
+							<p><span class="product-best">베스트 상품</span></p>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href=""><img src="/semi/images/kyh/new-arrivals-single.png"></a>
+						<div>
+							<p><span class="product-title">피치 야상</span></p>
+							<p><span class="product-price-discount">할인판매가 : 78,000 원</span></p>
+							<p><span class="product-short-detail">아름다운 야상</span></p>
+							<p><span class="product-best">베스트 상품</span></p>
+						</div>
+					</td>
+					<td>
+						<a href=""><img src="/semi/images/kyh/new-arrivals-double.png"></a>
+						<div>
+							<p><span class="product-title">피치 야상</span></p>
+							<p><span class="product-price-discount">할인판매가 : 78,000 원</span></p>
+							<p><span class="product-short-detail">아름다운 야상</span></p>
+							<p><span class="product-best">베스트 상품</span></p>
+						</div>
+					</td>
+					<td>
+						<a href=""><img src="/semi/images/kyh/new-arrivals-single.png"></a>
+						<div>
+							<p><span class="product-title">피치 야상</span></p>
+							<p><span class="product-price-discount">할인판매가 : 78,000 원</span></p>
+							<p><span class="product-short-detail">아름다운 야상</span></p>
+							<p><span class="product-best">베스트 상품</span></p>
+						</div>
+					</td>
+					<td>
+						<a href=""><img src="/semi/images/kyh/new-arrivals-double.png"></a>
+						<div>
+							<p><span class="product-title">피치 야상</span></p>
+							<p><span class="product-price-discount">할인판매가 : 78,000 원</span></p>
+							<p><span class="product-short-detail">아름다운 야상</span></p>
+							<p><span class="product-best">베스트 상품</span></p>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="row">
+		<div class="parallax">
+			<p><span class="mid-logo">FROM HEAD TOTOE</span></p>
+		</div>
+	</div>
+</div>
+<%@ include file="/include/lowermost-footer.jsp" %>
+</body>
+</html>

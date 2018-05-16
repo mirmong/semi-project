@@ -1,0 +1,258 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+  <style>
+	.titleArea{
+		margin:20px 0px 60px;	
+	}
+	.titleArea h2{
+		font-family: 'Open Sans' , '맑은고딕'';
+		letter-spacing:0.07em;
+		font-weight:600;
+		text-transform:uppercase;
+		font-size:13px;
+		color:#555;
+		text-align:center;
+		margin:10px auto 15px;
+	}
+	
+	.titleArea h3{
+		font-family: 'Open Sans' , '맑은고딕'';
+		letter-spacing:0.07em;
+		font-weight:600;
+		text-transform:uppercase;
+		font-size:10px;
+		color:#555;
+		text-align:center;
+		margin:10px auto 15px;
+	}
+	
+	fieldset{
+		margin: 20px 0 0;
+	    padding: 23px 20px;
+	    border: 1px solid #ccc;
+	    font-family: '맑은 고딕';
+	}
+.col-xs-6 p {
+    display: inline-block;
+    vertical-align: top;
+}
+  </style>
+  
+  <script type="text/javascript">
+
+  	function imagechange(){
+  		System.out.print("dfd");
+  		var id = document.getElementById("today");
+  		System.out.print(id.src);
+  		if("../image/오늘.gif".equal(id.src)){
+  			
+  	  		id.src = "../image/오늘2.gif";
+  		}else{
+
+  			id.src = "../image/오늘.gif";
+  		}
+  	}
+  	
+
+  
+  </script>
+  
+</head>
+<body>
+
+	<div class="titleArea">
+		<h2 style="margin-top: 200px; ">ORDER LIST</h2>
+		<h3>주문내역조회</h3>
+		
+		<%
+			
+		%>
+		
+		
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-2">
+				<h2 style="font-size:13px">주문내역조회(1)</h2>
+			</div>
+			<div class="col-xs-4">
+				<h2 style="font-size:13px">취소/반품/교환 내역(0)</h2>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="panel"></div>
+			</div>
+		</div>
+		
+		<div class="panel panel-default">
+		<div class="row">
+			<div class="col-xs-12" style="margin-top:10px; margin-bottom:10px">
+			<div class="col-xs-4">
+				<div class="btn-group" data-toggle="buttons">
+				  <label class="btn btn-primary active">
+				    <input type="radio" name="options" id="today" autocomplete="off">오늘
+				  </label>
+				  <label class="btn btn-primary">
+				    <input type="radio" name="options" id="week" autocomplete="off">1주일
+				  </label>
+				  <label class="btn btn-primary">
+				    <input type="radio" name="options" id="omonth" autocomplete="off">1개월
+				  </label>
+				  <label class="btn btn-primary">
+				    <input type="radio" name="options" id="tmonth" autocomplete="off">3개월
+				  </label>
+				  <label class="btn btn-primary">
+				    <input type="radio" name="options" id="smonth" autocomplete="off">6개월
+				  </label>
+				</div>
+			</div>
+			<div class="col-xs-6">
+				<input id="start_date" name="start_date" size="10" value="2018-03-28" type="text">
+				~
+				<input id="end_date" name="end_date" size="10" value="2018-03-28" type="text">
+				<button type="button" class="btn btn-primary">
+ 					조회
+				</button>
+			</div>
+			</div>
+			</div>
+		</div>
+		
+		
+		<div class="row">
+				<div class="col-xs-12">
+					<ul>
+						<li>기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 지난 주문내역을 조회하실 수 있습니다.</li>
+						<li>주문번호를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.</li>
+					</ul>
+				</div>
+		</div>
+		
+		<div class="row">
+			<h2 style="font-size: 13px">ORDER PRODUCT INFO</h2>
+			
+<div class="xans-element- xans-myshop xans-myshop-wishlist xans-record-">
+
+			<%--if(장바구니가 안비었으면) --%>
+			<%%>
+			<table border="1" summary class="displaynone" height="250px" width="100%">
+				<caption>관심상품 목록</caption>
+				<colgroup class="xans-element- xans-board xans-board-listheader-1002 xans-board-listheader xans-board-1002 ">
+						<col style="width:135px">
+						<col style="width:90px">
+						<col style="width:381px">
+						<col style="width:60px">
+						<col style="width:110px">
+						<col style="width:110px">
+						<col style="width:110px">
+					</colgroup>
+				
+				<thead>
+					<tr>
+						<th scope="col" class="orderno" style="text-align:center;font-size:10px;">주문일자<br>[주문번호]</th>
+						<th scope="col" class="image" style="text-align:center;font-size:10px;">이미지</th>
+						<th scope="col" class="productcontent" style="text-align:center;font-size:10px;">상품정보</th>
+						<th scope="col" class="amount" style="text-align:center;font-size:10px;">수량</th>
+						<th scope="col" class="price" style="text-align:center;font-size:10px;">상품구매금액</th>
+						<th scope="col" class="orderstatus" style="text-align:center;font-size:10px;">주문처리상태</th>
+						<th scope="col" class="cancel" style="text-align:center;font-size:10px;">취소/교환/반품</th>
+					</tr>
+				</thead>
+				
+				<tbody class="xans-element- xans-myshop xans-myshop-wishlistitem">
+					
+					<%%>
+					<tr class="xans-record-">
+						
+						<td class="orderno">
+							<p style="text-align:center;">주문번호<br>주문취소</p>
+						</td>
+						
+						<td class="image" style="text-align:center">
+							<a href=""><img src="../image/test.gif"  width="60" height="85" /></a>
+						</td>
+						<td class="productcontent">
+							<a href="" >
+								<strong>703짝꿍데님 SK</strong>
+							</a>
+							<ul class="xans-element- xans-myshop xans-myshop-optionall option">
+								<il class="xans-record-">
+									<strong class="displaynone" style="text-align:center;font-size:15px;"><%%></strong>
+									<p style="text-align:left; font-size:13px;">[옵션: 블루/S]</p>
+								</il>
+							</ul>
+						</td>
+						<td class="amount">
+							<strong><%%></strong>
+						</td>
+						<td class="price" style="text-align:center; font-size:15px;">
+							<strong  ><%%>원</strong>
+						</td>
+						
+						<td class="orderstatus" style="text-align:center;font-size:15px;">
+							입금전
+						</td>
+						<td class="cancel" style="text-align:center;font-size:10px;">--</td>
+					</tr>
+						<%%>
+						
+					
+				</tbody>
+			</table>
+			<%%>
+			<p class="empty">주문상품 목록이 없습니다.</p>
+			<%%>
+		</div>
+			
+			<div class="row">
+				<div class="col-xs-3"></div>
+				<div class="col-xs-6" style="margin: 30px 0 ; text-align:center;display:">
+					<p class="first"  width="16px" style="margin: 0 -4px 0 0;">
+						<a href="">
+							<img src="../image/첫페이지.jpg" alt="첫페이지">
+						</a>
+					</p>
+					<p>
+						<a href="">
+							<img src="../image/이전페이지.jpg" alt="이전페이지">
+						</a>
+					</p>
+					
+
+							<a href="" class="this">1</a>
+
+					
+					<p>
+						<a href="">
+							<img src="../image/다음페이지.jpg" alt="다음페이지">
+						</a>
+					</p>
+					<p class="last" style="display: inline-block;vertical-align: top;">
+						<a href="">
+							<img src="../image/마지막페이지.jpg" alt="첫마지막페이지">
+						</a>
+					</p>
+				</div>
+				<div class="col-xs-3"></div>
+			</div>	
+		</div>
+	</div>
+	
+	
+	
+	
+</body>
+</html>
+    

@@ -1,0 +1,59 @@
+package semi.vo;
+
+public class PointDetail {
+	private int customerNo;
+	private int customerPoint;//고객보유포인트
+	
+	private int customerusePoint;//사용가능적립포인트
+	private int productPoint; //적립금
+	
+	private int usedPoint;//사용한 포인트
+	
+	
+
+	
+	
+	public int getCustomerNo() {
+		return customerNo;
+	}
+
+	public void setCustomerNo(int customerNo) {
+		this.customerNo = customerNo;
+	}
+
+	public int getCustomerPoint() {
+		return customerPoint;
+	}
+
+	public void setCustomerPoint(int customerPoint) {
+		this.customerPoint = customerPoint;
+	}
+
+	public int getCustomerusePoint() {
+		return customerusePoint;
+	}
+
+	public void setCustomerusePoint(int customerusePoint) {
+		this.customerusePoint = customerusePoint;
+	}
+
+	public int getProductPoint() {
+		return productPoint;
+	}
+
+	public void setProductPoint(int productPoint) {
+		this.productPoint = productPoint;
+	}
+
+	public int getUsedPoint() {
+		return usedPoint;
+	}
+
+	public void setUsedPoint(int usedPoint) {
+		this.usedPoint = usedPoint;
+	}
+	
+	
+	
+	
+}
